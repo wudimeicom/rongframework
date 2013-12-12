@@ -1,5 +1,0 @@
-Rong Framework 是一款开源免费的php开发框架。实现了类似smarty的模板引擎，但解析速度比smarty快。有数据库、缓存、url重写转发、图像缩放等类库。
-
-https://sourceforge.net/projects/rongframework/files/RongFramework0.8/
-http://rongframework.googlecode.com/files/RongFramework-0.8.2.zip
-http://rong.wudimei.com/downloads/RongFramework-0.8.2.zip

@@ -1,17 +1,15 @@
-﻿
+
 Rong Framework is a free php framework, it 's goal is for coding-simplify.
-online english documentation: http://www.wudimei.com/data/html_doc/rongframework/en/
-online chinese documentation: http://www.wudimei.com/data/html_doc/rongframework/cn/
+
+
+online english documentation: http://rong.wudimei.com/manual/1.0/en/index.html
+online chinese documentation: http://rong.wudimei.com/manual/1.0/cn/index.html
+
 
 author:Yang Qing-rong
 email: yaqy@qq.com   yangqingrong@gmail.com
 blog:http://wudimei.com/yangqingrong
 
-usage for demo:
-please open application/controllers/IndexController.php and edit the code,so you will see the demo for Rong_Db(database connection module).
-
-[instalation]
-please read the documentation online:http://www.wudimei.com/data/html_doc/rongframework/en/
 
 [folders and files can be remove if you like:]
 

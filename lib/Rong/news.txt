@@ -1,0 +1,37 @@
+2013-04-11 add Rong_Service_Server and Rong_Service_Client
+2013-04-09 add Utf8String:__toString() subString() return Rong_Common_Utf8String
+2013-04-07 modify index.php/dev , beautify the generated code.change $this->import->model("xxxModel) to new xxxModel();
+2013-04-06 add config($cfg_item = "database.default.dbname"),load_database( $section=""); db_debug($strInfo="");
+padding: {$arr.($index+2*$num).name} , {foreachelse} , {$title|utf8SubString:0:16}
+
+
+
+2012-12-29 add rong_html controls. eg Rong_Html_TextField , Rong_Html_Textarea
+2012-12-28 add rong_validator_number,..Email,Length,Form,Required,Range
+2012-12-20 added a class RUtf8String which alias  Rong_Common_Utf8String
+
+ 
+2012-01-30 rong framework 0.8.6 release! 
+  add Rong_Common_ArrayTree::getPath( $id )。 add a class Rong_Hook_HookManager()
+2012-01-18 add class Rong_Crypto_SwapBit,for encryption and decryption
+2012-01-11 add Rong/Html/Password.php <input type="password" ... />
+2012-01-10 add class Rong_Mail_Smtp,support ssl-smtp by uncommnet ;extension=openssl.dll in php.ini
+2013-01-05 add a modifier <!--{$article.title|highlight:$wudimei.get.keywords : "red"}-->
+2012-01-04 add Rong_DB_Abstract::antiSqlInjection()
+2012-12-31 add modifiers utf8SubString and utf8Length <!--{$product.name|utf8SubString:0:18}--><!--{if $product.name|utf8Length > 18}-->...<!--{/if}-->
+2012-12-29 add rong_html controls. eg Rong_Html_TextField , Rong_Html_Textarea
+   add Rong_View_Wudimei::set($var_name, $value) instead of assign;
+   wudimei templates:
+   add {set var=$id value="23333"}
+   {$arr} echo the first element of $arr
+2012-12-28 add rong_validator_number,..Email,Length,Form,Required,Range
+2012-12-20 added a class RUtf8String which alias  Rong_Common_Utf8String
+2013-06-21 add Rong_ModuleDispatcher
+2013-06-22 add class Rong_Gd_SimpleSecurityCode and Rong_Html_SimpleMessage
+
+
+2009-10-5 add tag classes, you can call you tag class in the view by this way: <?php $this->tag('  TagClass.method  id="12" title="hello,world"  '); ?> 
+2009-8-9  the main function of dev controller has been finished!
+2009-8-6  the dev controller has been finished it's update function code generation
+2009-8-5  the dev controller has been finished it's create function code generation.
+2009-7-18 i wrote the documetation in chinese and fix the Rong_Uri problem.

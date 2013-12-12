@@ -1,3 +1,6 @@
+2013-04-07 enable $this->view->set("varname",$var); for class Rong_View_PHP;
+          add a modifier "date" for wudimei template engine: <!--{$wudimei.now|date:"Y"}--> <!--{$wudimei.now|date:"Y-m-d H:i:s"}-->
+ 
 
 2013-12-02 修改了Rong_Service_Server，增加了对magic_quotes的过滤，添加了错误提示。
 
@@ -21,3 +24,13 @@
    add some modifier for Rong_View_Wudime,<!--{$str|urlencode}--> <!--{$str|urldecode}-->,please to see files in Rong/View/Wudimei/Plugins
 2012-11-30 add Rong_Common_ArrayTree::getChildren($parentId);
 2010-9-21 remove Rong_Uri_BaseUrl,the base_url is   detected automactly.
+ 
+
+2009-10-8 construct function of Rong_Access_Abstract has been changed to Rong_Access_Abstract( $id, $name , $parentArray )
+2009-10   upload class and others has been modify because i removed the string attribute from the Rong_Object Class.
+2009-9-12 Rong_Uri caused Action error,i repaired it.the content-type of the views of Dev mode now changed to utf-8 
+2009-9-12 the Rong_Access has been released!
+2009-9-12 i remove Rong_Common_String,Rong_uri from the Rong_Object class.
+2009-8-9 Rong_Html_PageLink has been modified
+2009-8-6 Rong_Db_Model:getOne() method has been changed to Rong_DB_Model::fetchRow( $where )
+cache file was store as the  var_export method.
