@@ -1,0 +1,33 @@
+<!DOCTYPE  html>
+<html>
+    <head>
+        <?php include dirname( __FILE__) . "/../includes/head.php"; ?>
+    </head>
+    <body class="body">
+<?php include dirname( __FILE__) . "/../includes/top.php"; ?>
+        <div class="content">
+<?php include dirname( __FILE__) . "/../includes/leftmenu.php"; ?>
+            <div class="panel">
+                <div class="panel_padding">
+                    <a href="/index.php/Rent/index">&lt;&lt;</a>
+                    <table class="table">
+                        <tr>
+                            <td>stu_id</td>
+                            <td><?php echo $row["stu_id"]?></td>
+                        </tr>
+                        <tr>
+                            <td>book_id</td>
+                            <td><?php echo $row["book_id"]?></td>
+                        </tr>
+                        <tr>
+                            <td>date</td>
+                            <td><?php echo $row["date"]?></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+<?php include dirname( __FILE__) . "/../includes/bottom.php"; ?>
+    </body>
+</html>

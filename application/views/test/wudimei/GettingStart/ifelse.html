@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body>
+        <div>
+            {if $age<=18}
+               Forbidden!
+            {elseif $age<=0 || $age>150} 
+               Super human!2
+            {else}
+               Welcome!
+            {/if}
+            
+            {if $man->age>=18 && $age>=18}
+              two adult!
+            {/if}
+            
+            {if $man->age <= $man->age+$age}
+              the man is not so old!
+            {/if}
+             
+             {if $man->age>=18||$age>=18}
+              at lease one is adult.
+            {/if}
+            
+        </div>
+    </body>
+</html>

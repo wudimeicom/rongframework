@@ -1,0 +1,17 @@
+2013-04-11 add Rong_Service_Server and Rong_Service_Client
+2013-04-09 add Utf8String:__toString() subString() return Rong_Common_Utf8String
+2013-04-07 modify index.php/dev , beautify the generated code.change $this->import->model("xxxModel) to new xxxModel();
+2013-04-06 add config($cfg_item = "database.default.dbname"),load_database( $section=""); db_debug($strInfo="");
+padding: {$arr.($index+2*$num).name} , {foreachelse} , {$title|utf8SubString:0:16}
+
+2012-12-29 add rong_html controls. eg Rong_Html_TextField , Rong_Html_Textarea
+2012-12-28 add rong_validator_number,..Email,Length,Form,Required,Range
+2012-12-20 added a class RUtf8String which alias  Rong_Common_Utf8String
+
+
+
+2009-10-5 add tag classes, you can call you tag class in the view by this way: <?php $this->tag('  TagClass.method  id="12" title="hello,world"  '); ?> 
+2009-8-9  the main function of dev controller has been finished!
+2009-8-6  the dev controller has been finished it's update function code generation
+2009-8-5  the dev controller has been finished it's create function code generation.
+2009-7-18 i wrote the documetation in chinese and fix the Rong_Uri problem.

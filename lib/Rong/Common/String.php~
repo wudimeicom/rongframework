@@ -1,0 +1,98 @@
+<?php
+
+/*
+ * Rong PHP Framework
+ * author:Yang Qing-rong
+ * Email : yaqy@qq.com yangqingrong@gmail.com
+ * blog  : http://hi.baidu.com/tangtou
+ * This is a free software under the GNU Licence.
+ */
+
+class Rong_Common_String {
+
+    public function convCharset($str, $newCharset ="UTF-8") {
+        return mb_convert_encoding($str, $newCharset, mb_detect_encoding($str));
+    }
+
+    public function formatName($key) {
+        return preg_replace("/([^a-z0-9A-Z_])/", "", $key);
+    }
+
+    public function removeMultiBlank($string) {
+        return preg_replace("/(\s+)/", " ", $string);
+    }
+
+    /**
+     * will be deleted
+     * Enter description here ...
+     * @param unknown_type $filename
+     */
+    public function getFileExt($filename) {
+        $arr = explode(".", $filename);
+        $ext = strtolower($arr[count($arr) - 1]);
+        return $ext;
+    }
+
+    public function checkExt($filename, $allowExt) {
+        $ext = $this->getFileExt($filename);
+        return in_array($ext, $allowExt);
+    }
+
+    public function getImgs($html) {
+        preg_match_all('/src=[\"|\']([^\"|\']+)[\"|\']/is', $html, $Match);
+        $imgs = $Match[0];
+        for ($i = 0; $i < count($imgs); $i++) {
+            $imgs[$i] = preg_replace('/src=[\"|\']([^\"|\']+)[\"|\']/is', "\\1", $imgs[$i]);
+        }
+        return $imgs;
+    }
+
+    public function toCJKCharArray($string) {
+        $strLen = strlen( $string );
+        $strArray = array();
+        for ($i = 0; $i < $strLen; $i++) {
+            $ch = '';
+            if (ord($string[$i]) > 127) {
+                $ch = $string[$i] . $string[++$i] . $string[++$i];
+            } else {
+                $ch = $string[$i];
+            }
+            $strArray[] = $ch;
+        }
+        return $strArray;
+    }
+
+    public function CJKExplode( $glude, $str , $limit=0 )
+    {
+        $strArr = $this->toCJKCharArray( $str );
+        $gludeArr = $this->toCJKCharArray( $glude );
+        $rsArr = array();
+        $rsIndex =0;
+       
+        for( $i=0; $i< count( $strArr ); $i++ )
+        {
+            $found = true;
+            for( $j=0;$j<count( $gludeArr); $j++ )
+            {
+                if( $strArr[$i+$j] != $gludeArr[$j]  )
+                {
+                    $found = false;
+                }
+            }
+            if( $found )
+            {
+                $rsIndex++;
+                $i+=$j-1;
+                if( $limit>0 && $rsIndex >= $limit ) break;
+            }
+            else
+            {
+		if( !isset( $rsArr[$rsIndex] ) )  $rsArr[$rsIndex] = "";
+                $rsArr[$rsIndex] .= $strArr[$i];
+            }
+        }
+        return $rsArr;
+    }
+}
+
+?>

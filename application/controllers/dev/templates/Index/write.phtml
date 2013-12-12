@@ -1,0 +1,27 @@
+<!DOCTYPE  html>
+<html>
+    <head>
+        <?php include dirname( __FILE__) . "/../includes/head.php"; ?>
+    </head>
+    <body class="body">
+<?php include dirname( __FILE__) . "/../includes/top.php"; ?>
+        <div class="content">
+<?php include dirname( __FILE__) . "/../includes/leftmenu.php"; ?>
+            <div class="panel">
+                <div class="panel_padding"> 
+
+<h3>Now,the tasks has bean finished!</h3> <br />
+<div><?php echo $generatedFiles; ?></div>
+you can manage you mysql table via:  <a href="<?php echo config("site_root"); ?>/index.php/<?php echo ucfirst( $class) ?>/manage" target="_blank">manage</a><br />
+or you can have a look you public page:<a href="<?php echo config("site_root"); ?>/index.php/<?php echo ucfirst( $class) ?>/index" target="_blank">index</a><br />
+
+
+
+                
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+<?php include dirname( __FILE__) . "/../includes/bottom.php"; ?>
+    </body>
+</html>

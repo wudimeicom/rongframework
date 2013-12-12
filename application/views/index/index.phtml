@@ -1,0 +1,36 @@
+<!DOCTYPE  html>
+<html>
+    <head>
+        <?php include dirname( __FILE__) . "/../includes/head.php"; ?>
+    </head>
+    <body class="body">
+<?php include dirname( __FILE__) . "/../includes/top.php"; ?>
+        <div class="content">
+<?php include dirname( __FILE__) . "/../includes/leftmenu.php"; ?>
+            <div class="panel">
+                <div class="panel_padding"> 
+                    
+
+                     
+                        <img src="<?php echo config("site_root"); ?>/skin/default/images/logo.jpg" style="border:none;float:left;" /> 
+                        <span>Rong Framework 0.8.5</span> <br />
+                        rong framework is a light-weight php framework. <br />
+                    
+                        This countroller is locate at:<b>/application/controllers/IndexController.php , indexAction();</b><br />
+                        this view file 's location: <b><?php echo __FILE__; ?></b> , you can edit or replace this file<br />
+                        欢迎使用Rong Framework<br/>
+                        Welcome use Rong Framework <br />
+                        <br />
+                        进入<a href="<?php echo config("site_root"); ?>/index.php/dev">开发</a><br />
+                        go to the <a href="<?php echo config("site_root"); ?>/index.php/dev">dev</a> mode <br /><br />
+                     
+                        进入<a href="<?php echo config("site_root"); ?>/index.php/Index/testing">测试页</a><br />
+                        go to the <a href="<?php echo config("site_root"); ?>/index.php/Index/testing">testing</a> page<br />
+
+                 </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+<?php include dirname( __FILE__) . "/../includes/bottom.php"; ?>
+    </body>
+</html>

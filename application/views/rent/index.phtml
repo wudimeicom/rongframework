@@ -1,0 +1,39 @@
+<!DOCTYPE  html>
+<html>
+    <head>
+        <?php include dirname( __FILE__) . "/../includes/head.php"; ?>
+    </head>
+    <body class="body">
+<?php include dirname( __FILE__) . "/../includes/top.php"; ?>
+        <div class="content">
+<?php include dirname( __FILE__) . "/../includes/leftmenu.php"; ?>
+            <div class="panel">
+                <div class="panel_padding">
+                    <h1>rent</h1>
+                    <table class="table">
+                        <tr>
+                            <th>stu_id</th>
+                            <th>book_id</th>
+                            <th>date</th>
+                            <th></th>
+                        </tr>
+                        <?php  for( $i=0; $i< count( $Data); $i++ ):  $item = $Data[$i]; ?>
+                        <tr>
+                            <td><?php echo $item["stu_id"]; ?> </td>
+                            <td><?php echo $item["book_id"]; ?> </td>
+                            <td><?php echo $item["date"]; ?> </td>
+                            <td>
+                                <a href="/index.php/Rent/show?stu_id=<?=$Data[$i]["stu_id"]?>&book_id=<?=$Data[$i]["book_id"]?>">show</a>
+                            </td>
+                        </tr>
+                        <? endfor; ?>
+
+                    </table>
+                    <div class="PageLink"><?php echo $pagebar?></div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+<?php include dirname( __FILE__) . "/../includes/bottom.php"; ?>
+    </body>
+</html>

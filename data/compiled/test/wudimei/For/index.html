@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body>
+        <div>
+            <h3>simple loop</h3>
+            <?php for(  @$this->data['number']= 1;  @$this->data['number']<= 9;  @$this->data['number']+= 1){  ?>
+               <?php echo wudimei_toString( @$this->data['number']); ?> <br />
+            <?php } ?>
+            
+            <hr />
+            <?php for(  @$this->data['number']= 1;  @$this->data['number']<= 9;  @$this->data['number']+= 2){  ?>
+               <?php echo wudimei_toString( @$this->data['number']); ?> <br /> 
+            <?php } ?>
+            
+            <h3>My Friends</h3>
+            <?php for(  @$this->data['friendNumber']= 0;  @$this->data['friendNumber']<=wudimei_count (  @$this->data['friends'] )  - 1;  @$this->data['friendNumber']+= 1){  ?>
+               <?php echo wudimei_toString( @$this->data['friends'][@$this->data['friendNumber']]); ?> <br />
+            <?php } ?>
+            <hr /> 
+            <?php for(  @$this->data['friendNumber']=wudimei_count (  @$this->data['friends'] )  - 1;  @$this->data['friendNumber']>= 0;  @$this->data['friendNumber']+= - 1){  ?>
+               <?php echo wudimei_toString( @$this->data['friends'][@$this->data['friendNumber']]); ?> <br />
+            <?php } ?>
+            
+            <h3>languages </h3>
+            langeuage | company <br />
+            <?php for(  @$this->data['languageIndex']= 0;  @$this->data['languageIndex']<=wudimei_count (  @$this->data['languages'] )  - 1;  @$this->data['languageIndex']+= 1){  ?>
+               <?php echo wudimei_toString( @$this->data['languages'][@$this->data['languageIndex']]['name']); ?>  | <?php echo wudimei_toString( @$this->data['languages'][@$this->data['languageIndex']]['company']); ?><br />
+            <?php } ?>
+            <h3>foreach</h3>
+            
+            <table>
+                <tr>
+                    <th>index</th>
+                    <th>key</th>
+                    <th>name</th>
+                    <th>company</th>
+                </tr>
+            <?php $this->data["wudimei"]["foreach"]["languages" ]= array("index"=>-1); foreach(  @$this->data['languages']  as $this->data['k'] =>  $this->data['lang'] ){  $this->data["wudimei"]["foreach"]["languages"]["index"]++;  ?>
+                <tr>
+                     <td><?php echo wudimei_toString( @$this->data['wudimei']['foreach']['languages']['index']); ?></td>
+                     <td><?php echo wudimei_toString( @$this->data['k']); ?></td>
+                    <td><?php echo wudimei_toString( @$this->data['lang']['name']); ?></td>
+                     <td><?php echo wudimei_toString( @$this->data['lang']['company']); ?></td>
+                </tr>
+            <?php } ?>
+            </table>
+        </div>
+    </body>
+</html>

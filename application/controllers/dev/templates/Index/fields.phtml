@@ -1,0 +1,87 @@
+<!DOCTYPE  html>
+<html>
+    <head>
+        <?php include dirname( __FILE__) . "/../includes/head.php"; ?>
+    </head>
+    <body class="body">
+<?php include dirname( __FILE__) . "/../includes/top.php"; ?>
+        <div class="content">
+<?php include dirname( __FILE__) . "/../includes/leftmenu.php"; ?>
+            <div class="panel">
+                <div class="panel_padding"> 
+                    
+	   <form action="<?php echo config("site_root"); ?>/index.php/dev/Index/write" method="post">
+               <?php if( $has_error == true ){ ?>
+               <div style="color:red;background-color:#EEE;"> <?php echo $msg; ?>
+               </div>
+               <?php } ?>
+               
+		Table name: <?php echo $table_name ?>
+		
+		<input type="hidden" name="table_name" value="<?php echo $table_name ?>" />
+		Model name:<input type="text" name="model_name" value="<?php echo $model_name?>" />
+		<table class="table">
+			<tr>
+				<th> Field Name </th>
+				<th> Label </th>
+				<th> Control Type </th>
+				<th> Default Value Type </th>
+				<th> Default Value</th>
+			</tr>
+			<?php  for( $i=0; $i< count( $fields ) ; $i++ ): ?>
+			<tr>
+				<td><?php echo $fields[$i]["Field"] ?>
+						<input type="hidden" name="field_<?php echo $i ?>" value="<?php echo $fields[$i]["Field"] ?>" />
+				</td>
+				<td> <input type="text" name="<?php echo $fields[$i]["Field"] ?>_label" value="<?php echo $fields[$i]["Field"] ?>" /> 
+				</td>
+				<td>
+					<select name="<?php echo $fields[$i]["Field"] ?>_form">
+						<option value="HtmlInputText"> Text Box</option>
+                                                <?php /*
+						<option value="HtmlSelect">Select</option>
+						<option value="HtmlInputRadio">Radio Button</option>
+						<option value="HtmlInputCheckbox">Checkbox</option>
+						<option value="HtmlInputPassword">Password</option>
+						<option value="DateTime">Date Time</option>
+						<option value="Editor">Editor</option>
+						<option value="Upload">Upload </option>
+						<option value="TextArea">TextArea </option>
+						<option value="Ignore">Ignore </option> */ ?>
+					</select>
+				</td>
+				<td>
+					<select name="<?php echo $fields[$i]["Field"] ?>_def_type">
+						<option value="Value">value</option>
+						<?php /*<option value="Sql">sql</option>
+						
+						<option value="File"> path to file </option>*/ ?>
+					</select>
+				</td>
+				<td>
+					<textarea rows="2" cols="30"  name="<?php echo $fields[$i]["Field"] ?>_def_value"></textarea>
+				</td>
+			</tr>
+			<?php  endfor; ?>
+		</table>
+		<input type="hidden" name="field_count" value="<?php echo count( $fields )?>" />
+		Default Value( each line as an item when you use checkbox ,radio button,select)
+		<br/>
+		<input type="checkbox" name="functions[]" value="create" checked="checked" /> create
+		<input type="checkbox" name="functions[]" value="update" checked="checked" /> update
+		<input type="checkbox" name="functions[]" value="delete" checked="checked" /> delete
+		<input type="checkbox" name="functions[]" value="read" checked="checked" /> read
+                
+                <?php if( $has_error == false ){ ?>
+		<input  type="submit" value="write code" /> 
+                <?php } ?>
+		</form>
+	
+                
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+<?php include dirname( __FILE__) . "/../includes/bottom.php"; ?>
+    </body>
+</html>

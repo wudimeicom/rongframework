@@ -1,0 +1,23 @@
+
+2013-12-02 修改了Rong_Service_Server，增加了对magic_quotes的过滤，添加了错误提示。
+
+2013-02-26 add $config data for each drivers while it was instanced
+2013-01-11  Rong_Html_Abtract::attributesToHtml() support empty attribute value
+      antiSqlInjection()方法从escape()中移出，开发者可以自行调用：$str = $db->antiSqlInjection($str);$str = $db->escape( $str );
+      disable the Rong_URI_PathInfoParam 's $_SERVER["REDIRECT_URL"])
+2013-01-10 modify class Rong_Mail_SendMail
+2013-01-05   modifier support blank parameter string <!--{$wudimei_com|cat:""}-->
+2012-12-31 modifier support number parameters.
+2012-12-29 modified Rong_Html_Abttract Radios,Select,Checkboxes
+2012-12-20 let Rong_Common_Utf8::toCharArray( support more characters.
+2012-12-14 fixed the Rong_View_Wudimei template language {for} 's bug
+2012-12-12 fixed the Rong_View_Wudimei::display() not compatible bug.
+2012-12-02 fixed the quote's bug in class Rong_View_Wudimei 
+           add a modifier "date" for wudimei template engine: <!--{$wudimei.now|date:"Y"}--> <!--{$wudimei.now|date:"Y-m-d H:i:s"}-->
+2012-12-01 change Rong_Text_String and Rong_Common_Utf8String, i removed the $string member variable form each class.
+   pls use it like this:$strName = new Rong_Text_String("yangqingrong");
+   $strName = new Rong_Common_Utf8String("杨庆荣yangqingrong");
+   add class Rong_URI_PathInfoParam, "index.php/{action}/{param1}/{value1}/{param2}/{value2}"
+   add some modifier for Rong_View_Wudime,<!--{$str|urlencode}--> <!--{$str|urldecode}-->,please to see files in Rong/View/Wudimei/Plugins
+2012-11-30 add Rong_Common_ArrayTree::getChildren($parentId);
+2010-9-21 remove Rong_Uri_BaseUrl,the base_url is   detected automactly.
