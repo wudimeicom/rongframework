@@ -8,7 +8,7 @@ $PathToRongFramework = dirname(__FILE__)."/../lib"; //指向 名字为“Rong”
 set_include_path(  "." . PATH_SEPARATOR . $PathToRongFramework .  PATH_SEPARATOR . get_include_path() );
 
 require_once 'Rong/Db.php';
-require_once "Rong/Html/PageLink.php";
+ 
 
 $db = Rong_Db::factory("Mysql", array(
             "host" => "localhost", //mysql 主机
@@ -59,15 +59,15 @@ echo "</table>";
 ?>
 
     
-共有<?php echo $rs["PageLink"]["RecordCount"]; ?>条记录，
-分为<?php echo $rs["PageLink"]["PageCount"]; ?>页，
-每页<?php echo $rs["PageLink"]["PageCount"]; ?>条数据,
-当前第<?php echo $rs["PageLink"]["Page"]; ?>页。
+共有<?php echo $rs["PaginationData"]["RecordCount"]; ?>条记录，
+分为<?php echo $rs["PaginationData"]["PageCount"]; ?>页，
+每页<?php echo $rs["PaginationData"]["PageCount"]; ?>条数据,
+当前第<?php echo $rs["PaginationData"]["Page"]; ?>页。
 <br />
 <a href="db_paginator2.php?page=1">第一页</a>
-<a href="db_paginator2.php?page=<?php echo $rs["PageLink"]["Prev"]; ?>">上一页</a>
-<a href="db_paginator2.php?page=<?php echo $rs["PageLink"]["Next"]; ?>">下一页</a>
-<a href="db_paginator2.php?page=<?php echo $rs["PageLink"]["PageCount"]; ?>">最后一页</a>
+<a href="db_paginator2.php?page=<?php echo $rs["PaginationData"]["Prev"]; ?>">上一页</a>
+<a href="db_paginator2.php?page=<?php echo $rs["PaginationData"]["Next"]; ?>">下一页</a>
+<a href="db_paginator2.php?page=<?php echo $rs["PaginationData"]["PageCount"]; ?>">最后一页</a>
 <?php
 echo "<h3>分页时返回的数据</h3>";
 echo "<pre>";

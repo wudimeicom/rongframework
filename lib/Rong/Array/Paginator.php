@@ -8,7 +8,7 @@ class Rong_Array_Paginator{
             $data = $this->limit(  $rows ,  $page , $pageSize );
 			
             require_once 'Rong/Html/Paginator.php';
-            $pagePaginator = new Rong_Html_Paginator( $data["PageLink"] );
+            $pagePaginator = new Rong_Html_Paginator( $data["PaginationData"] );
             $pagePaginator->setSettingsArray( $paginatorSettings );
             $data["PaginatorHtml"] = $pagePaginator->getPaginatorHtml( $urlTemplate );
             return $data;
@@ -40,7 +40,7 @@ class Rong_Array_Paginator{
         }
 	    $result = array( 
 			"Data" => $dt,
-			"PageLink" => array(
+			"PaginationData" => array(
 				"Page"	=> $page ,
 				"First" => 1,
 				"Last"  => $PageCount ,

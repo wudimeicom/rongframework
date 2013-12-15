@@ -85,7 +85,7 @@ abstract class Rong_DB_Abstract extends Rong_Object implements Rong_Db_Interface
 		$Next = ($page + 1) > $PageCount ? $PageCount : ($page + 1);
 		$result = array(
 			"Data" => $rows[0],
-			"PageLink" => array(
+			"PaginationData" => array(
 				"Page" => $page,
 				"First" => 1,
 				"Last" => $PageCount,
@@ -102,7 +102,7 @@ abstract class Rong_DB_Abstract extends Rong_Object implements Rong_Db_Interface
 	public function getPaginator($sql, $page, $pageSize, $urlTemplate, $paginatorSettings = array()) {
 		$data = $this -> limit($sql, $page, $pageSize);
 		require_once 'Rong/Html/Paginator.php';
-		$pagePaginator = new Rong_Html_Paginator($data["PageLink"]);
+		$pagePaginator = new Rong_Html_Paginator($data["PaginationData"]);
 		$pagePaginator -> setSettingsArray($paginatorSettings);
 		$data["PaginatorHtml"] = $pagePaginator -> getPaginatorHtml($urlTemplate);
 		return $data;

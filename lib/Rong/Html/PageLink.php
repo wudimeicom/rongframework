@@ -6,9 +6,9 @@ require_once 'Rong/Html/Abstract.php';
  
 class Rong_Html_PageLink extends Rong_Html_Abstract implements Rong_Html_Interface
 {
-	public $PageLink;
+	public $PaginationData;
 	public $config;
-	public function __construct( $PageLink , $config = NULL  )
+	public function __construct( $PaginationData , $config = NULL  )
 	{
 		if( $config != NULL )
 		{
@@ -27,7 +27,7 @@ class Rong_Html_PageLink extends Rong_Html_Abstract implements Rong_Html_Interfa
 			$this->config = $defaultConfig;
 		}
 		parent::__construct();
-		$this->PageLink = $PageLink;
+		$this->PaginationData = $PaginationData;
 	}
 	public function setConfig( $config )
 	{
@@ -45,33 +45,33 @@ class Rong_Html_PageLink extends Rong_Html_Abstract implements Rong_Html_Interfa
 	}
 	public function setPage( $page )
 	{
-		 $this->PageLink["Page"] = $page ;
+		 $this->PaginationData["Page"] = $page ;
 	}
 	public function getPage( )
 	{
-		return  $this->PageLink["Page"];
+		return  $this->PaginationData["Page"];
 	}
 	// HrefLeft HrefRight LinkCount=6 TextFirst="<<" TextPrev="<" TextNext TextLast 
 	public function getLinks( $HrefLeft , $HrefRight )
 	{
 		$str = "";
-		if( $this->PageLink["PageCount"] >1 )
+		if( $this->PaginationData["PageCount"] >1 )
 		{
 			$str .= "<a href=\"" . $HrefLeft. "1" .$HrefRight."\">" .
 			     $this->config["TextFirst"] . "</a>";
 		}
-		if( ( $this->PageLink["Page"]-1 )>1 )
+		if( ( $this->PaginationData["Page"]-1 )>1 )
 		{
-			$str .= "<a href=\"" . $HrefLeft. ( $this->PageLink["Page"] -1 ) .$HrefRight."\">" .
+			$str .= "<a href=\"" . $HrefLeft. ( $this->PaginationData["Page"] -1 ) .$HrefRight."\">" .
 			     $this->config["TextPrev"] . "</a>";
 		}
 		
 		$halfOfCount = ceil( $this->config["LinkCount"]/2 );
-		for( $i= ( $this->PageLink["Page"] - $halfOfCount ); $i<( $this->PageLink["Page"] + $halfOfCount ) ;$i++ )
+		for( $i= ( $this->PaginationData["Page"] - $halfOfCount ); $i<( $this->PaginationData["Page"] + $halfOfCount ) ;$i++ )
 		{
-			if( $i>0 && $i<= $this->PageLink["PageCount"] )
+			if( $i>0 && $i<= $this->PaginationData["PageCount"] )
 			{
-				if( $i== $this->PageLink["Page"] ){ 
+				if( $i== $this->PaginationData["Page"] ){ 
 					
 				    $str .= "<span>" . $i . "</span>"; 
 				}
@@ -82,15 +82,15 @@ class Rong_Html_PageLink extends Rong_Html_Abstract implements Rong_Html_Interfa
 				}
 			}
 		}
-		if( ( $this->PageLink["Page"]+ 1 )< $this->PageLink["PageCount"] )
+		if( ( $this->PaginationData["Page"]+ 1 )< $this->PaginationData["PageCount"] )
 		{
-			$str .= "<a href=\"" . $HrefLeft. ( $this->PageLink["Page"] + 1 ) .$HrefRight."\">" .
+			$str .= "<a href=\"" . $HrefLeft. ( $this->PaginationData["Page"] + 1 ) .$HrefRight."\">" .
 			     $this->config["TextNext"] . "</a>";
 		}
 		
-		if( ( $this->PageLink["Page"] ) < $this->PageLink["PageCount"] )
+		if( ( $this->PaginationData["Page"] ) < $this->PaginationData["PageCount"] )
 		{
-			$str .= "<a href=\"" . $HrefLeft. ( $this->PageLink["PageCount"] ) .$HrefRight."\">" .
+			$str .= "<a href=\"" . $HrefLeft. ( $this->PaginationData["PageCount"] ) .$HrefRight."\">" .
 			     $this->config["TextLast"] . "</a>";
 		}
 		return $str;
@@ -108,7 +108,7 @@ class Rong_Html_PageLink extends Rong_Html_Abstract implements Rong_Html_Interfa
     
 }
 /*
-	 *   [PageLink] => Array
+	 *   [PaginationData] => Array
         (
             [Page] => 1
             [First] => 1
