@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body>
+        <div>
+             output variable $msg(输出$msg变量):{$msg} <br />
+             output variable $name(输出变量$name): {$name} <br />
+             trim $name(去掉$name的前后空格): {$name|trim} <br />
+             substr of $msg($msg的前五个字母): {$msg|substr:0:5}<br />
+             string length(字符串长度strlen): {$msg|strlen} <br />
+             replace string(字符串替换): {$msg|replace:"World":"China"} <br />
+             repeat string(字符串重复): {$msg|repeat:5}<br />
+             concat string(字符串连接): {$msg|concat:"how r u?"}<br />
+             concat string(字符串连接): {$msg|cat:"how r u?"}<br />
+             append string(字符串追加): {$name|append:" is a chinese."} <br />
+             nl2br(换行符替换成br标记):{$list|nl2br}<br />
+             url encode: {$url|urlencode} <br />
+             url decode: {$url|urldecode} <br />
+             base64 encode: {$url|base64_encode} <br />
+             base64 deocode:{$b64|base64_decode} <br />
+             string position of "World"（字符串“World”的位置）： {$msg|strpos:"World"} <br />
+             strip html tags（去掉HTML标记）：{$html|strip_tags} <br />
+             --------<br />
+             output $utf8String:{$utf8String}<br />
+             utf-8 sub string(utf-8字符集的子串):{$utf8String|utf8SubString:5:3}<br />
+             utf-8 string length(utf-8字符集的长度):{$utf8String|utf8Length}<br />
+             highlight:{$msg|highlight:"World":"red"}<br />
+             
+        </div>
+    </body>
+</html>

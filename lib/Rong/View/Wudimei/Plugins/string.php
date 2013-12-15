@@ -92,7 +92,7 @@ function wudimei_strpos( $string, $needle, $offset = null )
     return strpos( $string , $needle, $offset);
 }
 
-function wudimei_strip_tags($str, $allowable_tags)
+function wudimei_strip_tags($str, $allowable_tags="")
 {
    return strip_tags($str, $allowable_tags);
 }
