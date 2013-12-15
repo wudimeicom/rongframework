@@ -71,8 +71,15 @@ abstract class Rong_DB_Abstract extends Rong_Object implements Rong_Db_Interface
 
 		$sqlAll = $sql . " limit " . $start . "," . $pageSize . ";" . $sqlCount;
 		$rows = $this -> call($sqlAll);
-
-		$RecordCount = intval(@$rows[1][0]["count"]);
+		//print_r( $rows );
+		$RecordCount = 0;
+		if( isset( $rows[1][0]) &&!empty($rows[1][0]) )
+		{
+			foreach($rows[1][0] as $k=> $v)
+			{
+				$RecordCount=$v;
+			}
+		}
 		$PageCount = ceil($RecordCount / $pageSize);
 		$Prev = ($page - 1) > 1 ? ($page - 1) : 1;
 		$Next = ($page + 1) > $PageCount ? $PageCount : ($page + 1);
