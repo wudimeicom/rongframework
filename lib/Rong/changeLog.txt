@@ -1,3 +1,5 @@
+2014-01-02 修改了 wudime模板引擎fetch里$rong_view_data的错误 
+
 2013-04-07 enable $this->view->set("varname",$var); for class Rong_View_PHP;
           add a modifier "date" for wudimei template engine: <!--{$wudimei.now|date:"Y"}--> <!--{$wudimei.now|date:"Y-m-d H:i:s"}-->
  

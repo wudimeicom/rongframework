@@ -390,7 +390,7 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
 
     public static function compileVar($tag)
     {
-       
+      // echo $tag. "<br />";
         if (self::isStringExpression($tag))
         {
 
@@ -404,13 +404,13 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
             return $tag;
         }
 
-        //preg_match_all("/(\\$[a-zA-Z0-9\_\.\->]+)/i", $tag, $matches);
+        
         preg_match_all("/([a-zA-Z0-9\_\.\\$\->]+)/i", $tag, $matches);
         // echo $tag; echo "<br />";
         //print_r( $matches );
         $varName = $matches[0][0];
-        preg_match_all("/[\|]\s*([a-z0-9\_]+)(\s*[\:]\s*(([\$a-z0-9\.\_]+)|(\"[^\"]*\")|(\'([^\']*)\')))*/i", $tag, $modifier_matches);
-        // print_r( $modifier_matches );
+        preg_match_all("/[\|]\s*([a-z0-9\_]+)(\s*[\:]\s*(([\$a-zA-Z0-9\.\_\->]+)|(\"[^\"]*\")|(\'([^\']*)\')))*/i", $tag, $modifier_matches);
+        //  print_r( $modifier_matches );
         $modifierTxt = "";
         if (trim($varName) !== "")
         {
@@ -426,7 +426,7 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
                      //print_r($params_matches );
                     for ($j = 0; $j < count($params); $j++)
                     {
-                        if (preg_match("/^([\$a-z0-9\_]+)(\.[0-9a-z\_]+)+$/i", $params[$j]))
+                        if (preg_match("/^([\$a-z0-9\_]+)(\.[0-9a-z\_]+)*$/i", $params[$j]))
                         {
                             $params[$j] = self::compileVar($params[$j]);
                         }
@@ -447,7 +447,7 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
 
             $code = " @\$this->data['" . trim($arr[0]) . "']";
 
-            if (preg_match("/\\$([a-z0-9\_]+)/i", $arr[0]))
+            if (preg_match("/\\$([a-zA-Z0-9\_]+)/i", $arr[0]))
             {
                 $code = " @\$this->data[" . self::compileExpression($arr[0]) . "]";
             }
@@ -475,6 +475,7 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
         for ($i = 0; $i < count($functions); $i++)
         {
             $f = $functions[$i];
+			 
             $code = "wudimei_" . $f["name"] . " ( " . $code;
             if (count($f["params"]) > 0)
             {
@@ -482,6 +483,7 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
             }
             $code .= " ) ";
         }
+		//echo $code;
         return $code;
     }
 
@@ -501,14 +503,14 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
         }
         
         // $var.name   |  abc :efg
-        $modifier = "((\\$[a-zA-Z0-9\_]+((\->([a-zA-Z0-9\_]+))|(\.[\$]?[a-zA-Z0-9\_]+))*)|(\".*\")|('.*'))(\s*[\|]\s*[a-z0-9\_]+((\s*[\:]\s*((\$[a-z0-9A-Z\.\_]+)|(\"([^\"]*)\")|('([^']*)')|([0-9]+)|([a-zA-Z0-9\.\$\_]+)))*)*)*";
+        $modifier = "((\\$[a-zA-Z0-9\_]+((\->([a-zA-Z0-9\_]+))|(\.[\$]?[a-zA-Z0-9\_]+))*)|(\".*\")|('.*'))(\s*[\|]\s*[a-zA-Z0-9\_]+((\s*[\:]\s*((\$[a-z0-9A-Z\.\_\->]+)|(\"([^\"]*)\")|('([^']*)')|([0-9]+)|([a-zA-Z0-9\.\$\_]+)))*)*)*";
 
         preg_match_all('/' . $modifier . '|[0-9\.]+|\$[a-zA-Z0-9\_\.]+|[a-zA-Z0-9\_]+|===|!==|==|!=|\->|::|<=|>=|\*=|\+=|\/=|\-=|\%=|=|>|,|<|!|\(|\)|\.|\"[^\"]+\"|\'[^\']+\'|and|or|\&\&|\|\||%|\d+|\+|\-|\*|\/|gt|eq|lt/i', $expression, $matches);
         $expArr = $matches[0];
        
         //echo $expression;
-        // print_r( $matches );
-        //exit();
+          // print_r( $matches );
+         
         $newExp = "";
         for ($i = 0; $i < count($expArr); $i++)
         {
@@ -675,6 +677,14 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
                 $this->data[$saKey] = $saValue;
             }
         }
+		
+		if( !empty($Rong_View_Data) )
+		{
+			foreach ($Rong_View_Data as $key => $value) {
+				$this->data[$key] = $value;
+			}
+		}
+		
         $distFileName = $this->compileDir . "/" . $Rong_View_File;
         $distDir = dirname($distFileName);
         if (!is_dir($distDir))
