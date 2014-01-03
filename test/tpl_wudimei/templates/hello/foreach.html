@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body>
+        <div>{$msg}</div>
+        
+        	<table border="1">
+                <tr>
+                    <th>index</th>
+                    <th>key</th>
+                    <th>name</th>
+                    <th>company</th>
+                </tr>
+            {foreach from=$languages item=$lang key=$k}
+                <tr>
+                     <td>{$wudimei.foreach.languages.index}</td>
+                     <td>{$k}</td>
+                    <td>{$lang.name}</td>
+                     <td>{$lang.company}</td>
+                </tr>
+            {/foreach}
+            </table>
+            
+    </body>
+</html>
