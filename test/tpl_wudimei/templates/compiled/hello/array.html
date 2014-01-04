@@ -1,0 +1,30 @@
+<html>
+	<head>
+		<title>array sample</title>
+	</head>
+	<body>
+		
+		<h3>member information</h3>
+		id: <?php echo wudimei_toString( @$this->data['member']['id']); ?> <br />
+		username: <?php echo wudimei_toString( @$this->data['member']['username']); ?> <br />
+		birthday: <?php echo wudimei_toString( @$this->data['member']['birthday']); ?> <br />
+		
+		<h3>fruits</h3>
+		id1: <?php echo wudimei_toString( @$this->data['fruits']['0']['id']); ?> <br />
+		name1:<?php echo wudimei_toString( @$this->data['fruits']['0']['name']); ?> <br />
+		id2: <?php echo wudimei_toString( @$this->data['fruits']['1']['id']); ?> <br />
+		name2:<?php echo wudimei_toString( @$this->data['fruits']['1']['name']); ?> <br />
+		id3: <?php echo wudimei_toString( @$this->data['fruits']['2']['id']); ?> <br />
+		name3:<?php echo wudimei_toString( @$this->data['fruits']['2']['name']); ?> <br />
+		id4: <?php echo wudimei_toString( @$this->data['fruits']['3']['id']); ?> <br />
+		name4:<?php echo wudimei_toString( @$this->data['fruits']['3']['name']); ?> <br />
+		
+		<h3>array returned</h3>
+		name: <?php echo wudimei_toString( @$this->data['ArrayReturned']['Data']['0']['name']); ?>
+		
+		<br />
+		<?php if( wudimei_empty (  @$this->data['emptyArray'] )  == true): ?>
+			$emptyArray is an empty array <br />
+		<?php endif; ?>
+	</body>
+</html>

@@ -1,0 +1,30 @@
+<html>
+	<head>
+		<title>array sample</title>
+	</head>
+	<body>
+		
+		<h3>member information</h3>
+		id: {$member.id} <br />
+		username: {$member.username} <br />
+		birthday: {$member.birthday} <br />
+		
+		<h3>fruits</h3>
+		id1: {$fruits.0.id} <br />
+		name1:{$fruits.0.name} <br />
+		id2: {$fruits.1.id} <br />
+		name2:{$fruits.1.name} <br />
+		id3: {$fruits.2.id} <br />
+		name3:{$fruits.2.name} <br />
+		id4: {$fruits.3.id} <br />
+		name4:{$fruits.3.name} <br />
+		
+		<h3>array returned</h3>
+		name: {$ArrayReturned.Data.0.name}
+		
+		<br />
+		{if $emptyArray|empty == true}
+			$emptyArray is an empty array <br />
+		{/if}
+	</body>
+</html>

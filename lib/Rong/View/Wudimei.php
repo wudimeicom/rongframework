@@ -16,17 +16,26 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
     public function __construct()
     {
         parent::__construct();
-        $this->data["wudimei"] = array("foreach" => array(),
-            'get' => $_GET,
-            'post' => $_POST,
-            'session' => @$_SESSION,
-            'cookie' => $_COOKIE,
-            'now' => date("Y-m-d H:i:s"),
-            'global' => $GLOBALS
-        );
+        $this->data["wudimei"] = array("foreach" => array()  );
+		$this->updateWudimeiSystemArray();
         $this->loadPlugins();
     }
-
+	
+	
+	public function updateWudimeiSystemArray()
+	{
+		$this->data["wudimei"]["get"] = &$_GET;
+		$this->data["wudimei"]["post"] = &$_POST;
+		$this->data["wudimei"]["session"] = &$_SESSION;
+		$this->data["wudimei"]["cookie"] = &$_COOKIE;
+		$this->data["wudimei"]["now"] = date("Y-m-d H:i:s");
+		$this->data["wudimei"]["global"] = &$GLOBALS;
+		$this->data["wudimei"]["server"] = &$_SERVER; 
+		$this->data["wudimei"]["files"]  =&$_FILES;
+		$this->data["wudimei"]["request"] =&$_REQUEST;
+		$this->data["wudimei"]["env"] = &$_ENV;
+	}
+	
     public function loadPlugins()
     {
         $dirObj = dir(dirname(__FILE__) . "/Wudimei/Plugins");
@@ -667,6 +676,7 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
 
     public function fetch($Rong_View_File, $Rong_View_Data)
     {
+    	$this->updateWudimeiSystemArray();
         /**
          * @var string compiled file name.
          */

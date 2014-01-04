@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>sys vars</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body>
+    	$_GET["id"] = <?php echo wudimei_toString( @$this->data['wudimei']['get']['id']); ?> <br />
+    	$_POST["name"] = <?php echo wudimei_toString( @$this->data['wudimei']['post']['name']); ?> <br /> <br />
+    	<form action="" method="post">
+    		name:<input type="text" name="name" value="<?php echo wudimei_toString( @$this->data['wudimei']['post']['name']); ?>" />
+    		<input type="submit" value="post" />
+    	</form>
+    	
+    	Hi,<?php echo wudimei_toString( @$this->data['wudimei']['session']['username']); ?>,welcome to rong framework! <br />
+    	your cookie token is: <?php echo wudimei_toString( @$this->data['wudimei']['cookie']['token']); ?> <br />
+    	now is:<?php echo wudimei_toString( @$this->data['wudimei']['now']); ?><br />
+    	globals var db_host:<?php echo wudimei_toString( @$this->data['wudimei']['global']['db_host']); ?> <br />
+    	server name:<?php echo wudimei_toString( @$this->data['wudimei']['server']['SERVER_NAME']); ?> <br />
+    	files count:<?php echo wudimei_toString(wudimei_count (  @$this->data['wudimei']['files'] ) ); ?> <br />
+    	request id:<?php echo wudimei_toString( @$this->data['wudimei']['request']['id']); ?> <br />
+	</body>
+</html>

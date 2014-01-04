@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>sys vars</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body>
+    	$_GET["id"] = {$wudimei.get.id} <br />
+    	$_POST["name"] = {$wudimei.post.name} <br /> <br />
+    	<form action="" method="post">
+    		name:<input type="text" name="name" value="{$wudimei.post.name}" />
+    		<input type="submit" value="post" />
+    	</form>
+    	
+    	Hi,{$wudimei.session.username},welcome to rong framework! <br />
+    	your cookie token is: {$wudimei.cookie.token} <br />
+    	now is:{$wudimei.now}<br />
+    	globals var db_host:{$wudimei.global.db_host} <br />
+    	server name:{$wudimei.server.SERVER_NAME} <br />
+    	files count:{$wudimei.files|count} <br />
+    	request id:{$wudimei.request.id} <br />
+	</body>
+</html>

@@ -1,0 +1,23 @@
+<html>
+	<head>
+		<title>array sample</title>
+	</head>
+	<body>
+		<?php echo wudimei_toString( @$this->data['name']); ?>
+		
+		
+		
+			{$name} here will not be compiled by wudimei template engine!
+			<script type="text/javascript">
+				function showMsg(msg)
+				{
+					alert( msg );
+				}
+				alert("{$name} here will not be compiled by wudimei template engine!");
+			</script>
+			
+			
+		
+		
+	</body>
+</html>
