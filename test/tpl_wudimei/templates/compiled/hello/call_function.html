@@ -1,0 +1,10 @@
+<html>
+	<head>
+		<title>call function</title>
+	</head>
+	<body>
+		<?php @$this->data['prdHtml']=call_display_product(array("qty" =>  1 + @$this->data['cart']['0']['id'],"name" =>  @$this->data['cart']['0']['name'],), $this  ); ?>
+		<?php echo wudimei_toString( @$this->data['prdHtml']); ?> <br />
+		<?php echo wudimei_toString( @$this->data['cart']['0']['name']); ?>
+   </body>
+</html>

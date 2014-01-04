@@ -1,0 +1,10 @@
+<html>
+	<head>
+		<title>call function</title>
+	</head>
+	<body>
+		{call function="display_product" qty=1+$cart.0.id name=$cart.0.name return=$prdHtml}
+		{$prdHtml} <br />
+		{$cart.0.name}
+   </body>
+</html>

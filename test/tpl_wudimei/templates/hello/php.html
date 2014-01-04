@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>php tags</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body>
+    	 
+    	
+    	 {php}
+	    	 echo "hello,world";  
+    	 {/php}
+    	 
+    	 <table border="1">
+    	 	<tr>
+    	 		<th>id</th>
+    	 		<th>name</th>
+    	 		<th>qty</th>
+    	 	</tr>
+    	 {foreach from=$cart item=$product key=$k}
+    	 	<tr>
+    	 		<td>{$product.id}</td>
+    	 		<td>{$product.name}</td>
+    	 		<td>{$product.qty}</td>
+    	 		<td>
+    	 			{php}
+    	 			$qty = $this->data["product"]["qty"]; //equeals {$product.qty}
+    	 			if( $qty < 2 )
+    	 			{
+    	 				echo "qty less than 2!";
+    	 			}
+    	 			{/php}
+    	 		</td>
+    	 	</tr>
+    	 {/foreach}
+    	 </table>
+    	 
+	</body>
+</html>

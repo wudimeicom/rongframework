@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>set</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body>
+    	
+    	{set var=$age value=2013-1985}
+    	
+    	2013,My age is:{$age}   <br />
+    	
+		{assign var=$age value=2014-1985 }
+		2014,My age is:{$age} <br />
+		
+		{assign var=$age value=$age+1}
+		2015,My age is:{$age}
+    </body>
+</html>

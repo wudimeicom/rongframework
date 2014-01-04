@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>php tags</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body>
+    	 
+    	
+    	 <?php 
+	    	 echo "hello,world";  
+    	  ?>
+    	 
+    	 <table border="1">
+    	 	<tr>
+    	 		<th>id</th>
+    	 		<th>name</th>
+    	 		<th>qty</th>
+    	 	</tr>
+    	 <?php $this->data["wudimei"]["foreach"]["cart" ]= array("index"=>-1); foreach(  @$this->data['cart']  as $this->data['k'] =>  $this->data['product'] ){  $this->data["wudimei"]["foreach"]["cart"]["index"]++;  ?>
+    	 	<tr>
+    	 		<td><?php echo wudimei_toString( @$this->data['product']['id']); ?></td>
+    	 		<td><?php echo wudimei_toString( @$this->data['product']['name']); ?></td>
+    	 		<td><?php echo wudimei_toString( @$this->data['product']['qty']); ?></td>
+    	 		<td>
+    	 			<?php 
+    	 			$qty = $this->data["product"]["qty"]; //equeals {$product.qty}
+    	 			if( $qty < 2 )
+    	 			{
+    	 				echo "qty less than 2!";
+    	 			}
+    	 			 ?>
+    	 		</td>
+    	 	</tr>
+    	 <?php } ?>
+    	 </table>
+    	 
+	</body>
+</html>

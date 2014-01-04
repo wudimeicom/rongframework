@@ -98,7 +98,7 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
             $code = $this->compileCall(substr($tag, 5)   );
         } elseif (substr($tag, 0, 3) == "set")
         {
-            $code = self::compileSet(substr($tag, 7));
+            $code = self::compileSet(substr($tag, 4));
         } elseif (substr($tag, 0, 6) == "assign")
         {
             $code = self::compileSet(substr($tag, 7));
@@ -132,7 +132,7 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
             {
                 $vCompiled = self::compileExpression($v);
                 $attrs[$k] = trim($vCompiled, "'\" ");
-                if ($k != "function")
+                if ($k != "function" && $k != "return")
                 {
                     $paramsCode .= "\"" . $k . "\" => " . $vCompiled . ",";
                 }
@@ -142,10 +142,14 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
         $paramsCode .= ")";
 
         $function = $attrs["function"];
-
+		$return = @$attrs["return"];
         $code = "";
         if (trim($function) != "")
         {
+        	if( trim( $return )!= "" )
+			{
+				$code .= $return ."=";
+			}
             $code .= "call_" . $function . "(" . $paramsCode . ", \$this  );";
         }
 
@@ -156,10 +160,10 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
     {
         $attrs = array();
         $attrs = self::getAttributesArrayFromText($expression, "var,value");
-        // print_r( $attrs );
-        $var = self::compileExpression($attrs["var"]);
+		
+		$var = $attrs["var"];
         $value = self::compileExpression($attrs["value"]);
-        // echo $attrs["value"];
+        
         return ' $this->data[' . trim($var, '$') . '] = ' . $value . ';';
     }
 
@@ -554,6 +558,8 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
         $inWudimei = false;
         $inComment = false;
         $inIgnore = false;
+		$inPHP = false;
+		
         $strQuote = '"';
         $contentLength = strlen($content);
         $firstCharOfLeftDelimiter = $this->leftDelimiter[0];
@@ -609,10 +615,27 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
                                     $inIgnore = false;
                                     continue;
                                 }
+								if( trim( $wudimeiCode) == "php" )
+								{
+									$inPHP = true;
+									$html .= "<?php ";
+									continue;
+								}
+								if( trim( $wudimeiCode) == "/php" )
+								{
+									$inPHP = false;
+									$html .= " ?>";
+									continue;
+								}
+								
                                 if( $inIgnore == true )
                                 {
                                     $html .= $this->leftDelimiter. $wudimeiCode . $this->rightDelimiter;
                                 }
+								if( $inPHP == true )
+								{
+									$html .= $this->leftDelimiter. $wudimeiCode . $this->rightDelimiter;
+								}
                                 else
                                 {
                                     
