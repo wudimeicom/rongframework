@@ -17,13 +17,13 @@
                 
                  <div class="ctrl">
                     上一页:
-                                        <a href="Rong.View.Wudimei.For.html"> For循环</a>
+                                        <a href="Rong.View.Wudimei.ignore.html"> 忽略编译</a>
                     
                     &nbsp;
                     <a href="index.html">目录</a>
                     &nbsp;
                     下一页 :
-                                        <a href="Rong.Cache.html">缓存</a>
+                                        <a href="Rong.View.Wudimei.set.html">赋值</a>
                                     </div> 
                 <h3>注释</h3>
                 注释由{*开始，由*}结束，注释不会被编译，也不会被显示出来。是模板开发人员的说明文档。<br><br>Filename: /test/tpl_wudimei/comment.php<div class="code"  ><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">/**<br />&nbsp;*&nbsp;file&nbsp;encoding&nbsp;utf-8<br />&nbsp;*&nbsp;文件字符编码utf-8<br />&nbsp;*/<br /></span><span style="color: #0000BB">$PathToRongFramework&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">dirname</span><span style="color: #007700">(</span><span style="color: #0000BB">__FILE__</span><span style="color: #007700">).</span><span style="color: #DD0000">"/../../lib"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">set_include_path</span><span style="color: #007700">(&nbsp;&nbsp;</span><span style="color: #DD0000">"."&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">PATH_SEPARATOR&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$PathToRongFramework&nbsp;</span><span style="color: #007700">.&nbsp;&nbsp;</span><span style="color: #0000BB">PATH_SEPARATOR&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">get_include_path</span><span style="color: #007700">()&nbsp;);<br /><br /><br />require_once&nbsp;</span><span style="color: #DD0000">'Rong/View/Wudimei.php'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$wudimei&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">Rong_View_Wudimei</span><span style="color: #007700">();<br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">compileDir&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">dirname</span><span style="color: #007700">(</span><span style="color: #0000BB">__FILE__</span><span style="color: #007700">)&nbsp;.&nbsp;</span><span style="color: #DD0000">"/templates/compiled"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">viewsDirectory&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">dirname</span><span style="color: #007700">(</span><span style="color: #0000BB">__FILE__</span><span style="color: #007700">)&nbsp;.&nbsp;&nbsp;</span><span style="color: #DD0000">"/templates"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">leftDelimiter&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"{"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">rightDelimiter&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"}"</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">//assing&nbsp;var&nbsp;msg&nbsp;to&nbsp;template<br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">assign</span><span style="color: #007700">(</span><span style="color: #DD0000">"name"</span><span style="color: #007700">,</span><span style="color: #DD0000">"Yang&nbsp;Qing-rong"</span><span style="color: #007700">);<br /></span><span style="color: #FF8000">//echo&nbsp;$wudimei-&gt;fetch("hello/sysvars.html");<br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">display</span><span style="color: #007700">(</span><span style="color: #DD0000">"hello/comment.html"</span><span style="color: #007700">);<br /><br /></span></span></code></div><br><br>Filename: /test/tpl_wudimei/templates/hello/comment.html<div class="code"  ><pre>&lt;<span class='tagName'>html</span>&gt;
@@ -59,13 +59,13 @@
 
                 <div class="ctrl">
                     上一页:
-                                        <a href="Rong.View.Wudimei.For.html"> For循环</a>
+                                        <a href="Rong.View.Wudimei.ignore.html"> 忽略编译</a>
                     
                     &nbsp;
                     <a href="index.html">目录</a>
                     &nbsp;
                     下一页 :
-                                        <a href="Rong.Cache.html">缓存</a>
+                                        <a href="Rong.View.Wudimei.set.html">赋值</a>
                                     </div> 
             </div>
             <div class="bottom">

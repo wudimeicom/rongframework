@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>set variable</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <link href="style.css" rel="stylesheet" type="text/css" />        <meta name="keywords" content="set variable,Rong Framework" />
+        <meta name="description" content="set variable,Rong Framework" />
+    </head>
+    <body>
+        <div class="Page">
+            <div class="top">
+    <div class="rf">Rong Framework</div>
+</div>            <div class="content"> 
+                <div>
+                    <a href="index.html">Table Of Contents</a>
+                </div>
+                
+                 <div class="ctrl">
+                    Prev Page:
+                                        <a href="Rong.View.Wudimei.comment.html"> comment</a>
+                    
+                    &nbsp;
+                    <a href="index.html">Table Of Contents</a>
+                    &nbsp;
+                    Next Page :
+                                        <a href="Rong.View.Wudimei.sysvars.html">system varibles</a>
+                                    </div> 
+                <h3>set variable</h3>
+                {set var=$age value=2013-1985}
+
+<table class="LineTable">
+  <tr><th>attribute name</th><th>value</th><th>des</th></tr>
+  <tr>
+   <td>var</td>
+   <td>variable name</td>
+   <td>declare the variable name</td>
+  </tr>
+  <tr>
+   <td>value</td>
+   <td>variable's value.const,int,string,expressions</td>
+   <td>assign the value to the variable name</td>
+  </tr>
+</table>
+
+Filename: /test/tpl_wudimei/set.php<div class="code"  ><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">/**<br />&nbsp;*&nbsp;file&nbsp;encoding&nbsp;utf-8<br />&nbsp;*&nbsp;文件字符编码utf-8<br />&nbsp;*/<br /></span><span style="color: #0000BB">$PathToRongFramework&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">dirname</span><span style="color: #007700">(</span><span style="color: #0000BB">__FILE__</span><span style="color: #007700">).</span><span style="color: #DD0000">"/../../lib"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">set_include_path</span><span style="color: #007700">(&nbsp;&nbsp;</span><span style="color: #DD0000">"."&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">PATH_SEPARATOR&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$PathToRongFramework&nbsp;</span><span style="color: #007700">.&nbsp;&nbsp;</span><span style="color: #0000BB">PATH_SEPARATOR&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">get_include_path</span><span style="color: #007700">()&nbsp;);<br /><br /><br />require_once&nbsp;</span><span style="color: #DD0000">'Rong/View/Wudimei.php'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$wudimei&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">Rong_View_Wudimei</span><span style="color: #007700">();<br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">compileDir&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">dirname</span><span style="color: #007700">(</span><span style="color: #0000BB">__FILE__</span><span style="color: #007700">)&nbsp;.&nbsp;</span><span style="color: #DD0000">"/templates/compiled"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">viewsDirectory&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">dirname</span><span style="color: #007700">(</span><span style="color: #0000BB">__FILE__</span><span style="color: #007700">)&nbsp;.&nbsp;&nbsp;</span><span style="color: #DD0000">"/templates"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">leftDelimiter&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"{"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">rightDelimiter&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"}"</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">//assing&nbsp;var&nbsp;msg&nbsp;to&nbsp;template<br /><br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">display</span><span style="color: #007700">(</span><span style="color: #DD0000">"hello/set.html"</span><span style="color: #007700">);<br /><br /></span></span></code></div> Filename: /test/tpl_wudimei/templates/hello/set.html<div class="code"  ><pre>&lt;<span class='HTMLComment'>!DOCTYPE html</span>&gt;
+&lt;<span class='tagName'>html</span>&gt;
+    &lt;<span class='tagName'>head</span>&gt;
+        &lt;<span class='tagName'>title</span>&gt;set&lt;<span class='tagName'>/title</span>&gt;
+        &lt;<span class='tagName'>meta</span> <span class='tagAttribute'>http-equiv</span>=<span class='tagValue'>"Content-Type"</span> <span class='tagAttribute'>content</span>=<span class='tagValue'>"text/html; charset=UTF-8"</span>>
+    &lt;<span class='tagName'>/head</span>&gt;
+    &lt;<span class='tagName'>body</span>&gt;
+    	
+    	{<span class='WudimeiTagName'>set</span> <span class='WudimeiTagAttribute'>var</span>=<span class='WudimeiTagValue'>$age</span> <span class='WudimeiTagAttribute'>value</span>=<span class='WudimeiTagValue'>2013-1985</span>}
+    	
+    	2013,My age is:{<span class='WudimeiTagName'>$age</span>}   &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+    	
+		{<span class='WudimeiTagName'>assign</span> <span class='WudimeiTagAttribute'>var</span>=<span class='WudimeiTagValue'>$age</span> <span class='WudimeiTagAttribute'>value</span>=<span class='WudimeiTagValue'>2014-1985</span> }
+		2014,My age is:{<span class='WudimeiTagName'>$age</span>} &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+		
+		{<span class='WudimeiTagName'>assign</span> <span class='WudimeiTagAttribute'>var</span>=<span class='WudimeiTagValue'>$age</span> <span class='WudimeiTagAttribute'>value</span>=<span class='WudimeiTagValue'>$age+1</span>}
+		2015,My age is:{<span class='WudimeiTagName'>$age</span>}
+    &lt;<span class='tagName'>/body</span>&gt;
+&lt;<span class='tagName'>/html</span>&gt;</pre></div> URL: /test/tpl_wudimei/set.php<div class="code"  ><pre>&lt;<span class='HTMLComment'>!DOCTYPE html</span>&gt;
+&lt;<span class='tagName'>html</span>&gt;
+    &lt;<span class='tagName'>head</span>&gt;
+        &lt;<span class='tagName'>title</span>&gt;set&lt;<span class='tagName'>/title</span>&gt;
+        &lt;<span class='tagName'>meta</span> <span class='tagAttribute'>http-equiv</span>=<span class='tagValue'>"Content-Type"</span> <span class='tagAttribute'>content</span>=<span class='tagValue'>"text/html; charset=UTF-8"</span>>
+    &lt;<span class='tagName'>/head</span>&gt;
+    &lt;<span class='tagName'>body</span>&gt;
+    	
+    	    	
+    	2013,My age is:28   &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+    	
+				2014,My age is:29 &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+		
+				2015,My age is:30    &lt;<span class='tagName'>/body</span>&gt;
+&lt;<span class='tagName'>/html</span>&gt;</pre></div> 
+
+
+                <div class="ctrl">
+                    Prev Page:
+                                        <a href="Rong.View.Wudimei.comment.html"> comment</a>
+                    
+                    &nbsp;
+                    <a href="index.html">Table Of Contents</a>
+                    &nbsp;
+                    Next Page :
+                                        <a href="Rong.View.Wudimei.sysvars.html">system varibles</a>
+                                    </div> 
+            </div>
+            <div class="bottom">
+ To get the last version of Rong Framework.please vist <a href="http://rong.wudimei.com" target="_balnk">http://rong.wudimei.com</a></div>  
+        </div>
+    </body>
+</html>
