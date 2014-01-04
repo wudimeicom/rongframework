@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Database Model</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <link href="style.css" rel="stylesheet" type="text/css" />        <meta name="keywords" content="Database Model,Rong Framework" />
+        <meta name="description" content="Database Model,Rong Framework" />
+    </head>
+    <body>
+        <div class="Page">
+            <div class="top">
+    <div class="rf">Rong Framework</div>
+</div>            <div class="content"> 
+                <div>
+                    <a href="index.html">Table Of Contents</a>
+                </div>
+                
+                 <div class="ctrl">
+                    Prev Page:
+                                        <a href="Rong.Db.Driver.Sqlite.php"> Rong_Db connect to sqlite</a>
+                    
+                    &nbsp;
+                    <a href="index.html">Table Of Contents</a>
+                    &nbsp;
+                    Next Page :
+                                        <a href="Rong.Db.Paginator.html">database pagination</a>
+                                    </div> 
+                <h3>Database Model</h3>
+                <h1>Model</h1><br><p>
+<br>
+<span class="title1">1.Create a new Model</span></p>
+<div class="code"  ><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">/**<br />*&nbsp;file&nbsp;name:&nbsp;/test/models/ArticleModel.php<br />*/<br /></span><span style="color: #007700">require_once&nbsp;</span><span style="color: #DD0000">'Rong/Db/Model.php'</span><span style="color: #007700">;<br />class&nbsp;</span><span style="color: #0000BB">ArticleModel&nbsp;</span><span style="color: #007700">extends&nbsp;</span><span style="color: #0000BB">Rong_Db_Model&nbsp;<br /></span><span style="color: #007700">{<br />&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;</span><span style="color: #0000BB">$_name&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">""</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;function&nbsp;</span><span style="color: #0000BB">__construct</span><span style="color: #007700">(&nbsp;)<br />&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">parent</span><span style="color: #007700">::</span><span style="color: #0000BB">__construct</span><span style="color: #007700">();<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">setNameWithDefaultTablePrefix</span><span style="color: #007700">(</span><span style="color: #DD0000">"article"</span><span style="color: #007700">);&nbsp;</span><span style="color: #FF8000">//assign&nbsp;"w_article"&nbsp;&nbsp;to&nbsp;$_name&nbsp;(table&nbsp;name)<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">}<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;function&nbsp;</span><span style="color: #0000BB">m_insert</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">$title</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$content&nbsp;</span><span style="color: #007700">)<br />&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$data&nbsp;</span><span style="color: #007700">=&nbsp;array(<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">"title"&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">$title&nbsp;</span><span style="color: #007700">,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">"content"&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">$content&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">parent</span><span style="color: #007700">::</span><span style="color: #0000BB">insert</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">$data&nbsp;</span><span style="color: #007700">);&nbsp;</span><span style="color: #FF8000">//&nbsp;insert()return&nbsp;last_insert_id,&nbsp;or&nbsp;-1<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">}<br />}<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+
+<p>"Rong_Db_Model".it's attribute $_name is the table name of the database.<br>
+Insert data into the table in db using this style:</p>
+
+<pre><div class="code"  ><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$data&nbsp;</span><span style="color: #007700">=&nbsp;array(<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">"fieldName1"&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">$value1&nbsp;</span><span style="color: #007700">,<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">"fieldName2"&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">$value2&nbsp;</span><span style="color: #007700">,<br />&nbsp;&nbsp;&nbsp;&nbsp;......<br />);<br />return&nbsp;</span><span style="color: #0000BB">parent</span><span style="color: #007700">::</span><span style="color: #0000BB">insert</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">$data&nbsp;</span><span style="color: #007700">);&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//return&nbsp;the&nbsp;last&nbsp;insert&nbsp;id</span></span></code></div>
+</pre>
+
+<p><span class="title1">3.Using Model we created in the action of controller</span></p><br><b><span class="title1">after <a href="./Rong.Db.html">class Rong_Db created</a>,we have to tell the instance to Rong_Db_Model,in order to let it regnize the instance</span></b><p><span class="title1"><div class="code"  ><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">require_once&nbsp;</span><span style="color: #DD0000">'Rong/Db/Model.php'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">Rong_Db_Model</span><span style="color: #007700">::</span><span style="color: #0000BB">setDefaultDb</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">$db&nbsp;</span><span style="color: #007700">);</span></span></code></div><br></span></p><p><span class="title1">3.1 import the model we created and create a instance<br><div class="code"  ><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">require_once&nbsp;</span><span style="color: #0000BB">dirname</span><span style="color: #007700">(</span><span style="color: #0000BB">__FILE__</span><span style="color: #007700">)&nbsp;.&nbsp;</span><span style="color: #DD0000">"/models/ArticleModel.php"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$articleModel&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">ArticleModel</span><span style="color: #007700">();</span></span></code></div></span></p><p><span class="title1">3.2 insert data to table<br><div class="code"  ><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$lastInsertId&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$articleModel</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">insert</span><span style="color: #007700">(array(<br />&nbsp;&nbsp;</span><span style="color: #DD0000">"title"&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">"good&nbsp;good&nbsp;study"</span><span style="color: #007700">,<br />&nbsp;&nbsp;</span><span style="color: #DD0000">"content"&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">"day&nbsp;day&nbsp;up"<br /></span><span style="color: #007700">));<br />echo&nbsp;</span><span style="color: #DD0000">"last&nbsp;insert&nbsp;id:"&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$lastInsertId&nbsp;</span><span style="color: #007700">.</span><span style="color: #DD0000">"&lt;br&nbsp;/&gt;"</span><span style="color: #007700">;</span></span></code></div></span></p><p><span class="title1">3.3 update data<br><div class="code"  ><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /><br />$affectedRows&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$articleModel</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">update</span><span style="color: #007700">(<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;array(<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">"title"&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">"new&nbsp;title"</span><span style="color: #FF8000">//&nbsp;db&nbsp;field&nbsp;name&nbsp;=&gt;&nbsp;value<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">),&nbsp;</span><span style="color: #DD0000">"id="&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$lastInsertId<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">);<br />echo&nbsp;</span><span style="color: #DD0000">"update&nbsp;affected&nbsp;rows:"</span><span style="color: #007700">.</span><span style="color: #0000BB">$affectedRows&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">"&lt;br&nbsp;/&gt;"</span><span style="color: #007700">;</span><span style="color: #0000BB"> </span></span></code></div></span></p><p><span class="title1">3.4 delete data<br></span></p><p><span class="title1"><div class="code"  ><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /><br />$affectedRows&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$articleModel</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">delete</span><span style="color: #007700">(</span><span style="color: #DD0000">"id="&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$lastInsertId</span><span style="color: #007700">);<br />echo&nbsp;</span><span style="color: #DD0000">"Deletion&nbsp;affected&nbsp;rows:"</span><span style="color: #007700">.</span><span style="color: #0000BB">$affectedRows&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">"&lt;br&nbsp;/&gt;"</span><span style="color: #007700">;</span></span></code></div></span></p><p><span class="title1">3.5 fetch a record:<br><div class="code"  ><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$record&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$articleModel</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">fetchRow</span><span style="color: #007700">(</span><span style="color: #DD0000">"id=1"&nbsp;</span><span style="color: #007700">);<br />echo&nbsp;</span><span style="color: #DD0000">"fetch&nbsp;a&nbsp;record:"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">print_r</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">$record&nbsp;</span><span style="color: #007700">);<br />echo&nbsp;</span><span style="color: #DD0000">"&lt;br&nbsp;/&gt;"</span><span style="color: #007700">;</span></span></code></div><br>3.6 fetch multiple records:<br></span></p><p><span class="title1"><div class="code"  ><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$records&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$articleModel</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">fetchAll</span><span style="color: #007700">(</span><span style="color: #DD0000">"id&gt;0"</span><span style="color: #007700">);<br />echo&nbsp;</span><span style="color: #DD0000">"fetch&nbsp;all&nbsp;records:&lt;pre&gt;"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">$records&nbsp;</span><span style="color: #007700">);<br />echo&nbsp;</span><span style="color: #DD0000">"&lt;/pre&gt;"</span><span style="color: #007700">;</span></span></code></div></span></p><p><span class="title1"><br></span></p><p><br><span class="title1"></span></p><b>Rong_Db_Model::setDb( $db )</b><br><p>
+setup db instance for model ,$db is created by Rong_Db::factory()<br>
+<b>$articleModel = $this-&gt;import-&gt;model("ArticleModel" ); </b><br>
+get a instance of ArticleModel which we create before<br>
+<span class="title1">4.The basic method of Rong_Db_Model</span><br>
+<b>Rong_Db_Model::setModelsDir( $modelDir )</b><br>
+set new path to models directory. eg: /php/new/models<br>
+<b>Rong_Db_Model::setName( $newName )</b><br>
+set the table name of the model<br>
+<b>Rong_Db_Model::getName( )</b><br>
+<br>
+<b>Rong_Db_Model::insert( $data )</b><br>
+Insert an array into the database<br>
+<b>Rong_Db_Model::update( $data , $where )</b><br>
+is an array contains the "key=&gt;value" pair, $where is sub sql statement after the where key word.<br>
+<b>Rong_Db_Model::delete( $where )</b><br>
+delete data from the database table.<br>
+<b>Rong_Db_Model::fetchRow( $where )</b><br>
+one frow from the table .<br>
+<b>Rong_Db_Model::escape( $str )</b><br>
+escape the special char like (')<br>
+<b>$Rong_Db_Model-&gt;db-&gt;numFields()</b><br>
+return the field count of a result set<br>
+<b>$Rong_Db_Model-&gt;db-&gt;numRows()</b><br>
+return the row count of the result set</p>
+
+
+
+
+
+
+
+
+
+                <div class="ctrl">
+                    Prev Page:
+                                        <a href="Rong.Db.Driver.Sqlite.php"> Rong_Db connect to sqlite</a>
+                    
+                    &nbsp;
+                    <a href="index.html">Table Of Contents</a>
+                    &nbsp;
+                    Next Page :
+                                        <a href="Rong.Db.Paginator.html">database pagination</a>
+                                    </div> 
+            </div>
+            <div class="bottom">
+ To get the last version of Rong Framework.please vist <a href="http://rong.wudimei.com" target="_balnk">http://rong.wudimei.com</a></div>  
+        </div>
+    </body>
+</html>

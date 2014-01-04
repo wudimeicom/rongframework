@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>多行文本框</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <link href="style.css" rel="stylesheet" type="text/css" />        <meta name="keywords" content="多行文本框,Rong Framework" />
+        <meta name="description" content="多行文本框,Rong Framework" />
+    </head>
+    <body>
+        <div class="Page">
+            <div class="top">
+    <div class="rf">Rong Framework</div>
+</div>            <div class="content"> 
+                <div>
+                    <a href="index.html">目录</a>
+                </div>
+                
+                 <div class="ctrl">
+                    上一页:
+                                        <a href="Rong.Html.TextField.html"> 文本框</a>
+                    
+                    &nbsp;
+                    <a href="index.html">目录</a>
+                    &nbsp;
+                    下一页 :
+                                        <a href="Rong.Html.Select.html">选择框</a>
+                                    </div> 
+                <h3>多行文本框</h3>
+                Rong_Html_Textarea也是Rong_Html_Abstract的子类。<br>它仅有一个属性：<br>public $text = "";//这是文本框显示的文字内容。<br>一个例子:<br>Filename: /test/html/html_textarea.php<div class="code"  ><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php&nbsp;<br /><br /></span><span style="color: #FF8000">/**<br />&nbsp;*&nbsp;file&nbsp;encoding&nbsp;utf-8<br />&nbsp;*&nbsp;文件字符编码utf-8<br />&nbsp;*/<br /></span><span style="color: #0000BB">$PathToRongFramework&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">dirname</span><span style="color: #007700">(</span><span style="color: #0000BB">__FILE__</span><span style="color: #007700">).</span><span style="color: #DD0000">"/../../lib"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">set_include_path</span><span style="color: #007700">(&nbsp;&nbsp;</span><span style="color: #DD0000">"."&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">PATH_SEPARATOR&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$PathToRongFramework&nbsp;</span><span style="color: #007700">.&nbsp;&nbsp;</span><span style="color: #0000BB">PATH_SEPARATOR&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">get_include_path</span><span style="color: #007700">()&nbsp;);<br /><br /><br />require_once&nbsp;</span><span style="color: #DD0000">'Rong/Html/Textarea.php'</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">$ta&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">Rong_Html_Textarea</span><span style="color: #007700">();<br /></span><span style="color: #0000BB">$ta</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">set</span><span style="color: #007700">(</span><span style="color: #DD0000">"id"</span><span style="color: #007700">,</span><span style="color: #DD0000">"content"</span><span style="color: #007700">)-&gt;</span><span style="color: #0000BB">set</span><span style="color: #007700">(</span><span style="color: #DD0000">"name"</span><span style="color: #007700">,</span><span style="color: #DD0000">"content"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$ta</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">set</span><span style="color: #007700">(</span><span style="color: #DD0000">"cols"</span><span style="color: #007700">,</span><span style="color: #0000BB">60</span><span style="color: #007700">)-&gt;</span><span style="color: #0000BB">set</span><span style="color: #007700">(</span><span style="color: #DD0000">"rows"</span><span style="color: #007700">,</span><span style="color: #0000BB">5</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$ta</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">text&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"&lt;hr&gt;hello,world"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">header</span><span style="color: #007700">(</span><span style="color: #DD0000">"Content-Type:&nbsp;text/html;&nbsp;charset=utf-8"</span><span style="color: #007700">);<br />echo&nbsp;</span><span style="color: #0000BB">$ta</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">toHtml</span><span style="color: #007700">();<br /><br /><br /></span></span></code></div><br>它会输出：<br><div class="code"  ><pre>&lt;<span class='tagName'>textarea</span>  <span class='tagAttribute'>id</span>=<span class='tagValue'>"content"</span> <span class='tagAttribute'>name</span>=<span class='tagValue'>"content"</span> <span class='tagAttribute'>cols</span>=<span class='tagValue'>"60"</span> <span class='tagAttribute'>rows</span>=<span class='tagValue'>"5"</span>  >&lt;<span class='tagName'>hr</span>&gt;hello,world&lt;<span class='tagName'>/textarea</span>&gt;</pre></div><br>看一下它：http://127.0.0.9/index.php/test/html/Text/index<br>
+
+
+
+                <div class="ctrl">
+                    上一页:
+                                        <a href="Rong.Html.TextField.html"> 文本框</a>
+                    
+                    &nbsp;
+                    <a href="index.html">目录</a>
+                    &nbsp;
+                    下一页 :
+                                        <a href="Rong.Html.Select.html">选择框</a>
+                                    </div> 
+            </div>
+            <div class="bottom">
+ 要获取最新的Rong Framework,请访问<a href="http://rong.wudimei.com" target="_balnk">http://rong.wudimei.com</a></div>  
+        </div>
+    </body>
+</html>

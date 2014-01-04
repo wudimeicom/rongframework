@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>For循环</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <link href="style.css" rel="stylesheet" type="text/css" />        <meta name="keywords" content="For循环,Rong Framework" />
+        <meta name="description" content="For循环,Rong Framework" />
+    </head>
+    <body>
+        <div class="Page">
+            <div class="top">
+    <div class="rf">Rong Framework</div>
+</div>            <div class="content"> 
+                <div>
+                    <a href="index.html">目录</a>
+                </div>
+                
+                 <div class="ctrl">
+                    上一页:
+                                        <a href="Rong.View.Wudimei.include.html"> 包含文件</a>
+                    
+                    &nbsp;
+                    <a href="index.html">目录</a>
+                    &nbsp;
+                    下一页 :
+                                        <a href="Rong.View.Wudimei.comment.html">注释</a>
+                                    </div> 
+                <h3>For循环</h3>
+                <h1>For循环介绍</h1>
+<table border="1">
+  <tbody><tr>
+    <td>属姓名<br></td><td>类型</td><td>说明</td>
+  </tr>
+  <tr>
+    <td>var</td><td>变量</td><td>循环数字的变量名，例如$index</td>
+  </tr>
+  <tr>
+    <td>from</td><td>数值型</td><td>循环初始值</td>
+  </tr>
+  <tr>
+    <td>to</td><td>数值型</td><td>循环结束值</td>
+  </tr>
+  <tr>
+    <td>step</td><td>数值型</td><td>每次增加的数值</td>
+  </tr>
+</tbody></table>
+
+<p>为了少写wudimei模板引擎的初始化代码，我们把初始化代码放到load_wudimei()函数中。<br>
+我创建一个文件：application/includes/load.php , 它的内容是这样的：<br>
+<div class="code"  ><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">/**<br />&nbsp;*&nbsp;@return&nbsp;Rong_View_Wudimei&nbsp;Description<br />&nbsp;*/<br /></span><span style="color: #007700">function&nbsp;</span><span style="color: #0000BB">load_wudimei</span><span style="color: #007700">()<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;require_once&nbsp;</span><span style="color: #DD0000">'Rong/View/Wudimei.php'</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$wudimei&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">Rong_View_Wudimei</span><span style="color: #007700">();<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">compileDir&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">ROOT&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">"/data/compiled"</span><span style="color: #007700">;<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">viewsDirectory&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">ROOT&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">"/application/views"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">leftDelimiter&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"{"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">rightDelimiter&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"}"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">;<br />}<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div><br>
+接下来我们创建一个ForController以测试wudimei模板的循环。当然我们要加载load.php,在此之前我们先创建一个文件:application/controllers/test/wudimei/ForController.php<br>
+<div class="code"  ><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">require_once&nbsp;</span><span style="color: #0000BB">ROOT&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">'/application/includes/load.php'</span><span style="color: #007700">;<br />class&nbsp;</span><span style="color: #0000BB">ForController&nbsp;</span><span style="color: #007700">extends&nbsp;</span><span style="color: #0000BB">Rong_Controller<br /></span><span style="color: #007700">{<br />&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;function&nbsp;</span><span style="color: #0000BB">__construct</span><span style="color: #007700">()<br />&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">parent</span><span style="color: #007700">::</span><span style="color: #0000BB">__construct</span><span style="color: #007700">();<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;function&nbsp;</span><span style="color: #0000BB">indexAction</span><span style="color: #007700">()<br />&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$wudimei&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">load_wudimei</span><span style="color: #007700">();<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">display</span><span style="color: #007700">(</span><span style="color: #DD0000">"test/wudimei/For/index.html"</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div><br>
+我们还要创建一个模板文件:application/views/test/wudimei/For/index.html.<br>
+我们接着显示1到9这个数字。<br>
+<div class="code"  ><pre>&lt;<span class='tagName'>h3</span>&gt;simple loop&lt;<span class='tagName'>/h3</span>&gt;
+            {<span class='WudimeiTagName'>for</span> <span class='WudimeiTagAttribute'>var</span>=<span class='WudimeiTagValue'>$number</span> <span class='WudimeiTagAttribute'>from</span>=<span class='WudimeiTagValue'>1</span> <span class='WudimeiTagAttribute'>to</span>=<span class='WudimeiTagValue'>9</span> <span class='WudimeiTagAttribute'>step</span>=<span class='WudimeiTagValue'>1</span>}
+               {<span class='WudimeiTagName'>$number</span>} &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+            {<span class='WudimeiTagName'>/for</span>}</pre></div><br>
+我们也可以每隔一个数字显示一次，只要把step设为2就可以了。<br>
+<div class="code"  ><pre>&lt;<span class='tagName'>hr</span> <span class='tagAttribute'>/</span>>
+            {<span class='WudimeiTagName'>for</span> <span class='WudimeiTagAttribute'>var</span>=<span class='WudimeiTagValue'>$number</span> <span class='WudimeiTagAttribute'>from</span>=<span class='WudimeiTagValue'>1</span> <span class='WudimeiTagAttribute'>to</span>=<span class='WudimeiTagValue'>9</span> <span class='WudimeiTagAttribute'>step</span>=<span class='WudimeiTagValue'>2</span>}
+               {<span class='WudimeiTagName'>$number</span>} &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+            {<span class='WudimeiTagName'>/for</span>}</pre></div><br>
+这时访问http://127.0.0.9/index.php/test/wudimei/For 就可以看到结果了。<br><br>接下来我们输出一个数组中的元素,在ForController中添加入下代码：<br><div class="code"  ><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$friends&nbsp;</span><span style="color: #007700">=&nbsp;array(</span><span style="color: #DD0000">"Jim"</span><span style="color: #007700">,</span><span style="color: #DD0000">"HanMeimei"</span><span style="color: #007700">,</span><span style="color: #DD0000">"LiLei"</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">assign</span><span style="color: #007700">(</span><span style="color: #DD0000">"friends"</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$friends</span><span style="color: #007700">);</span></span></code></div><br>在.../For/index.html中加入显示$friends的代码：<br><div class="code"  ><pre>&lt;<span class='tagName'>h3</span>&gt;My Friends&lt;<span class='tagName'>/h3</span>&gt;
+            {<span class='WudimeiTagName'>for</span> <span class='WudimeiTagAttribute'>var</span>=<span class='WudimeiTagValue'>$friendNumber</span> <span class='WudimeiTagAttribute'>from</span>=<span class='WudimeiTagValue'>0</span> <span class='WudimeiTagAttribute'>to</span>=<span class='WudimeiTagValue'>$friends|count-1</span> <span class='WudimeiTagAttribute'>step</span>=<span class='WudimeiTagValue'>1</span>}
+               {<span class='WudimeiTagName'>$friends.$friendNumber</span>} &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+            {<span class='WudimeiTagName'>/for</span>}</pre></div><br>这时访问http://127.0.0.9/index.php/test/wudimei/For 就可以看到结果了。<br>当然，你也可以倒过来显示，这时要换一下from和to,把step设为负数。<br><div class="code"  ><pre>{<span class='WudimeiTagName'>for</span> <span class='WudimeiTagAttribute'>var</span>=<span class='WudimeiTagValue'>$friendNumber</span> <span class='WudimeiTagAttribute'>from</span>=<span class='WudimeiTagValue'>$friends|count</span> <span class='WudimeiTagAttribute'>- 1 to</span>=<span class='WudimeiTagValue'>0</span>   <span class='WudimeiTagAttribute'>step</span>=<span class='WudimeiTagValue'>-1</span>}
+               {<span class='WudimeiTagName'>$friends.$friendNumber</span>} &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+{<span class='WudimeiTagName'>/for</span>}</pre></div><br></p><p>我们再来输出一个二维数组,还是在ForController中添加代码：<br><div class="code"  ><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$languages&nbsp;</span><span style="color: #007700">=&nbsp;array(<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;array(</span><span style="color: #DD0000">"name"&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">"java"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"company"&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">"oracle"</span><span style="color: #007700">),<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;array(</span><span style="color: #DD0000">"name"&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">"c#"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"company"&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">"microsoft"&nbsp;</span><span style="color: #007700">),<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;array(</span><span style="color: #DD0000">"name"&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">"php"&nbsp;</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"company"&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">"zend"</span><span style="color: #007700">)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">assign</span><span style="color: #007700">(</span><span style="color: #DD0000">"languages"</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$languages&nbsp;</span><span style="color: #007700">);</span></span></code></div><br>还是在.../For/index.html中加入显示$languages的模板代码：<br><div class="code"  ><pre>&lt;<span class='tagName'>h3</span>&gt;languages &lt;<span class='tagName'>/h3</span>&gt;
+            langeuage | company &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+            {<span class='WudimeiTagName'>for</span> <span class='WudimeiTagAttribute'>var</span>=<span class='WudimeiTagValue'>$languageIndex</span> <span class='WudimeiTagAttribute'>from</span>=<span class='WudimeiTagValue'>0</span> <span class='WudimeiTagAttribute'>to</span>=<span class='WudimeiTagValue'>$languages|count-1</span> <span class='WudimeiTagAttribute'>step</span>=<span class='WudimeiTagValue'>1</span>}
+               {<span class='WudimeiTagName'>$languages.$languageIndex.name</span>}  | {<span class='WudimeiTagName'>$languages.$languageIndex.company</span>}&lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+            {<span class='WudimeiTagName'>/for</span>}</pre></div><br><br></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                <div class="ctrl">
+                    上一页:
+                                        <a href="Rong.View.Wudimei.include.html"> 包含文件</a>
+                    
+                    &nbsp;
+                    <a href="index.html">目录</a>
+                    &nbsp;
+                    下一页 :
+                                        <a href="Rong.View.Wudimei.comment.html">注释</a>
+                                    </div> 
+            </div>
+            <div class="bottom">
+ 要获取最新的Rong Framework,请访问<a href="http://rong.wudimei.com" target="_balnk">http://rong.wudimei.com</a></div>  
+        </div>
+    </body>
+</html>

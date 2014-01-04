@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>if、else、elseif语句</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <link href="style.css" rel="stylesheet" type="text/css" />        <meta name="keywords" content="if、else、elseif语句,Rong Framework" />
+        <meta name="description" content="if、else、elseif语句,Rong Framework" />
+    </head>
+    <body>
+        <div class="Page">
+            <div class="top">
+    <div class="rf">Rong Framework</div>
+</div>            <div class="content"> 
+                <div>
+                    <a href="index.html">目录</a>
+                </div>
+                
+                 <div class="ctrl">
+                    上一页:
+                                        <a href="Rong.View.Wudimei.init.html"> 初始化Wudimei模版引擎</a>
+                    
+                    &nbsp;
+                    <a href="index.html">目录</a>
+                    &nbsp;
+                    下一页 :
+                                        <a href="Rong.View.Wudimei.Foreach.html">Foreach</a>
+                                    </div> 
+                <h3>if、else、elseif语句</h3>
+                <p><br>
+<br>
+在动作中添加一个$age的变量，它的值是16，显然未成年嘛！<br>
+<div class="code"  ><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">//assing&nbsp;var&nbsp;msg&nbsp;to&nbsp;template<br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">assign</span><span style="color: #007700">(</span><span style="color: #DD0000">"age"</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">16&nbsp;</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">display</span><span style="color: #007700">(</span><span style="color: #DD0000">"hello/if_else.html"</span><span style="color: #007700">);</span></span></code></div><br>
+接下来我们在模板中判断是否未满18岁：<br>
+<br>
+<div class="code"  ><pre>&lt;<span class='HTMLComment'>!DOCTYPE html</span>&gt;
+&lt;<span class='tagName'>html</span>&gt;
+    &lt;<span class='tagName'>head</span>&gt;
+        &lt;<span class='tagName'>title</span>&gt;&lt;<span class='tagName'>/title</span>&gt;
+        &lt;<span class='tagName'>meta</span> <span class='tagAttribute'>http-equiv</span>=<span class='tagValue'>"Content-Type"</span> <span class='tagAttribute'>content</span>=<span class='tagValue'>"text/html; charset=UTF-8"</span>>
+    &lt;<span class='tagName'>/head</span>&gt;
+    &lt;<span class='tagName'>body</span>&gt;
+        &lt;<span class='tagName'>div</span>&gt;
+            {<span class='WudimeiTagName'>if</span> <span class='WudimeiTagAttribute'>$age<18</span>}
+               Forbidden!
+            {<span class='WudimeiTagName'>/if</span>}
+        &lt;<span class='tagName'>/div</span>&gt;
+    &lt;<span class='tagName'>/body</span>&gt;
+&lt;<span class='tagName'>/html</span>&gt;</pre></div><br>
+我们可以看到{if $age&lt;18}表示如果年龄小于18就输出Forbidden!的字样，{if}的结尾是{/if}<br>
+但是如果年龄大于等于18我们就显示欢迎：<br>
+<div class="code"  ><pre>&lt;<span class='tagName'>div</span>&gt;
+            {<span class='WudimeiTagName'>if</span> <span class='WudimeiTagAttribute'>$age<18</span>}
+               Forbidden!
+            {<span class='WudimeiTagName'>else</span>}
+               Welcome!
+            {<span class='WudimeiTagName'>/if</span>}
+        &lt;<span class='tagName'>/div</span>&gt;</pre></div><br>
+还有我们要判断$age是否小于等于0和大于150的情况,这是超级人类的年龄:<br>
+<br>
+<div class="code"  ><pre>&lt;<span class='tagName'>div</span>&gt;
+            {<span class='WudimeiTagName'>if</span> <span class='WudimeiTagAttribute'>$age<18</span>}
+               Forbidden!
+            {<span class='WudimeiTagName'>elseif</span> <span class='WudimeiTagAttribute'>$age<</span>=<span class='WudimeiTagValue'>0</span> <span class='WudimeiTagAttribute'>|| $age>150</span>}
+               Super human!
+            {<span class='WudimeiTagName'>else</span>}
+               Welcome!
+            {<span class='WudimeiTagName'>/if</span>}
+        &lt;<span class='tagName'>/div</span>&gt;</pre></div><br>
+<br>
+尝试一些运算符：<br>
+<div class="code"  ><pre>{<span class='WudimeiTagName'>if</span> <span class='WudimeiTagAttribute'>$man->age></span>=<span class='WudimeiTagValue'>18</span> <span class='WudimeiTagAttribute'>&& $age></span>=<span class='WudimeiTagValue'>18</span>}
+       two adult!
+ {<span class='WudimeiTagName'>/if</span>}
+            
+ {<span class='WudimeiTagName'>if</span> <span class='WudimeiTagAttribute'>$man->age <</span>=<span class='WudimeiTagValue'></span> <span class='WudimeiTagAttribute'>$man->age+$age</span>}
+      the man is not so old!
+{<span class='WudimeiTagName'>/if</span>}
+             
+{<span class='WudimeiTagName'>if</span> <span class='WudimeiTagAttribute'>$man->age></span>=<span class='WudimeiTagValue'>18||$age>=18</span>}
+       at lease one is adult.
+{<span class='WudimeiTagName'>/if</span>}</pre></div><br>
+访问php以查看你的结果。<p></p>
+
+<p>php文件&nbsp;&nbsp; Filename: /test/tpl_wudimei/if_else.php<div class="code"  ><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">/**<br />&nbsp;*&nbsp;file&nbsp;encoding&nbsp;utf-8<br />&nbsp;*&nbsp;文件字符编码utf-8<br />&nbsp;*/<br /></span><span style="color: #0000BB">$PathToRongFramework&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">dirname</span><span style="color: #007700">(</span><span style="color: #0000BB">__FILE__</span><span style="color: #007700">).</span><span style="color: #DD0000">"/../../lib"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">set_include_path</span><span style="color: #007700">(&nbsp;&nbsp;</span><span style="color: #DD0000">"."&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">PATH_SEPARATOR&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$PathToRongFramework&nbsp;</span><span style="color: #007700">.&nbsp;&nbsp;</span><span style="color: #0000BB">PATH_SEPARATOR&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">get_include_path</span><span style="color: #007700">()&nbsp;);<br /><br /><br />require_once&nbsp;</span><span style="color: #DD0000">'Rong/View/Wudimei.php'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$wudimei&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">Rong_View_Wudimei</span><span style="color: #007700">();<br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">compileDir&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">dirname</span><span style="color: #007700">(</span><span style="color: #0000BB">__FILE__</span><span style="color: #007700">)&nbsp;.&nbsp;</span><span style="color: #DD0000">"/templates/compiled"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">viewsDirectory&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">dirname</span><span style="color: #007700">(</span><span style="color: #0000BB">__FILE__</span><span style="color: #007700">)&nbsp;.&nbsp;&nbsp;</span><span style="color: #DD0000">"/templates"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">leftDelimiter&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"{"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">rightDelimiter&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"}"</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">//assing&nbsp;var&nbsp;msg&nbsp;to&nbsp;template<br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">assign</span><span style="color: #007700">(</span><span style="color: #DD0000">"msg"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"Hello,World!"</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">assign</span><span style="color: #007700">(</span><span style="color: #DD0000">"age"</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">16&nbsp;</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">$man&nbsp;</span><span style="color: #007700">=new&nbsp;</span><span style="color: #0000BB">stdClass</span><span style="color: #007700">();<br /></span><span style="color: #0000BB">$man</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">age&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">20</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">assign</span><span style="color: #007700">(</span><span style="color: #DD0000">"man"&nbsp;</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$man&nbsp;</span><span style="color: #007700">);<br /><br /><br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">display</span><span style="color: #007700">(</span><span style="color: #DD0000">"hello/if_else.html"</span><span style="color: #007700">);<br /><br /></span></span></code></div></p><p>模板：</p><p>Filename: /test/tpl_wudimei/templates/hello/if_else.html<div class="code"  ><pre>&lt;<span class='HTMLComment'>!DOCTYPE html</span>&gt;
+&lt;<span class='tagName'>html</span>&gt;
+    &lt;<span class='tagName'>head</span>&gt;
+        &lt;<span class='tagName'>title</span>&gt;&lt;<span class='tagName'>/title</span>&gt;
+        &lt;<span class='tagName'>meta</span> <span class='tagAttribute'>http-equiv</span>=<span class='tagValue'>"Content-Type"</span> <span class='tagAttribute'>content</span>=<span class='tagValue'>"text/html; charset=UTF-8"</span>>
+    &lt;<span class='tagName'>/head</span>&gt;
+    &lt;<span class='tagName'>body</span>&gt;
+        &lt;<span class='tagName'>div</span>&gt;
+            {<span class='WudimeiTagName'>if</span> <span class='WudimeiTagAttribute'>$age<</span>=<span class='WudimeiTagValue'>18</span>}
+               Forbidden!
+            {<span class='WudimeiTagName'>elseif</span> <span class='WudimeiTagAttribute'>$age<</span>=<span class='WudimeiTagValue'>0</span> <span class='WudimeiTagAttribute'>|| $age>150</span>} 
+               Super human!2
+            {<span class='WudimeiTagName'>else</span>}
+               Welcome!
+            {<span class='WudimeiTagName'>/if</span>}
+            
+            {<span class='WudimeiTagName'>if</span> <span class='WudimeiTagAttribute'>$man->age></span>=<span class='WudimeiTagValue'>18</span> <span class='WudimeiTagAttribute'>&& $age></span>=<span class='WudimeiTagValue'>18</span>}
+              two adult!
+            {<span class='WudimeiTagName'>/if</span>}
+            
+            {<span class='WudimeiTagName'>if</span> <span class='WudimeiTagAttribute'>$man->age <</span>=<span class='WudimeiTagValue'></span> <span class='WudimeiTagAttribute'>$man->age+$age</span>}
+              the man is not so old!
+            {<span class='WudimeiTagName'>/if</span>}
+             
+             {<span class='WudimeiTagName'>if</span> <span class='WudimeiTagAttribute'>$man->age></span>=<span class='WudimeiTagValue'>18||$age>=18</span>}
+              at lease one is adult.
+            {<span class='WudimeiTagName'>/if</span>}
+            
+        &lt;<span class='tagName'>/div</span>&gt;
+    &lt;<span class='tagName'>/body</span>&gt;
+&lt;<span class='tagName'>/html</span>&gt;</pre></div></p><p></p>
+
+<p>=== == != &lt;= &gt;= *= += -= /= %= gt lt</p>
+
+
+
+
+
+
+
+
+
+
+                <div class="ctrl">
+                    上一页:
+                                        <a href="Rong.View.Wudimei.init.html"> 初始化Wudimei模版引擎</a>
+                    
+                    &nbsp;
+                    <a href="index.html">目录</a>
+                    &nbsp;
+                    下一页 :
+                                        <a href="Rong.View.Wudimei.Foreach.html">Foreach</a>
+                                    </div> 
+            </div>
+            <div class="bottom">
+ 要获取最新的Rong Framework,请访问<a href="http://rong.wudimei.com" target="_balnk">http://rong.wudimei.com</a></div>  
+        </div>
+    </body>
+</html>

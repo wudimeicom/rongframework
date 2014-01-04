@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SMTP发邮件</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <link href="style.css" rel="stylesheet" type="text/css" />        <meta name="keywords" content="SMTP发邮件,Rong Framework" />
+        <meta name="description" content="SMTP发邮件,Rong Framework" />
+    </head>
+    <body>
+        <div class="Page">
+            <div class="top">
+    <div class="rf">Rong Framework</div>
+</div>            <div class="content"> 
+                <div>
+                    <a href="index.html">目录</a>
+                </div>
+                
+                 <div class="ctrl">
+                    上一页:
+                                        <a href="Rong.Mail.SendMail.html"> SendMail发邮件</a>
+                    
+                    &nbsp;
+                    <a href="index.html">目录</a>
+                    &nbsp;
+                    下一页 :
+                                        <a href="Rong.Crypto.html">加密</a>
+                                    </div> 
+                <h3>SMTP发邮件</h3>
+                Properties of class Rong_Mail_Smtp<table border="1">
+  <tbody><tr>
+   <th>属性名</th>
+   <th>类型</th>
+   <th>含义</th>
+   
+  </tr>
+  <tr>
+   <td>to</td>
+   <td>array</td>
+   <td>收件人列表</td>
+  </tr>
+  <tr>
+   <td>from</td>
+   <td>string</td>
+   <td>发件人的邮件地址</td>
+  </tr>
+  <tr>
+   <td>subject</td>
+   <td>string</td>
+   <td>主题</td>
+  </tr>
+  <tr>
+   <td>content</td>
+   <td>string</td>
+   <td>邮件内容</td>
+  </tr>
+<tr>
+   <td>ssl</td>
+   <td>boolean</td>
+   <td>是否使用ssl</td>
+  </tr>
+  <tr>
+   <td>debug</td>
+   <td>boolean</td>
+   <td>是否输出调试信息</td>
+  </tr>
+<tr>
+   <td>host</td>
+   <td>string</td>
+   <td>邮件的主机，如:smtp.wudimei.com</td>
+  </tr>
+<tr>
+   <td>port</td>
+   <td>整数</td>
+   <td>smtp的端口，如：25，在ssl方式下一般是465</td>
+  </tr>
+<tr>
+   <td>username</td>
+   <td>string</td>
+   <td>smtp的用户名</td>
+  </tr>
+<tr>
+   <td>password</td>
+   <td>string</td>
+   <td>smtp的密码</td>
+  </tr>
+</tbody></table>
+Methods of class Rong_Mail_Smtp<table border="1">
+  <tbody><tr>
+   <th>方法名</th>
+   <th>参数</th>
+   <th>返回值</th>
+   <th>含义</th>
+   
+  </tr>
+<tr>
+   <td>connect()</td>
+   <td>无</td>
+   <td>void</td>
+   <td>连接到smtp主机</td>
+  </tr>
+<tr>
+   <td>login()</td>
+   <td>无</td>
+   <td>void</td>
+   <td>登录服务器</td>
+  </tr>
+<tr>
+   <td>send()</td>
+   <td>无</td>
+   <td>void</td>
+   <td>发送邮件</td>
+  </tr>
+<tr>
+   <td>quit()</td>
+   <td>无</td>
+   <td>void</td>
+   <td>退出发送</td>
+  </tr>
+<tr>
+   <td>close()</td>
+   <td>无</td>
+   <td>void</td>
+   <td>断开连接</td>
+  </tr>
+</tbody></table>
+
+<br>示例：<br>Filename: /test/mail/mail_smtp_simple.php<div class="code"  ><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php&nbsp;<br /><br /></span><span style="color: #FF8000">/**<br />&nbsp;*&nbsp;file&nbsp;encoding&nbsp;utf-8<br />&nbsp;*&nbsp;文件字符编码utf-8<br />&nbsp;*/<br /></span><span style="color: #0000BB">$PathToRongFramework&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">dirname</span><span style="color: #007700">(</span><span style="color: #0000BB">__FILE__</span><span style="color: #007700">).</span><span style="color: #DD0000">"/../../lib"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">set_include_path</span><span style="color: #007700">(&nbsp;&nbsp;</span><span style="color: #DD0000">"."&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">PATH_SEPARATOR&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$PathToRongFramework&nbsp;</span><span style="color: #007700">.&nbsp;&nbsp;</span><span style="color: #0000BB">PATH_SEPARATOR&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">get_include_path</span><span style="color: #007700">()&nbsp;);<br /><br /></span><span style="color: #FF8000">//$GLOBALS["debug"]&nbsp;=1;<br /></span><span style="color: #007700">require_once&nbsp;</span><span style="color: #DD0000">'Rong/Mail/Smtp.php'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$smtp&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">Rong_Mail_Smtp</span><span style="color: #007700">();<br /></span><span style="color: #0000BB">$smtp</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">host&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"smtp.exmail.qq.com"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$smtp</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">port&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">25</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$smtp</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">username&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"yangqingrong@wudimei.com"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$smtp</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">password&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"*******"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$smtp</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">from&nbsp;</span><span style="color: #007700">=</span><span style="color: #DD0000">"yangqingrong@wudimei.com"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">$smtp</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">debug&nbsp;</span><span style="color: #007700">=</span><span style="color: #0000BB">true</span><span style="color: #007700">;<br />&nbsp;</span><span style="color: #0000BB">$smtp</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">connect</span><span style="color: #007700">();&nbsp;</span><span style="color: #FF8000">//连接<br /></span><span style="color: #0000BB">$smtp</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">login</span><span style="color: #007700">();&nbsp;</span><span style="color: #FF8000">//登录<br /><br /><br />//------------send&nbsp;first&nbsp;email&nbsp;start&nbsp;发第一封邮件开始-------<br /></span><span style="color: #0000BB">$smtp</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">to&nbsp;</span><span style="color: #007700">=&nbsp;array(</span><span style="color: #DD0000">"admin@wudimei.com"&nbsp;</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$smtp</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">subject&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"hello,how&nbsp;are&nbsp;you?你好吗？"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$smtp</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">content&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"hello,&lt;b&gt;你好吗？&lt;/b&gt;"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$smtp</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">send</span><span style="color: #007700">();</span><span style="color: #FF8000">//send&nbsp;an&nbsp;email<br />//------------send&nbsp;first&nbsp;email&nbsp;end&nbsp;发第一封邮件结束-------<br />&nbsp;&nbsp;<br />&nbsp;&nbsp;<br />//------------send&nbsp;second&nbsp;email&nbsp;start&nbsp;发第二封邮件开始------<br />/*<br />$smtp-&gt;to&nbsp;=&nbsp;array("yqr@wudimei.com");<br />$smtp-&gt;subject&nbsp;=&nbsp;"i&nbsp;would&nbsp;like&nbsp;to&nbsp;meet&nbsp;you&nbsp;next&nbsp;day.";<br />$smtp-&gt;content&nbsp;=&nbsp;"do&nbsp;you&nbsp;have&nbsp;time?";<br />$smtp-&gt;send();<br />*/<br />//------------send&nbsp;second&nbsp;email&nbsp;end&nbsp;发第二封邮件结束-----<br /><br />//.....<br /><br /></span><span style="color: #0000BB">$smtp</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">quit</span><span style="color: #007700">();&nbsp;</span><span style="color: #FF8000">//退出登录<br /></span><span style="color: #0000BB">$smtp</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">close</span><span style="color: #007700">();&nbsp;&nbsp;</span><span style="color: #FF8000">//关闭连接<br /><br /><br /></span></span></code></div><br>发送 SSL 邮件<br>Filename: /test/mail/mail_smtp_ssl.php<div class="code"  ><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php&nbsp;<br /><br /></span><span style="color: #FF8000">/**<br />&nbsp;*&nbsp;file&nbsp;encoding&nbsp;utf-8<br />&nbsp;*&nbsp;文件字符编码utf-8<br />&nbsp;*/<br /></span><span style="color: #0000BB">$PathToRongFramework&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">dirname</span><span style="color: #007700">(</span><span style="color: #0000BB">__FILE__</span><span style="color: #007700">).</span><span style="color: #DD0000">"/../../lib"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">set_include_path</span><span style="color: #007700">(&nbsp;&nbsp;</span><span style="color: #DD0000">"."&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">PATH_SEPARATOR&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$PathToRongFramework&nbsp;</span><span style="color: #007700">.&nbsp;&nbsp;</span><span style="color: #0000BB">PATH_SEPARATOR&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">get_include_path</span><span style="color: #007700">()&nbsp;);<br /><br /><br />require_once&nbsp;</span><span style="color: #DD0000">'Rong/Mail/Smtp.php'</span><span style="color: #007700">;<br />&nbsp;</span><span style="color: #FF8000">//uncomment&nbsp;this&nbsp;line&nbsp;in&nbsp;php.ini:&nbsp;&nbsp;;extension=php_openssl.dll<br /></span><span style="color: #0000BB">$smtp&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">Rong_Mail_Smtp</span><span style="color: #007700">();<br /></span><span style="color: #0000BB">$smtp</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">host&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"smtp.gmail.com"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$smtp</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">port&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">465</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$smtp</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">username&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"**********@gmail.com"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$smtp</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">password&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"*******"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$smtp</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">ssl&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">true</span><span style="color: #007700">;&nbsp;<br /></span><span style="color: #0000BB">$smtp</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">debug&nbsp;</span><span style="color: #007700">=</span><span style="color: #0000BB">true</span><span style="color: #007700">;&nbsp;</span><span style="color: #FF8000">//if&nbsp;it&nbsp;was&nbsp;set&nbsp;to&nbsp;true,the&nbsp;smtp&nbsp;will&nbsp;output&nbsp;the&nbsp;debug&nbsp;info.<br /><br /></span><span style="color: #0000BB">$smtp</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">from&nbsp;</span><span style="color: #007700">=</span><span style="color: #DD0000">"**********@gmail.com"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">$smtp</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">connect</span><span style="color: #007700">();<br /></span><span style="color: #0000BB">$smtp</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">login</span><span style="color: #007700">();<br /></span><span style="color: #FF8000">//------------send&nbsp;first&nbsp;email&nbsp;start--------<br /></span><span style="color: #0000BB">$smtp</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">to&nbsp;</span><span style="color: #007700">=&nbsp;array(</span><span style="color: #DD0000">"yangqingrong@wudimei.com"</span><span style="color: #007700">,</span><span style="color: #DD0000">"admin@wudimei.com"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$smtp</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">subject&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"hello,how&nbsp;are&nbsp;you?你好吗？"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$smtp</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">content&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"hello,&lt;b&gt;你好吗？&lt;/b&gt;"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$smtp</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">send</span><span style="color: #007700">();</span><span style="color: #FF8000">//send&nbsp;an&nbsp;email<br />//------------send&nbsp;first&nbsp;email&nbsp;end--------<br /><br />//------------send&nbsp;second&nbsp;email&nbsp;start--------<br />/*<br />$smtp-&gt;to&nbsp;=&nbsp;array("admin@wudimei.com");<br />$smtp-&gt;subject&nbsp;=&nbsp;"i&nbsp;would&nbsp;like&nbsp;to&nbsp;meet&nbsp;you&nbsp;next&nbsp;day.";<br />$smtp-&gt;content&nbsp;=&nbsp;"do&nbsp;you&nbsp;have&nbsp;time?";<br />$smtp-&gt;send();<br />*/<br />//------------send&nbsp;second&nbsp;email&nbsp;end--------<br /></span><span style="color: #0000BB">$smtp</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">quit</span><span style="color: #007700">();<br /></span><span style="color: #0000BB">$smtp</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">close</span><span style="color: #007700">();<br /><br /><br /><br /><br /><br /></span></span></code></div> 
+
+
+
+<br>
+
+
+
+
+
+
+
+                <div class="ctrl">
+                    上一页:
+                                        <a href="Rong.Mail.SendMail.html"> SendMail发邮件</a>
+                    
+                    &nbsp;
+                    <a href="index.html">目录</a>
+                    &nbsp;
+                    下一页 :
+                                        <a href="Rong.Crypto.html">加密</a>
+                                    </div> 
+            </div>
+            <div class="bottom">
+ 要获取最新的Rong Framework,请访问<a href="http://rong.wudimei.com" target="_balnk">http://rong.wudimei.com</a></div>  
+        </div>
+    </body>
+</html>

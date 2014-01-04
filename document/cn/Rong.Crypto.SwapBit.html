@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SwapBit换位</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <link href="style.css" rel="stylesheet" type="text/css" />        <meta name="keywords" content="SwapBit换位,Rong Framework" />
+        <meta name="description" content="SwapBit换位,Rong Framework" />
+    </head>
+    <body>
+        <div class="Page">
+            <div class="top">
+    <div class="rf">Rong Framework</div>
+</div>            <div class="content"> 
+                <div>
+                    <a href="index.html">目录</a>
+                </div>
+                
+                 <div class="ctrl">
+                    上一页:
+                                        <a href="Rong.Crypto.html"> 加密</a>
+                    
+                    &nbsp;
+                    <a href="index.html">目录</a>
+                    &nbsp;
+                    下一页 :
+                                        <a href="Rong.Db_intro.html">数据库介绍</a>
+                                    </div> 
+                <h3>SwapBit换位</h3>
+                Rong_Crypto_SwapBit的主要方法：
+<table border="1">
+ <tbody><tr>
+  <td>方法名</td>
+  <td>参数</td>
+  <td>返回值</td>
+  <td>含义</td>
+ </tr><tr><td valign="top">decrypt<br></td><td valign="top">$text, $password<br></td><td valign="top">string<br></td><td valign="top">解密<br></td></tr><tr><td valign="top">encrypt<br></td><td valign="top">$text, $password<br></td><td valign="top">string<br></td><td valign="top">加密<br></td></tr>
+</tbody></table><br>示例： <br><div class="code"  ><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">/**<br />&nbsp;*&nbsp;file&nbsp;encoding&nbsp;utf-8<br />&nbsp;*&nbsp;文件字符编码utf-8<br />&nbsp;*/<br /></span><span style="color: #0000BB">$PathToRongFramework&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">dirname</span><span style="color: #007700">(</span><span style="color: #0000BB">__FILE__</span><span style="color: #007700">).</span><span style="color: #DD0000">"/../../lib"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">set_include_path</span><span style="color: #007700">(&nbsp;&nbsp;</span><span style="color: #DD0000">"."&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">PATH_SEPARATOR&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$PathToRongFramework&nbsp;</span><span style="color: #007700">.&nbsp;&nbsp;</span><span style="color: #0000BB">PATH_SEPARATOR&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">get_include_path</span><span style="color: #007700">()&nbsp;);<br /><br />require_once&nbsp;</span><span style="color: #DD0000">'Rong/Crypto/SwapBit.php'</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">$text&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"Hello,this&nbsp;is&nbsp;the&nbsp;text&nbsp;to&nbsp;be&nbsp;encrypted!"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$password&nbsp;</span><span style="color: #007700">=</span><span style="color: #DD0000">"pasword"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">$start&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">microtime</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">true&nbsp;</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$swapBit&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">Rong_Crypto_SwapBit</span><span style="color: #007700">();<br /><br /><br /></span><span style="color: #0000BB">$encryptedText&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$swapBit</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">encrypt</span><span style="color: #007700">(</span><span style="color: #0000BB">$text</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$password</span><span style="color: #007700">);<br />echo&nbsp;</span><span style="color: #DD0000">"encrypted&nbsp;text:&nbsp;"&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$encryptedText&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">"&lt;br&nbsp;/&gt;"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">$decryptedText&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$swapBit</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">decrypt</span><span style="color: #007700">(</span><span style="color: #0000BB">$encryptedText&nbsp;</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$password</span><span style="color: #007700">);<br />echo&nbsp;</span><span style="color: #DD0000">"decrypted&nbsp;text:&nbsp;"&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$decryptedText&nbsp;&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">"&lt;br&nbsp;/&gt;"</span><span style="color: #007700">;<br /><br />echo&nbsp;</span><span style="color: #DD0000">"base&nbsp;64&nbsp;decode:&nbsp;"&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">base64_decode</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">$encryptedText&nbsp;</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$end&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">microtime</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">true&nbsp;</span><span style="color: #007700">);<br />echo&nbsp;</span><span style="color: #DD0000">"&lt;br&nbsp;/&gt;"&nbsp;</span><span style="color: #007700">.&nbsp;(&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$end&nbsp;</span><span style="color: #007700">-&nbsp;</span><span style="color: #0000BB">$start&nbsp;</span><span style="color: #007700">)&nbsp;.&nbsp;</span><span style="color: #DD0000">"&nbsp;seconds"</span><span style="color: #007700">;</span></span></code></div><br>
+
+
+                <div class="ctrl">
+                    上一页:
+                                        <a href="Rong.Crypto.html"> 加密</a>
+                    
+                    &nbsp;
+                    <a href="index.html">目录</a>
+                    &nbsp;
+                    下一页 :
+                                        <a href="Rong.Db_intro.html">数据库介绍</a>
+                                    </div> 
+            </div>
+            <div class="bottom">
+ 要获取最新的Rong Framework,请访问<a href="http://rong.wudimei.com" target="_balnk">http://rong.wudimei.com</a></div>  
+        </div>
+    </body>
+</html>

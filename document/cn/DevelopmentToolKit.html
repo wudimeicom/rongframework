@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Dev</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <link href="style.css" rel="stylesheet" type="text/css" />        <meta name="keywords" content="Dev,Rong Framework" />
+        <meta name="description" content="Dev,Rong Framework" />
+    </head>
+    <body>
+        <div class="Page">
+            <div class="top">
+    <div class="rf">Rong Framework</div>
+</div>            <div class="content"> 
+                <div>
+                    <a href="index.html">目录</a>
+                </div>
+                
+                 <div class="ctrl">
+                    上一页:
+                                        <a href="Rong.Route.html"> 路由</a>
+                    
+                    &nbsp;
+                    <a href="index.html">目录</a>
+                    &nbsp;
+                    下一页 :
+                                        没有了                                    </div> 
+                <h3>Dev</h3>
+                
+<p><span class="title1">简介</span><br />
+dev 是一款按数据表名<strong>生成</strong>crud<strong>代码</strong>的工具。 它将自动生成控制器，<strong>数据库</strong>模型和<em>视图</em>。这功能不宜在生产环境中应用，避免造成不必要的损失。<br />
+<span class="title1">启用dev模块 </span><br />
+打开 application/config/config.php 把EnableDev设为true测启用了Dev模块，如果在生产环境，情务必把它设为false</p>
+
+<p><div class="code"  ><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />&nbsp;$config</span><span style="color: #007700">[</span><span style="color: #DD0000">"EnableDev"</span><span style="color: #007700">]&nbsp;=&nbsp;</span><span style="color: #0000BB">true&nbsp;</span><span style="color: #007700">;</span></span></code></div></p>
+
+<p><span class="title1">使用dev模块进行开发 </span><br />
+<span class="title2">一、配置数据库</span></p>
+
+<p>&nbsp;</p>
+
+<p><br />
+还是打开application/config/config.php然后配置注释的值。</p>
+
+<p><div class="code"  ><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$config</span><span style="color: #007700">[</span><span style="color: #DD0000">"dbAdapter"</span><span style="color: #007700">]&nbsp;=&nbsp;</span><span style="color: #DD0000">"Mysqli"</span><span style="color: #007700">;&nbsp;</span><span style="color: #FF8000">//可以是mysql&nbsp;或&nbsp;mysqli<br /></span><span style="color: #0000BB">$config</span><span style="color: #007700">[</span><span style="color: #DD0000">"db"</span><span style="color: #007700">]&nbsp;=&nbsp;array(<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">"host"&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">"localhost"&nbsp;</span><span style="color: #007700">,&nbsp;</span><span style="color: #FF8000">//数据库主机<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">"dbname"&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">"rong_db"&nbsp;</span><span style="color: #007700">,&nbsp;</span><span style="color: #FF8000">//数据库名字<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">"username"&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">"root"&nbsp;</span><span style="color: #007700">,&nbsp;</span><span style="color: #FF8000">//用户名<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">"password"&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">"123456"</span><span style="color: #007700">,&nbsp;</span><span style="color: #FF8000">//密码<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">"charset"&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">"utf8"</span><span style="color: #007700">,&nbsp;</span><span style="color: #FF8000">//默认字符集<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">"tblprefix"&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">"rf_"&nbsp;</span><span style="color: #FF8000">//表前缀，如不使用，请设为空，默认为rf<br /></span><span style="color: #007700">);</span></span></code></div></p>
+
+<p><span class="title2">二、创建数据表 </span><br />
+打开phpMyAdmin或mysql客户端，执行以下sql语句：</p>
+
+<div class="code">
+<pre>
+CREATE TABLE `rf_friends` (
+`id` INT( 4 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+`name` CHAR( 20 ) NOT NULL DEFAULT &#39; &#39;,
+`sex` CHAR( 1 ) NOT NULL DEFAULT &#39; &#39;,
+`qq` CHAR( 10 ) NOT NULL DEFAULT &#39; &#39;,
+`phone` CHAR( 13 ) NOT NULL DEFAULT &#39; &#39;,
+`address` VARCHAR( 255 ) NOT NULL DEFAULT &#39; &#39;,
+`des` TEXT NOT NULL
+) ENGINE = MYISAM ;
+</pre>
+</div>
+
+<p>这只是一个示例，其中表名&quot;`rf_friends`&quot;中的 &quot;rf_&quot; 是在config.php中配置的表前缀。表名&quot;friends&quot;可以用任意字符串代替它。表中的字段也可以自己任意的设置。<br />
+<span class="title2">三、访问Dev </span><br />
+输入下面的网址以访问Dev,假定你的开发环境的地址是localhost</p>
+
+<div class="code">http://localhost/index.php/Dev</div>
+
+<p>选择框中我们选我们刚创建的&quot;rf_friends&quot;表名，在&quot;mode name&quot;输入框中我们随便输入&quot;朋友&quot;,然后点&ldquo;Next&quot;进入下一步。<br />
+进入下一步，在label列中是一输入文本框，它的默认值是字段的名字，把它改成相应的名称，也可以不改。&quot;Control Type&quot;、&quot;Default Value Type&quot;和 &quot;Default Value&quot; 这几项还没有开发好，保持默认。然后点击&quot;Write code&quot;按钮，这样&quot;friends&quot;表的&quot;crud&quot;的代码就大功告成了啦！<br />
+这时你可能这样访问刚生成的代码。</p>
+
+<div class="code">后台管理： http://localhost/index.php/Friends/manage<br />
+前台：http://localhost/index.php/Friends/index
+<div class="navHolder">&nbsp;</div>
+
+<div class="navbar">&nbsp;</div>
+</div>
+
+
+
+                <div class="ctrl">
+                    上一页:
+                                        <a href="Rong.Route.html"> 路由</a>
+                    
+                    &nbsp;
+                    <a href="index.html">目录</a>
+                    &nbsp;
+                    下一页 :
+                                        没有了                                    </div> 
+            </div>
+            <div class="bottom">
+ 要获取最新的Rong Framework,请访问<a href="http://rong.wudimei.com" target="_balnk">http://rong.wudimei.com</a></div>  
+        </div>
+    </body>
+</html>

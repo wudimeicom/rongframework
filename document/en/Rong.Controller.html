@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Controller</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <link href="style.css" rel="stylesheet" type="text/css" />        <meta name="keywords" content="Controller,Rong Framework" />
+        <meta name="description" content="Controller,Rong Framework" />
+    </head>
+    <body>
+        <div class="Page">
+            <div class="top">
+    <div class="rf">Rong Framework</div>
+</div>            <div class="content"> 
+                <div>
+                    <a href="index.html">Table Of Contents</a>
+                </div>
+                
+                 <div class="ctrl">
+                    Prev Page:
+                                        <a href="GettingStart.html"> GettingStart of MVC</a>
+                    
+                    &nbsp;
+                    <a href="index.html">Table Of Contents</a>
+                    &nbsp;
+                    Next Page :
+                                        <a href="Rong.Controller.Request.html">remove magic_quotes</a>
+                                    </div> 
+                <h3>Controller</h3>
+                
+<h1>Controller</h1>
+
+<p><span class="title1">1.Basic controller look like</span></p>
+
+<pre>
+<div class="code"  ><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php&nbsp;</span><span style="color: #007700">class&nbsp;</span><span style="color: #0000BB">GuestBookController&nbsp;</span><span style="color: #007700">extends&nbsp;</span><span style="color: #0000BB">Rong_Controller&nbsp;<br /></span><span style="color: #007700">{<br />&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;function&nbsp;</span><span style="color: #0000BB">indexAction</span><span style="color: #007700">()<br />&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"indexAction"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;function&nbsp;</span><span style="color: #0000BB">testAction</span><span style="color: #007700">()<br />&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"testAction"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />}</span></span></code></div>
+</pre>
+
+<p>Controllers are placed in the controllers dir and named {ControllerName}Controller.php as the filename.this file only contains one class called {ControllerName}Controller,it extends the Rong_Controller calss.<br />
+For example the class GuestBookController save as GuestBookController.php<br />
+the method named {ActionName}Action() is the action of Controller,it enable visit by the public.now,let us visit the index action of GuetBook using bellow urls.</p>
+
+<pre>
+http://localhost/GuestBook/index   
+http://localhost/index.php?do=/GuetBook/index 
+
+http://localhost/index.php/GuetBook/index
+
+</pre>
+
+<p>So,GuestBook is a controller name ,index the action name,it call the indexAction() method of class GuestBookController in the GuestBookController.php<br />
+In $_GET[] array ,key &quot;C&quot; is the Abbreviation of &quot;Controller&quot;, &quot;A&quot; is the Abbreviation of &quot;Action&quot;.<br />
+if there is the index action,we might visit the url without &quot;/index&quot;(the action name).<br />
+http://localhost/GuetBook<br />
+so if there is the Index Controller and index Action, we might visite without the &quot;/Index/index&quot;,like this way: http://localhost/<br />
+<span class="title1">2.Change your controller directory</span><br />
+In index.php, we have created the instance of class Rong_Controller_Guide,it dispatch the requests.<br />
+Rong_Controller_Guide::setControllersDir( $newControllerDir ); // this method is for change the controllers dir in the filesystem.<br />
+$newController : This parram is path to new controllers dir, eg: /php/new/controllers<br />
+<div class="code"  ><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php&nbsp;</span><span style="color: #007700">require_once&nbsp;</span><span style="color: #DD0000">"Rong/Object.php"</span><span style="color: #007700">;<br />require_once&nbsp;</span><span style="color: #DD0000">"Rong/Controller/Guide.php"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$guide&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">Rong_Controller_Guide</span><span style="color: #007700">();<br /></span><span style="color: #0000BB">$guide</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">setControllersDir</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">ROOT&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">"/install/application/controllers"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$guide</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">start</span><span style="color: #007700">();</span></span></code></div></p>
+
+<p>if you base directory is http://localhost/install ,please visit the IndexController/indexAction like this:</p>
+
+<div class="code">http://localhost/install/Index/index<br />
+http://localhost/install/index.php?do=/Index/index</div>
+
+<p>echo the base url, for example , you website is install in /var/www/rong, the value of baseUrl is &quot;/rong&quot;, if you website is install in /var/www , the value is &quot;&quot;(blank).</p>
+
+<pre>
+<div class="code"  ><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php&nbsp;</span><span style="color: #007700">function&nbsp;</span><span style="color: #0000BB">indexAction</span><span style="color: #007700">()<br />{<br />&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">uri</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">baseUrl</span><span style="color: #007700">;&nbsp;<br />}</span></span></code></div>
+</pre>
+
+
+
+                <div class="ctrl">
+                    Prev Page:
+                                        <a href="GettingStart.html"> GettingStart of MVC</a>
+                    
+                    &nbsp;
+                    <a href="index.html">Table Of Contents</a>
+                    &nbsp;
+                    Next Page :
+                                        <a href="Rong.Controller.Request.html">remove magic_quotes</a>
+                                    </div> 
+            </div>
+            <div class="bottom">
+ To get the last version of Rong Framework.please vist <a href="http://rong.wudimei.com" target="_balnk">http://rong.wudimei.com</a></div>  
+        </div>
+    </body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SendMail</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <link href="style.css" rel="stylesheet" type="text/css" />        <meta name="keywords" content="SendMail,Rong Framework" />
+        <meta name="description" content="SendMail,Rong Framework" />
+    </head>
+    <body>
+        <div class="Page">
+            <div class="top">
+    <div class="rf">Rong Framework</div>
+</div>            <div class="content"> 
+                <div>
+                    <a href="index.html">Table Of Contents</a>
+                </div>
+                
+                 <div class="ctrl">
+                    Prev Page:
+                                        <a href="Wudimei.Mail.html"> Mail</a>
+                    
+                    &nbsp;
+                    <a href="index.html">Table Of Contents</a>
+                    &nbsp;
+                    Next Page :
+                                        <a href="Rong.Mail.Smtp.html">SMTP</a>
+                                    </div> 
+                <h3>SendMail</h3>
+                Properties of class Rong_Mail_SendMail
+<table border="1">
+  <tbody><tr>
+   <th>Property Name</th>
+   <th>type</th>
+   <th>des</th>
+   
+  </tr>
+  <tr>
+   <td>to</td>
+   <td>array</td>
+   <td>receipents</td>
+  </tr>
+  <tr>
+   <td>from</td>
+   <td>string</td>
+   <td>email of sender</td>
+  </tr>
+  <tr>
+   <td>subject</td>
+   <td>string</td>
+   <td>subject</td>
+  </tr>
+  <tr>
+   <td>content</td>
+   <td>string</td>
+   <td>content of email</td>
+  </tr>
+</tbody></table>
+Methods of class Rong_Mail_SendMail
+<table border="1">
+  <tbody><tr>
+   <th>method name</th>
+   <th>parameters</th>
+   <th>return</th>
+   <th>des</th>
+   
+  </tr>
+<tr>
+   <td>send()</td>
+   <td>none</td>
+   <td>void</td>
+   <td>send an email</td>
+  </tr>
+</tbody></table>
+
+<br>example:<br>Filename: /test/mail/mail_send_mail.php<div class="code"  ><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php&nbsp;<br /><br /></span><span style="color: #FF8000">/**<br />&nbsp;*&nbsp;file&nbsp;encoding&nbsp;utf-8<br />&nbsp;*&nbsp;文件字符编码utf-8<br />&nbsp;*/<br /></span><span style="color: #0000BB">$PathToRongFramework&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">dirname</span><span style="color: #007700">(</span><span style="color: #0000BB">__FILE__</span><span style="color: #007700">).</span><span style="color: #DD0000">"/../../lib"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">set_include_path</span><span style="color: #007700">(&nbsp;&nbsp;</span><span style="color: #DD0000">"."&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">PATH_SEPARATOR&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$PathToRongFramework&nbsp;</span><span style="color: #007700">.&nbsp;&nbsp;</span><span style="color: #0000BB">PATH_SEPARATOR&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">get_include_path</span><span style="color: #007700">()&nbsp;);<br /><br /><br />require_once&nbsp;</span><span style="color: #DD0000">'Rong/Mail/SendMail.php'</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">$mail&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">Rong_Mail_SendMail</span><span style="color: #007700">();<br /></span><span style="color: #0000BB">$mail</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">to&nbsp;</span><span style="color: #007700">=&nbsp;array(&nbsp;</span><span style="color: #DD0000">"abc@****.com"&nbsp;</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$mail</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">from&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"abc@****.com"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$mail</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">subject&nbsp;</span><span style="color: #007700">=&nbsp;&nbsp;</span><span style="color: #DD0000">"&nbsp;how&nbsp;are&nbsp;you?"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$mail</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">content&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"content"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$mail</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">send</span><span style="color: #007700">();</span></span></code></div>
+
+                <div class="ctrl">
+                    Prev Page:
+                                        <a href="Wudimei.Mail.html"> Mail</a>
+                    
+                    &nbsp;
+                    <a href="index.html">Table Of Contents</a>
+                    &nbsp;
+                    Next Page :
+                                        <a href="Rong.Mail.Smtp.html">SMTP</a>
+                                    </div> 
+            </div>
+            <div class="bottom">
+ To get the last version of Rong Framework.please vist <a href="http://rong.wudimei.com" target="_balnk">http://rong.wudimei.com</a></div>  
+        </div>
+    </body>
+</html>

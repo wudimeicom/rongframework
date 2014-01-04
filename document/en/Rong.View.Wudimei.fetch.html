@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>fetch() template rendered html result</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <link href="style.css" rel="stylesheet" type="text/css" />        <meta name="keywords" content="fetch() template rendered html result,Rong Framework" />
+        <meta name="description" content="fetch() template rendered html result,Rong Framework" />
+    </head>
+    <body>
+        <div class="Page">
+            <div class="top">
+    <div class="rf">Rong Framework</div>
+</div>            <div class="content"> 
+                <div>
+                    <a href="index.html">Table Of Contents</a>
+                </div>
+                
+                 <div class="ctrl">
+                    Prev Page:
+                                        <a href="Rong.View.Wudimei.sysvars.html"> system varibles</a>
+                    
+                    &nbsp;
+                    <a href="index.html">Table Of Contents</a>
+                    &nbsp;
+                    Next Page :
+                                        <a href="Rong.View.Wudimei.init.html">initialize Wudimei Template Engine</a>
+                                    </div> 
+                <h3>fetch() template rendered html result</h3>
+                Rong_View_Wudimei::fetch( $Rong_View_File , $Rong_View_Data =array());<br>$Rong_View_File is the template filename.<br>$Rong_View_Data is a variables array assign to the template.<br><br>Filename: /test/tpl_wudimei/fetch.php<div class="code"  ><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">/**<br />&nbsp;*&nbsp;file&nbsp;encoding&nbsp;utf-8<br />&nbsp;*&nbsp;文件字符编码utf-8<br />&nbsp;*/<br /></span><span style="color: #0000BB">$PathToRongFramework&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">dirname</span><span style="color: #007700">(</span><span style="color: #0000BB">__FILE__</span><span style="color: #007700">).</span><span style="color: #DD0000">"/../../lib"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">set_include_path</span><span style="color: #007700">(&nbsp;&nbsp;</span><span style="color: #DD0000">"."&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">PATH_SEPARATOR&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$PathToRongFramework&nbsp;</span><span style="color: #007700">.&nbsp;&nbsp;</span><span style="color: #0000BB">PATH_SEPARATOR&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">get_include_path</span><span style="color: #007700">()&nbsp;);<br /><br /><br />require_once&nbsp;</span><span style="color: #DD0000">'Rong/View/Wudimei.php'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$wudimei&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">Rong_View_Wudimei</span><span style="color: #007700">();<br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">compileDir&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">dirname</span><span style="color: #007700">(</span><span style="color: #0000BB">__FILE__</span><span style="color: #007700">)&nbsp;.&nbsp;</span><span style="color: #DD0000">"/templates/compiled"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">viewsDirectory&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">dirname</span><span style="color: #007700">(</span><span style="color: #0000BB">__FILE__</span><span style="color: #007700">)&nbsp;.&nbsp;&nbsp;</span><span style="color: #DD0000">"/templates"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">leftDelimiter&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"{"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">rightDelimiter&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"}"</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">//assing&nbsp;var&nbsp;msg&nbsp;to&nbsp;template<br />&nbsp;<br /></span><span style="color: #0000BB">$tpl_vars&nbsp;</span><span style="color: #007700">=&nbsp;array(<br />&nbsp;</span><span style="color: #DD0000">"username"&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">"YangQing-rong"</span><span style="color: #007700">,<br />&nbsp;</span><span style="color: #DD0000">"password"&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">"123456"<br /></span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$email_tpl&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">fetch</span><span style="color: #007700">(</span><span style="color: #DD0000">"hello/email_tpl.html"&nbsp;</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$tpl_vars</span><span style="color: #007700">);<br /><br />echo&nbsp;</span><span style="color: #0000BB">$email_tpl</span><span style="color: #007700">;<br /></span><span style="color: #FF8000">//to&nbsp;do:&nbsp;mail&nbsp;it</span></span></code></div><br><br>Filename: /test/tpl_wudimei/templates/hello/email_tpl.html<div class="code"  ><pre>Hi,{<span class='WudimeiTagName'>$username</span>}!&lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+welcome to sign up wudimei.com!&lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+your password is:&lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+{<span class='WudimeiTagName'>$password</span>} &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+{<span class='WudimeiTagName'>$wudimei.now</span>}
+</pre></div><br><br>URL: /test/tpl_wudimei/fetch.php<div class="code"  ><pre>Hi,YangQing-rong!&lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+welcome to sign up wudimei.com!&lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+your password is:&lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+123456 &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+2014-01-04 13:01:05</pre></div><br><br>
+
+                <div class="ctrl">
+                    Prev Page:
+                                        <a href="Rong.View.Wudimei.sysvars.html"> system varibles</a>
+                    
+                    &nbsp;
+                    <a href="index.html">Table Of Contents</a>
+                    &nbsp;
+                    Next Page :
+                                        <a href="Rong.View.Wudimei.init.html">initialize Wudimei Template Engine</a>
+                                    </div> 
+            </div>
+            <div class="bottom">
+ To get the last version of Rong Framework.please vist <a href="http://rong.wudimei.com" target="_balnk">http://rong.wudimei.com</a></div>  
+        </div>
+    </body>
+</html>

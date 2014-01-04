@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>MVC三层模型快速入门</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <link href="style.css" rel="stylesheet" type="text/css" />        <meta name="keywords" content="MVC三层模型快速入门,Rong Framework" />
+        <meta name="description" content="MVC三层模型快速入门,Rong Framework" />
+    </head>
+    <body>
+        <div class="Page">
+            <div class="top">
+    <div class="rf">Rong Framework</div>
+</div>            <div class="content"> 
+                <div>
+                    <a href="index.html">目录</a>
+                </div>
+                
+                 <div class="ctrl">
+                    上一页:
+                                        <a href="Rong.MVC.html"> MVC集成(ControllerEngine)</a>
+                    
+                    &nbsp;
+                    <a href="index.html">目录</a>
+                    &nbsp;
+                    下一页 :
+                                        <a href="Rong.Controller.html">控制器</a>
+                                    </div> 
+                <h3>MVC三层模型快速入门</h3>
+                
+<h1>快速入门</h1>
+
+<p>本文说明如何快速使用<strong>Rong Framework</strong>。<br />
+<span class="title1">一、创建目录结构</span></p>
+
+<div class="code">
+<pre>
++-- .httaccess   <span class="comment">#如果支持<strong>重写</strong>则需要此文件。</span>
++-- index.php
++-- application
+      +-- controllers<span class="comment">  #<strong>控制器</strong>文件夹</span>
+      +-- models<span class="comment"> #数据库模型文件夹</span>
+      +-- views<span class="comment"> #<strong>视图</strong>模板文件夹</span>
+ +-- lib
+     +-- Rong<span class="comment"> #rong framework文件夹</span>
+</pre>
+</div>
+
+<p><span class="title1">二、创建控制器</span><br />
+创建文件/application/controllers/IndexController.php</p>
+
+<p><div class="code"  ><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php&nbsp;</span><span style="color: #007700">class&nbsp;</span><span style="color: #0000BB">IndexController&nbsp;</span><span style="color: #007700">extends&nbsp;</span><span style="color: #0000BB">Rong_Controller&nbsp;<br /></span><span style="color: #007700">{<br />&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;function&nbsp;</span><span style="color: #0000BB">indexAction</span><span style="color: #007700">()<br />&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"这里是Index控制器，index动作."</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;function&nbsp;</span><span style="color: #0000BB">testAction</span><span style="color: #007700">()<br />&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"这里是test动作"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}</span></span></code></div></p>
+
+<p><span class="title1">三、创建/index.php</span></p>
+
+<p>&nbsp;</p>
+
+<p><div class="code"  ><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php&nbsp;&nbsp;define</span><span style="color: #007700">(&nbsp;</span><span style="color: #DD0000">"ROOT"&nbsp;</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">dirname</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">__FILE__&nbsp;</span><span style="color: #007700">)&nbsp;);<br /></span><span style="color: #0000BB">set_include_path</span><span style="color: #007700">(&nbsp;</span><span style="color: #DD0000">"."&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">PATH_SEPARATOR&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">ROOT</span><span style="color: #007700">.</span><span style="color: #DD0000">"/lib"</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">PATH_SEPARATOR</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">get_include_path</span><span style="color: #007700">()&nbsp;);<br />require_once&nbsp;</span><span style="color: #DD0000">"Rong/Controller/Engine.php"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$engine&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">Rong_Controller_Engine</span><span style="color: #007700">();<br /></span><span style="color: #0000BB">$engine</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">setControllersDirectory</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">ROOT&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">"/application/controllers"</span><span style="color: #007700">);&nbsp;</span><span style="color: #FF8000">//设置控制器的位置<br /></span><span style="color: #0000BB">$engine</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">setViewsDirectory</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">ROOT&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">"/templates"&nbsp;</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$engine</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">start</span><span style="color: #007700">();</span></span></code></div></p>
+
+<p><br />
+<span class="title1">四、服务器是否支持url重写。</span><br />
+<span class="title2">a) 不需要重</span>写<br />
+现在你可以这样访问Index<strong>控制器</strong>和test<strong>动作</strong>。</p>
+
+<div class="code">http://localhost/index.php?do=/Index/test #推荐采用这种访问形式 : /控制器/动作 或者 /控制器目录/控制器/动作</div>
+
+<p><br />
+<span class="title2">b) 需要用到重写</span><br />
+apache2如果要用到<em>重写</em>，请找到httpd.conf ，并找到这一行</p>
+
+<div class="code">#LoadModule rewrite_module modules/mod_rewrite.so</div>
+
+<p>如果前面有 &quot;#&quot;字符，请把它去掉，它是一个注释符。</p>
+
+<div class="code">
+<p><directory appserv="" d:=""><br />
+Options Indexes FollowSymLinks MultiViews ExecCGI<br />
+AllowOverride All<br />
+Order allow,deny<br />
+Allow from all</directory></p>
+
+<p>&nbsp;</p>
+</div>
+
+<p>确保 &quot;Options&quot; 中有 &quot; FollowSymLinks&quot;,如果没有，请添加上。确保&quot;AllowOverride&quot;的值为&quot;All&quot;,配置完后保存，并重启apache。</p>
+
+<p>在根目录中添加&quot;.htaccess&quot;文件</p>
+
+<div class="code"><ifmodule mod_rewrite.c=""><br />
+RewriteEngine On<br />
+RewriteBase /<br />
+RewriteCond %{REQUEST_FILENAME} !-f<br />
+RewriteCond %{REQUEST_FILENAME} !-d<br />
+RewriteRule ^(.*)$ index.php/$1 [L]</ifmodule><br />
+<br />
+<ifmodule mod_rewrite.c=""><br />
+ErrorDocument 404 /index.php</ifmodule></div>
+
+<p>现在你可以这样访问Index<strong>控制器</strong>和test动作。</p>
+
+<div class="code">http://localhost/Index/test</div>
+
+<p>&nbsp;</p>
+
+
+
+                <div class="ctrl">
+                    上一页:
+                                        <a href="Rong.MVC.html"> MVC集成(ControllerEngine)</a>
+                    
+                    &nbsp;
+                    <a href="index.html">目录</a>
+                    &nbsp;
+                    下一页 :
+                                        <a href="Rong.Controller.html">控制器</a>
+                                    </div> 
+            </div>
+            <div class="bottom">
+ 要获取最新的Rong Framework,请访问<a href="http://rong.wudimei.com" target="_balnk">http://rong.wudimei.com</a></div>  
+        </div>
+    </body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>文本框</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <link href="style.css" rel="stylesheet" type="text/css" />        <meta name="keywords" content="文本框,Rong Framework" />
+        <meta name="description" content="文本框,Rong Framework" />
+    </head>
+    <body>
+        <div class="Page">
+            <div class="top">
+    <div class="rf">Rong Framework</div>
+</div>            <div class="content"> 
+                <div>
+                    <a href="index.html">目录</a>
+                </div>
+                
+                 <div class="ctrl">
+                    上一页:
+                                        <a href="Rong.Html.Radios.html"> 单选按钮组</a>
+                    
+                    &nbsp;
+                    <a href="index.html">目录</a>
+                    &nbsp;
+                    下一页 :
+                                        <a href="Rong.Html.Textarea.html">多行文本框</a>
+                                    </div> 
+                <h3>文本框</h3>
+                Rong_Html_TextField() 继承自Rong_Html_Abtract<br>实现了toHtml()方法，下面演示一下使用方法，其中set()方法的定义参考Rong.Html.html。<br>Filename: /test/html/html_textfield.php<div class="code"  ><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php&nbsp;<br /><br /></span><span style="color: #FF8000">/**<br />&nbsp;*&nbsp;file&nbsp;encoding&nbsp;utf-8<br />&nbsp;*&nbsp;文件字符编码utf-8<br />&nbsp;*/<br /></span><span style="color: #0000BB">$PathToRongFramework&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">dirname</span><span style="color: #007700">(</span><span style="color: #0000BB">__FILE__</span><span style="color: #007700">).</span><span style="color: #DD0000">"/../../lib"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">set_include_path</span><span style="color: #007700">(&nbsp;&nbsp;</span><span style="color: #DD0000">"."&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">PATH_SEPARATOR&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$PathToRongFramework&nbsp;</span><span style="color: #007700">.&nbsp;&nbsp;</span><span style="color: #0000BB">PATH_SEPARATOR&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">get_include_path</span><span style="color: #007700">()&nbsp;);<br /><br />require_once&nbsp;</span><span style="color: #DD0000">'Rong/Html/TextField.php'</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">$tf&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">Rong_Html_TextField</span><span style="color: #007700">();<br /></span><span style="color: #0000BB">$tf</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">set</span><span style="color: #007700">(</span><span style="color: #DD0000">"id"</span><span style="color: #007700">,</span><span style="color: #DD0000">"title"</span><span style="color: #007700">)-&gt;</span><span style="color: #0000BB">set</span><span style="color: #007700">(</span><span style="color: #DD0000">"name"</span><span style="color: #007700">,</span><span style="color: #DD0000">"title"</span><span style="color: #007700">)-&gt;</span><span style="color: #0000BB">set</span><span style="color: #007700">(</span><span style="color: #DD0000">"value"</span><span style="color: #007700">,</span><span style="color: #DD0000">"Hello,world"</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">header</span><span style="color: #007700">(</span><span style="color: #DD0000">"Content-Type:&nbsp;text/html;&nbsp;charset=utf-8"</span><span style="color: #007700">);<br />echo&nbsp;</span><span style="color: #0000BB">$tf</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">toHtml</span><span style="color: #007700">();<br /></span></span></code></div><br>它输出的代码是：<br><div class="code"  ><pre>&lt;<span class='tagName'>input</span>  <span class='tagAttribute'>type</span>=<span class='tagValue'>"text"</span> <span class='tagAttribute'>id</span>=<span class='tagValue'>"title"</span> <span class='tagAttribute'>name</span>=<span class='tagValue'>"title"</span> <span class='tagAttribute'>value</span>=<span class='tagValue'>"Hello,world"</span>  <span class='tagAttribute'>/</span>></pre></div><br>可以通过网址：/test/html_textfield.php 查看。<br>
+
+
+
+
+
+                <div class="ctrl">
+                    上一页:
+                                        <a href="Rong.Html.Radios.html"> 单选按钮组</a>
+                    
+                    &nbsp;
+                    <a href="index.html">目录</a>
+                    &nbsp;
+                    下一页 :
+                                        <a href="Rong.Html.Textarea.html">多行文本框</a>
+                                    </div> 
+            </div>
+            <div class="bottom">
+ 要获取最新的Rong Framework,请访问<a href="http://rong.wudimei.com" target="_balnk">http://rong.wudimei.com</a></div>  
+        </div>
+    </body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>string</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <link href="style.css" rel="stylesheet" type="text/css" />        <meta name="keywords" content="string,Rong Framework" />
+        <meta name="description" content="string,Rong Framework" />
+    </head>
+    <body>
+        <div class="Page">
+            <div class="top">
+    <div class="rf">Rong Framework</div>
+</div>            <div class="content"> 
+                <div>
+                    <a href="index.html">Table Of Contents</a>
+                </div>
+                
+                 <div class="ctrl">
+                    Prev Page:
+                                        <a href="Rong.View.Wudimei.array.html"> array</a>
+                    
+                    &nbsp;
+                    <a href="index.html">Table Of Contents</a>
+                    &nbsp;
+                    Next Page :
+                                        <a href="Rong.View.Wudimei.ignore.html">ingore compile</a>
+                                    </div> 
+                <h3>string</h3>
+                <br>Filename: /test/tpl_wudimei/string.php<div class="code"  ><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">/**<br />&nbsp;*&nbsp;file&nbsp;encoding&nbsp;utf-8<br />&nbsp;*&nbsp;文件字符编码utf-8<br />&nbsp;*/<br /></span><span style="color: #0000BB">$PathToRongFramework&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">dirname</span><span style="color: #007700">(</span><span style="color: #0000BB">__FILE__</span><span style="color: #007700">).</span><span style="color: #DD0000">"/../../lib"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">set_include_path</span><span style="color: #007700">(&nbsp;&nbsp;</span><span style="color: #DD0000">"."&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">PATH_SEPARATOR&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$PathToRongFramework&nbsp;</span><span style="color: #007700">.&nbsp;&nbsp;</span><span style="color: #0000BB">PATH_SEPARATOR&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">get_include_path</span><span style="color: #007700">()&nbsp;);<br /><br /><br />require_once&nbsp;</span><span style="color: #DD0000">'Rong/View/Wudimei.php'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$wudimei&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">Rong_View_Wudimei</span><span style="color: #007700">();<br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">compileDir&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">dirname</span><span style="color: #007700">(</span><span style="color: #0000BB">__FILE__</span><span style="color: #007700">)&nbsp;.&nbsp;</span><span style="color: #DD0000">"/templates/compiled"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">viewsDirectory&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">dirname</span><span style="color: #007700">(</span><span style="color: #0000BB">__FILE__</span><span style="color: #007700">)&nbsp;.&nbsp;&nbsp;</span><span style="color: #DD0000">"/templates"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">leftDelimiter&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"{"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">rightDelimiter&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"}"</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">//assing&nbsp;var&nbsp;msg&nbsp;to&nbsp;template<br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">assign</span><span style="color: #007700">(</span><span style="color: #DD0000">"msg"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"Hello,World!"</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">assign</span><span style="color: #007700">(</span><span style="color: #DD0000">"name"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"&nbsp;&nbsp;&nbsp;&nbsp;Yang&nbsp;Qing-rong&nbsp;&nbsp;"</span><span style="color: #007700">);&nbsp;</span><span style="color: #FF8000">//trim<br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">assign</span><span style="color: #007700">(</span><span style="color: #DD0000">"list"&nbsp;</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"orange\napple\nbanana"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">assign</span><span style="color: #007700">(</span><span style="color: #DD0000">"url"</span><span style="color: #007700">,</span><span style="color: #DD0000">"http://rong.wudimei.com"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">assign</span><span style="color: #007700">(</span><span style="color: #DD0000">"url2"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"http%3A%2F%2Frong.wudimei.com"&nbsp;</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">assign</span><span style="color: #007700">(</span><span style="color: #DD0000">"b64"</span><span style="color: #007700">,</span><span style="color: #DD0000">"aHR0cDovL3Jvbmcud3VkaW1laS5jb20="&nbsp;</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">assign</span><span style="color: #007700">(</span><span style="color: #DD0000">"html"</span><span style="color: #007700">,</span><span style="color: #DD0000">"&lt;p&gt;hello,world&lt;/p&gt;&lt;p&gt;yqr&lt;/p&gt;&lt;table&gt;&lt;tr&gt;&lt;td&gt;hello&lt;/td&gt;&lt;td&gt;world&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">assign</span><span style="color: #007700">(</span><span style="color: #DD0000">"utf8String"</span><span style="color: #007700">,</span><span style="color: #DD0000">"你好，我叫杨庆荣！"</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">display</span><span style="color: #007700">(</span><span style="color: #DD0000">"hello/string.html"</span><span style="color: #007700">);<br /><br /></span></span></code></div><br><br>Filename: /test/tpl_wudimei/templates/hello/string.html<div class="code"  ><pre>&lt;<span class='HTMLComment'>!DOCTYPE html</span>&gt;
+&lt;<span class='tagName'>html</span>&gt;
+    &lt;<span class='tagName'>head</span>&gt;
+        &lt;<span class='tagName'>title</span>&gt;&lt;<span class='tagName'>/title</span>&gt;
+        &lt;<span class='tagName'>meta</span> <span class='tagAttribute'>http-equiv</span>=<span class='tagValue'>"Content-Type"</span> <span class='tagAttribute'>content</span>=<span class='tagValue'>"text/html; charset=UTF-8"</span>>
+    &lt;<span class='tagName'>/head</span>&gt;
+    &lt;<span class='tagName'>body</span>&gt;
+        &lt;<span class='tagName'>div</span>&gt;
+             output variable $msg(输出$msg变量):{<span class='WudimeiTagName'>$msg</span>} &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+             output variable $name(输出变量$name): {<span class='WudimeiTagName'>$name</span>} &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+             trim $name(去掉$name的前后空格): {<span class='WudimeiTagName'>$name|trim</span>} &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+             substr of $msg($msg的前五个字母): {<span class='WudimeiTagName'>$msg|substr:0:5</span>}&lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+             string length(字符串长度strlen): {<span class='WudimeiTagName'>$msg|strlen</span>} &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+             replace string(字符串替换): {<span class='WudimeiTagName'>$msg|replace:"World":"China"</span>} &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+             repeat string(字符串重复): {<span class='WudimeiTagName'>$msg|repeat:5</span>}&lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+             concat string(字符串连接): {<span class='WudimeiTagName'>$msg|concat:"how</span> <span class='WudimeiTagAttribute'>r u?"</span>}&lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+             concat string(字符串连接): {<span class='WudimeiTagName'>$msg|cat:"how</span> <span class='WudimeiTagAttribute'>r u?"</span>}&lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+             append string(字符串追加): {<span class='WudimeiTagName'>$name|append:"</span> <span class='WudimeiTagAttribute'>is a chinese."</span>} &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+             nl2br(换行符替换成br标记):{<span class='WudimeiTagName'>$list|nl2br</span>}&lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+             url encode: {<span class='WudimeiTagName'>$url|urlencode</span>} &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+             url decode: {<span class='WudimeiTagName'>$url|urldecode</span>} &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+             base64 encode: {<span class='WudimeiTagName'>$url|base64_encode</span>} &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+             base64 deocode:{<span class='WudimeiTagName'>$b64|base64_decode</span>} &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+             string position of "World"（字符串“World”的位置）： {<span class='WudimeiTagName'>$msg|strpos:"World"</span>} &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+             strip html tags（去掉HTML标记）：{<span class='WudimeiTagName'>$html|strip_tags</span>} &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+             --------&lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+             output $utf8String:{<span class='WudimeiTagName'>$utf8String</span>}&lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+             utf-8 sub string(utf-8字符集的子串):{<span class='WudimeiTagName'>$utf8String|utf8SubString:5:3</span>}&lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+             utf-8 string length(utf-8字符集的长度):{<span class='WudimeiTagName'>$utf8String|utf8Length</span>}&lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+             highlight:{<span class='WudimeiTagName'>$msg|highlight:"World":"red"</span>}&lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+             
+        &lt;<span class='tagName'>/div</span>&gt;
+    &lt;<span class='tagName'>/body</span>&gt;
+&lt;<span class='tagName'>/html</span>&gt;</pre></div><br>输出结果：<br><div class="code"  ><pre>&lt;<span class='HTMLComment'>!DOCTYPE html</span>&gt;
+&lt;<span class='tagName'>html</span>&gt;
+    &lt;<span class='tagName'>head</span>&gt;
+        &lt;<span class='tagName'>title</span>&gt;&lt;<span class='tagName'>/title</span>&gt;
+        &lt;<span class='tagName'>meta</span> <span class='tagAttribute'>http-equiv</span>=<span class='tagValue'>"Content-Type"</span> <span class='tagAttribute'>content</span>=<span class='tagValue'>"text/html; charset=UTF-8"</span>>
+    &lt;<span class='tagName'>/head</span>&gt;
+    &lt;<span class='tagName'>body</span>&gt;
+        &lt;<span class='tagName'>div</span>&gt;
+             output variable $msg(输出$msg变量):Hello,World! &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+             output variable $name(输出变量$name):     Yang Qing-rong   &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+             trim $name(去掉$name的前后空格): Yang Qing-rong &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+             substr of $msg($msg的前五个字母): Hello&lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+             string length(字符串长度strlen): 12 &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+             replace string(字符串替换): Hello,China! &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+             repeat string(字符串重复): Hello,World!Hello,World!Hello,World!Hello,World!Hello,World!&lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+             concat string(字符串连接): Hello,World!how r u?&lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+             concat string(字符串连接): Hello,World!how r u?&lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+             append string(字符串追加):     Yang Qing-rong   is a chinese. &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+             nl2br(换行符替换成br标记):orange&lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+apple&lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+banana&lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+             url encode: http%3A%2F%2Frong.wudimei.com &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+             url decode: http://rong.wudimei.com &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+             base64 encode: aHR0cDovL3Jvbmcud3VkaW1laS5jb20= &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+             base64 deocode:http://rong.wudimei.com &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+             string position of "World"（字符串“World”的位置）： 6 &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+             strip html tags（去掉HTML标记）：hello,worldyqrhelloworld &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+             --------&lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+             output $utf8String:你好，我叫杨庆荣！&lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+             utf-8 sub string(utf-8字符集的子串):杨庆荣&lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+             utf-8 string length(utf-8字符集的长度):9&lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+             highlight:Hello,&lt;<span class='tagName'>span</span> <span class='tagAttribute'>style</span>=<span class='tagValue'>"color:red"</span>>World&lt;<span class='tagName'>/span</span>&gt;!&lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+        &lt;<span class='tagName'>/div</span>&gt;
+    &lt;<span class='tagName'>/body</span>&gt;
+&lt;<span class='tagName'>/html</span>&gt;</pre></div><br>
+
+
+
+
+                <div class="ctrl">
+                    Prev Page:
+                                        <a href="Rong.View.Wudimei.array.html"> array</a>
+                    
+                    &nbsp;
+                    <a href="index.html">Table Of Contents</a>
+                    &nbsp;
+                    Next Page :
+                                        <a href="Rong.View.Wudimei.ignore.html">ingore compile</a>
+                                    </div> 
+            </div>
+            <div class="bottom">
+ To get the last version of Rong Framework.please vist <a href="http://rong.wudimei.com" target="_balnk">http://rong.wudimei.com</a></div>  
+        </div>
+    </body>
+</html>

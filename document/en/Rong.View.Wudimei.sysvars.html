@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>system varibles</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <link href="style.css" rel="stylesheet" type="text/css" />        <meta name="keywords" content="system varibles,Rong Framework" />
+        <meta name="description" content="system varibles,Rong Framework" />
+    </head>
+    <body>
+        <div class="Page">
+            <div class="top">
+    <div class="rf">Rong Framework</div>
+</div>            <div class="content"> 
+                <div>
+                    <a href="index.html">Table Of Contents</a>
+                </div>
+                
+                 <div class="ctrl">
+                    Prev Page:
+                                        <a href="Rong.View.Wudimei.html"> Wudimei Template Engine</a>
+                    
+                    &nbsp;
+                    <a href="index.html">Table Of Contents</a>
+                    &nbsp;
+                    Next Page :
+                                        <a href="Rong.View.Wudimei.fetch.html">fetch() template rendered html result</a>
+                                    </div> 
+                <h3>system varibles</h3>
+                wudimei variable and php varible mapping:<br><table border="1">
+<tbody><tr><td>wudimei variable</td><td>php varible<br></td></tr>
+<tr><td>{$wudimei.get.id}</td><td>$_GET["id"]</td></tr>
+<tr><td>{$wudimei.post.id}</td><td>$_POST["id"]</td></tr>
+<tr><td>{$wudimei.session.id}</td><td>$_SESSION["id"]</td></tr>
+<tr><td>{$wudimei.cookie.id}</td><td>$_COOKIE["id"]</td></tr>
+<tr><td>{$wudimei.now}</td><td>date("Y-m-d H:i:s");</td></tr>
+<tr><td>{$wudimei.global.id}</td><td>$GLOBALS["id"]</td></tr>
+<tr><td>{$wudimei.server.SERVER_NAME}</td><td>$_SERVER["SERVER_NAME"]</td></tr>
+<tr><td>{$wudimei.files}</td><td>$_FILES</td></tr>
+<tr><td>{$wudimei.request.id}</td><td>$_REQUEST["id"]</td></tr>
+</tbody></table>
+
+Filename: /test/tpl_wudimei/sysvars.php<div class="code"  ><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">/**<br />&nbsp;*&nbsp;file&nbsp;encoding&nbsp;utf-8<br />&nbsp;*&nbsp;文件字符编码utf-8<br />&nbsp;*/<br /></span><span style="color: #0000BB">$PathToRongFramework&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">dirname</span><span style="color: #007700">(</span><span style="color: #0000BB">__FILE__</span><span style="color: #007700">).</span><span style="color: #DD0000">"/../../lib"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">set_include_path</span><span style="color: #007700">(&nbsp;&nbsp;</span><span style="color: #DD0000">"."&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">PATH_SEPARATOR&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$PathToRongFramework&nbsp;</span><span style="color: #007700">.&nbsp;&nbsp;</span><span style="color: #0000BB">PATH_SEPARATOR&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">get_include_path</span><span style="color: #007700">()&nbsp;);<br /><br /><br />require_once&nbsp;</span><span style="color: #DD0000">'Rong/View/Wudimei.php'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$wudimei&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">Rong_View_Wudimei</span><span style="color: #007700">();<br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">compileDir&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">dirname</span><span style="color: #007700">(</span><span style="color: #0000BB">__FILE__</span><span style="color: #007700">)&nbsp;.&nbsp;</span><span style="color: #DD0000">"/templates/compiled"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">viewsDirectory&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">dirname</span><span style="color: #007700">(</span><span style="color: #0000BB">__FILE__</span><span style="color: #007700">)&nbsp;.&nbsp;&nbsp;</span><span style="color: #DD0000">"/templates"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">leftDelimiter&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"{"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">rightDelimiter&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"}"</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">//assing&nbsp;var&nbsp;msg&nbsp;to&nbsp;template<br /><br /></span><span style="color: #0000BB">session_start</span><span style="color: #007700">();<br /></span><span style="color: #0000BB">$_SESSION</span><span style="color: #007700">[</span><span style="color: #DD0000">"cart"</span><span style="color: #007700">]&nbsp;=&nbsp;array(<br />&nbsp;&nbsp;array(</span><span style="color: #DD0000">"id"</span><span style="color: #007700">=&gt;</span><span style="color: #0000BB">1</span><span style="color: #007700">,</span><span style="color: #DD0000">"name"</span><span style="color: #007700">=&gt;</span><span style="color: #DD0000">"banana"</span><span style="color: #007700">,</span><span style="color: #DD0000">"qty"</span><span style="color: #007700">=&gt;</span><span style="color: #0000BB">1</span><span style="color: #007700">),<br />&nbsp;&nbsp;array(</span><span style="color: #DD0000">"id"</span><span style="color: #007700">=&gt;</span><span style="color: #0000BB">2</span><span style="color: #007700">,</span><span style="color: #DD0000">"name"</span><span style="color: #007700">=&gt;</span><span style="color: #DD0000">"apple"</span><span style="color: #007700">,</span><span style="color: #DD0000">"qty"</span><span style="color: #007700">=&gt;</span><span style="color: #0000BB">2</span><span style="color: #007700">)<br />);<br /></span><span style="color: #0000BB">$_SESSION</span><span style="color: #007700">[</span><span style="color: #DD0000">"username"</span><span style="color: #007700">]&nbsp;=</span><span style="color: #DD0000">"Yang&nbsp;Qing-rong"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">setcookie</span><span style="color: #007700">(</span><span style="color: #DD0000">"token"</span><span style="color: #007700">,</span><span style="color: #0000BB">md5</span><span style="color: #007700">(</span><span style="color: #DD0000">""</span><span style="color: #007700">),&nbsp;</span><span style="color: #0000BB">time</span><span style="color: #007700">()+</span><span style="color: #0000BB">3600</span><span style="color: #007700">*</span><span style="color: #0000BB">24</span><span style="color: #007700">);&nbsp;</span><span style="color: #FF8000">//refresh&nbsp;browser&nbsp;required<br /></span><span style="color: #0000BB">$GLOBALS</span><span style="color: #007700">[</span><span style="color: #DD0000">"db_host"</span><span style="color: #007700">]&nbsp;=&nbsp;</span><span style="color: #DD0000">"127.0.0.1"</span><span style="color: #007700">;<br /></span><span style="color: #FF8000">//echo&nbsp;$wudimei-&gt;fetch("hello/sysvars.html");<br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">display</span><span style="color: #007700">(</span><span style="color: #DD0000">"hello/sysvars.html"</span><span style="color: #007700">);<br /><br /></span></span></code></div>
+
+<br><br>Filename: /test/tpl_wudimei/templates/hello/sysvars.html<div class="code"  ><pre>&lt;<span class='HTMLComment'>!DOCTYPE html</span>&gt;
+&lt;<span class='tagName'>html</span>&gt;
+    &lt;<span class='tagName'>head</span>&gt;
+        &lt;<span class='tagName'>title</span>&gt;sys vars&lt;<span class='tagName'>/title</span>&gt;
+        &lt;<span class='tagName'>meta</span> <span class='tagAttribute'>http-equiv</span>=<span class='tagValue'>"Content-Type"</span> <span class='tagAttribute'>content</span>=<span class='tagValue'>"text/html; charset=UTF-8"</span>>
+    &lt;<span class='tagName'>/head</span>&gt;
+    &lt;<span class='tagName'>body</span>&gt;
+    	$_GET["id"] = {<span class='WudimeiTagName'>$wudimei.get.id</span>} &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+    	$_POST["name"] = {<span class='WudimeiTagName'>$wudimei.post.name</span>} &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>> &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+    	&lt;<span class='tagName'>form</span> <span class='tagAttribute'>action</span>=<span class='tagValue'>""</span> <span class='tagAttribute'>method</span>=<span class='tagValue'>"post"</span>>
+    		name:&lt;<span class='tagName'>input</span> <span class='tagAttribute'>type</span>=<span class='tagValue'>"text"</span> <span class='tagAttribute'>name</span>=<span class='tagValue'>"name"</span> <span class='tagAttribute'>value</span>=<span class='tagValue'>"{$wudimei.post.name}"</span> <span class='tagAttribute'>/</span>>
+    		&lt;<span class='tagName'>input</span> <span class='tagAttribute'>type</span>=<span class='tagValue'>"submit"</span> <span class='tagAttribute'>value</span>=<span class='tagValue'>"post"</span> <span class='tagAttribute'>/</span>>
+    	&lt;<span class='tagName'>/form</span>&gt;
+    	
+    	Hi,{<span class='WudimeiTagName'>$wudimei.session.username</span>},welcome to rong framework! &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+    	your cookie token is: {<span class='WudimeiTagName'>$wudimei.cookie.token</span>} &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+    	now is:{<span class='WudimeiTagName'>$wudimei.now</span>}&lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+    	globals var db_host:{<span class='WudimeiTagName'>$wudimei.global.db_host</span>} &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+    	server name:{<span class='WudimeiTagName'>$wudimei.server.SERVER_NAME</span>} &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+    	files count:{<span class='WudimeiTagName'>$wudimei.files|count</span>} &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+    	request id:{<span class='WudimeiTagName'>$wudimei.request.id</span>} &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+	&lt;<span class='tagName'>/body</span>&gt;
+&lt;<span class='tagName'>/html</span>&gt;</pre></div><br><br>
+
+URL: /test/tpl_wudimei/sysvars.php?id=1985<div class="code"  ><pre>&lt;<span class='HTMLComment'>!DOCTYPE html</span>&gt;
+&lt;<span class='tagName'>html</span>&gt;
+    &lt;<span class='tagName'>head</span>&gt;
+        &lt;<span class='tagName'>title</span>&gt;sys vars&lt;<span class='tagName'>/title</span>&gt;
+        &lt;<span class='tagName'>meta</span> <span class='tagAttribute'>http-equiv</span>=<span class='tagValue'>"Content-Type"</span> <span class='tagAttribute'>content</span>=<span class='tagValue'>"text/html; charset=UTF-8"</span>>
+    &lt;<span class='tagName'>/head</span>&gt;
+    &lt;<span class='tagName'>body</span>&gt;
+    	$_GET["id"] = 1985 &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+    	$_POST["name"] =  &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>> &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+    	&lt;<span class='tagName'>form</span> <span class='tagAttribute'>action</span>=<span class='tagValue'>""</span> <span class='tagAttribute'>method</span>=<span class='tagValue'>"post"</span>>
+    		name:&lt;<span class='tagName'>input</span> <span class='tagAttribute'>type</span>=<span class='tagValue'>"text"</span> <span class='tagAttribute'>name</span>=<span class='tagValue'>"name"</span> <span class='tagAttribute'>value</span>=<span class='tagValue'>""</span> <span class='tagAttribute'>/</span>>
+    		&lt;<span class='tagName'>input</span> <span class='tagAttribute'>type</span>=<span class='tagValue'>"submit"</span> <span class='tagAttribute'>value</span>=<span class='tagValue'>"post"</span> <span class='tagAttribute'>/</span>>
+    	&lt;<span class='tagName'>/form</span>&gt;
+    	
+    	Hi,Yang Qing-rong,welcome to rong framework! &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+    	your cookie token is:  &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+    	now is:2014-01-04 13:01:05&lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+    	globals var db_host:127.0.0.1 &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+    	server name:127.0.0.9 &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+    	files count:0 &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+    	request id:1985 &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+	&lt;<span class='tagName'>/body</span>&gt;
+&lt;<span class='tagName'>/html</span>&gt;</pre></div>
+
+
+                <div class="ctrl">
+                    Prev Page:
+                                        <a href="Rong.View.Wudimei.html"> Wudimei Template Engine</a>
+                    
+                    &nbsp;
+                    <a href="index.html">Table Of Contents</a>
+                    &nbsp;
+                    Next Page :
+                                        <a href="Rong.View.Wudimei.fetch.html">fetch() template rendered html result</a>
+                                    </div> 
+            </div>
+            <div class="bottom">
+ To get the last version of Rong Framework.please vist <a href="http://rong.wudimei.com" target="_balnk">http://rong.wudimei.com</a></div>  
+        </div>
+    </body>
+</html>

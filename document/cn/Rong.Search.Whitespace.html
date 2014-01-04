@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>白板分析</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <link href="style.css" rel="stylesheet" type="text/css" />        <meta name="keywords" content="白板分析,Rong Framework" />
+        <meta name="description" content="白板分析,Rong Framework" />
+    </head>
+    <body>
+        <div class="Page">
+            <div class="top">
+    <div class="rf">Rong Framework</div>
+</div>            <div class="content"> 
+                <div>
+                    <a href="index.html">目录</a>
+                </div>
+                
+                 <div class="ctrl">
+                    上一页:
+                                        <a href="Rong.Search.html"> 搜索</a>
+                    
+                    &nbsp;
+                    <a href="index.html">目录</a>
+                    &nbsp;
+                    下一页 :
+                                        <a href="Rong.Search.Chinese.html">中文分词</a>
+                                    </div> 
+                <h3>白板分析</h3>
+                无须加入词典，很方便：<br>Filename: /test/search/search_whitespace.php<div class="code"  ><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /><br /><br /></span><span style="color: #FF8000">/**<br />&nbsp;*&nbsp;file&nbsp;encoding&nbsp;utf-8<br />&nbsp;*&nbsp;文件字符编码utf-8<br />&nbsp;*/<br /></span><span style="color: #0000BB">$PathToRongFramework&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">dirname</span><span style="color: #007700">(</span><span style="color: #0000BB">__FILE__</span><span style="color: #007700">).</span><span style="color: #DD0000">"/../../lib"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">set_include_path</span><span style="color: #007700">(&nbsp;&nbsp;</span><span style="color: #DD0000">"."&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">PATH_SEPARATOR&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$PathToRongFramework&nbsp;</span><span style="color: #007700">.&nbsp;&nbsp;</span><span style="color: #0000BB">PATH_SEPARATOR&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">get_include_path</span><span style="color: #007700">()&nbsp;);<br /><br />require_once&nbsp;</span><span style="color: #DD0000">'Rong/Search/Analyzer.php'</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">$analyzer&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">Rong_Search_Analyzer</span><span style="color: #007700">::</span><span style="color: #0000BB">factory</span><span style="color: #007700">(</span><span style="color: #DD0000">"WhiteSpace"</span><span style="color: #007700">,&nbsp;array());<br /></span><span style="color: #0000BB">$ks&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$analyzer</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">analyze</span><span style="color: #007700">(</span><span style="color: #DD0000">'Rong&nbsp;Framework&nbsp;which&nbsp;is&nbsp;a&nbsp;php5-based&nbsp;framework,is&nbsp;developed&nbsp;by&nbsp;yangqingrong.it&nbsp;simplify&nbsp;the&nbsp;sql&nbsp;development.wudimei&nbsp;template&nbsp;engine&nbsp;is&nbsp;similar&nbsp;to&nbsp;smarty,but&nbsp;it&nbsp;has&nbsp;lots&nbsp;of&nbsp;itself\'s&nbsp;style'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$ks</span><span style="color: #007700">);</span></span></code></div><br><br>输出：<br><div class="code"  ><code><span style="color: #000000">Array&nbsp;(&nbsp;[0]&nbsp;=&gt;&nbsp;Rong&nbsp;[1]&nbsp;=&gt;&nbsp;Framework&nbsp;[2]&nbsp;=&gt;&nbsp;which&nbsp;[3]&nbsp;=&gt;&nbsp;is&nbsp;[4]&nbsp;=&gt;&nbsp;a&nbsp;[5]&nbsp;=&gt;&nbsp;php5&nbsp;[6]&nbsp;=&gt;&nbsp;based&nbsp;[7]&nbsp;=&gt;&nbsp;framework&nbsp;[8]&nbsp;=&gt;&nbsp;is&nbsp;[9]&nbsp;=&gt;&nbsp;developed&nbsp;[10]&nbsp;=&gt;&nbsp;by&nbsp;[11]&nbsp;=&gt;&nbsp;yangqingrong&nbsp;[12]&nbsp;=&gt;&nbsp;it&nbsp;[13]&nbsp;=&gt;&nbsp;simplify&nbsp;[14]&nbsp;=&gt;&nbsp;the&nbsp;[15]&nbsp;=&gt;&nbsp;sql&nbsp;[16]&nbsp;=&gt;&nbsp;development&nbsp;[17]&nbsp;=&gt;&nbsp;wudimei&nbsp;[18]&nbsp;=&gt;&nbsp;template&nbsp;[19]&nbsp;=&gt;&nbsp;engine&nbsp;[20]&nbsp;=&gt;&nbsp;is&nbsp;[21]&nbsp;=&gt;&nbsp;similar&nbsp;[22]&nbsp;=&gt;&nbsp;to&nbsp;[23]&nbsp;=&gt;&nbsp;smarty&nbsp;[24]&nbsp;=&gt;&nbsp;but&nbsp;[25]&nbsp;=&gt;&nbsp;it&nbsp;[26]&nbsp;=&gt;&nbsp;has&nbsp;[27]&nbsp;=&gt;&nbsp;lots&nbsp;[28]&nbsp;=&gt;&nbsp;of&nbsp;[29]&nbsp;=&gt;&nbsp;itself&nbsp;[30]&nbsp;=&gt;&nbsp;s&nbsp;[31]&nbsp;=&gt;&nbsp;style&nbsp;)</span></code></div><br>
+
+
+
+                <div class="ctrl">
+                    上一页:
+                                        <a href="Rong.Search.html"> 搜索</a>
+                    
+                    &nbsp;
+                    <a href="index.html">目录</a>
+                    &nbsp;
+                    下一页 :
+                                        <a href="Rong.Search.Chinese.html">中文分词</a>
+                                    </div> 
+            </div>
+            <div class="bottom">
+ 要获取最新的Rong Framework,请访问<a href="http://rong.wudimei.com" target="_balnk">http://rong.wudimei.com</a></div>  
+        </div>
+    </body>
+</html>

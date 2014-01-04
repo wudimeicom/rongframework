@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>包含文件</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <link href="style.css" rel="stylesheet" type="text/css" />        <meta name="keywords" content="包含文件,Rong Framework" />
+        <meta name="description" content="包含文件,Rong Framework" />
+    </head>
+    <body>
+        <div class="Page">
+            <div class="top">
+    <div class="rf">Rong Framework</div>
+</div>            <div class="content"> 
+                <div>
+                    <a href="index.html">目录</a>
+                </div>
+                
+                 <div class="ctrl">
+                    上一页:
+                                        <a href="Rong.View.Wudimei.ignore.html"> 忽略编译</a>
+                    
+                    &nbsp;
+                    <a href="index.html">目录</a>
+                    &nbsp;
+                    下一页 :
+                                        <a href="Rong.View.Wudimei.For.html">For循环</a>
+                                    </div> 
+                <h3>包含文件</h3>
+                包含文件的语法是：
+<br>{include file="/inc/top.html"}<br>它的作用是把另一个文件包含进来。<br>file属性指定文件名的相对路径。它在$wudimei-&gt;viewsDirectory里面。程序会读取$wudimei-&gt;viewsDirectory.file指定的文件。上面的例子中会读取$wudimei-&gt;viewsDirectory."/inc/top.html"这个文件。<br><br>Filename: /test/tpl_wudimei/include.php<div class="code"  ><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">/**<br />&nbsp;*&nbsp;file&nbsp;encoding&nbsp;utf-8<br />&nbsp;*&nbsp;文件字符编码utf-8<br />&nbsp;*/<br /></span><span style="color: #0000BB">$PathToRongFramework&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">dirname</span><span style="color: #007700">(</span><span style="color: #0000BB">__FILE__</span><span style="color: #007700">).</span><span style="color: #DD0000">"/../../lib"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">set_include_path</span><span style="color: #007700">(&nbsp;&nbsp;</span><span style="color: #DD0000">"."&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">PATH_SEPARATOR&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$PathToRongFramework&nbsp;</span><span style="color: #007700">.&nbsp;&nbsp;</span><span style="color: #0000BB">PATH_SEPARATOR&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">get_include_path</span><span style="color: #007700">()&nbsp;);<br /><br /><br />require_once&nbsp;</span><span style="color: #DD0000">'Rong/View/Wudimei.php'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$wudimei&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">Rong_View_Wudimei</span><span style="color: #007700">();<br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">compileDir&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">dirname</span><span style="color: #007700">(</span><span style="color: #0000BB">__FILE__</span><span style="color: #007700">)&nbsp;.&nbsp;</span><span style="color: #DD0000">"/templates/compiled"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">viewsDirectory&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">dirname</span><span style="color: #007700">(</span><span style="color: #0000BB">__FILE__</span><span style="color: #007700">)&nbsp;.&nbsp;&nbsp;</span><span style="color: #DD0000">"/templates"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">leftDelimiter&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"{"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">rightDelimiter&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"}"</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">//assing&nbsp;var&nbsp;msg&nbsp;to&nbsp;template<br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">assign</span><span style="color: #007700">(</span><span style="color: #DD0000">"site_name"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"wudimei&nbsp;shop"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">assign</span><span style="color: #007700">(</span><span style="color: #DD0000">"welcome"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"hello,welcome&nbsp;to&nbsp;wudimei&nbsp;shop!"</span><span style="color: #007700">);<br /><br /><br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">display</span><span style="color: #007700">(</span><span style="color: #DD0000">"hello/include_sample.html"</span><span style="color: #007700">);<br /><br /></span></span></code></div><br><br>Filename: /test/tpl_wudimei/templates/inc/top.html<div class="code"  ><pre>&lt;<span class='tagName'>h1</span>&gt;{<span class='WudimeiTagName'>$site_name</span>}&lt;<span class='tagName'>/h1</span>&gt;</pre></div><br><br>Filename: /test/tpl_wudimei/templates/hello/include_sample.html<div class="code"  ><pre>&lt;<span class='tagName'>html</span>&gt;
+	&lt;<span class='tagName'>head</span>&gt;
+		&lt;<span class='tagName'>title</span>&gt;include sample&lt;<span class='tagName'>/title</span>&gt;
+	&lt;<span class='tagName'>/head</span>&gt;
+	&lt;<span class='tagName'>body</span>&gt;
+		{<span class='WudimeiTagName'>include</span> <span class='WudimeiTagAttribute'>file</span>=<span class='WudimeiTagValue'>"inc/top.html"</span>}
+		&lt;<span class='tagName'>div</span>&gt;
+			{<span class='WudimeiTagName'>$welcome</span>}
+		&lt;<span class='tagName'>/div</span>&gt;
+	&lt;<span class='tagName'>/body</span>&gt;
+&lt;<span class='tagName'>/html</span>&gt;</pre></div><br><br>输出：<br>URL: /test/tpl_wudimei/include.php<div class="code"  ><pre>&lt;<span class='tagName'>html</span>&gt;
+	&lt;<span class='tagName'>head</span>&gt;
+		&lt;<span class='tagName'>title</span>&gt;include sample&lt;<span class='tagName'>/title</span>&gt;
+	&lt;<span class='tagName'>/head</span>&gt;
+	&lt;<span class='tagName'>body</span>&gt;
+		&lt;<span class='tagName'>h1</span>&gt;wudimei shop&lt;<span class='tagName'>/h1</span>&gt;		&lt;<span class='tagName'>div</span>&gt;
+			hello,welcome to wudimei shop!		&lt;<span class='tagName'>/div</span>&gt;
+	&lt;<span class='tagName'>/body</span>&gt;
+&lt;<span class='tagName'>/html</span>&gt;</pre></div><br>
+<br>
+
+
+
+
+
+                <div class="ctrl">
+                    上一页:
+                                        <a href="Rong.View.Wudimei.ignore.html"> 忽略编译</a>
+                    
+                    &nbsp;
+                    <a href="index.html">目录</a>
+                    &nbsp;
+                    下一页 :
+                                        <a href="Rong.View.Wudimei.For.html">For循环</a>
+                                    </div> 
+            </div>
+            <div class="bottom">
+ 要获取最新的Rong Framework,请访问<a href="http://rong.wudimei.com" target="_balnk">http://rong.wudimei.com</a></div>  
+        </div>
+    </body>
+</html>

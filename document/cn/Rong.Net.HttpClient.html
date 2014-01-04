@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Http客户端</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <link href="style.css" rel="stylesheet" type="text/css" />        <meta name="keywords" content="Http客户端,Rong Framework" />
+        <meta name="description" content="Http客户端,Rong Framework" />
+    </head>
+    <body>
+        <div class="Page">
+            <div class="top">
+    <div class="rf">Rong Framework</div>
+</div>            <div class="content"> 
+                <div>
+                    <a href="index.html">目录</a>
+                </div>
+                
+                 <div class="ctrl">
+                    上一页:
+                                        <a href="Rong.Net.html"> 网络</a>
+                    
+                    &nbsp;
+                    <a href="index.html">目录</a>
+                    &nbsp;
+                    下一页 :
+                                        <a href="Rong.Gd.ResizeImage.html">图片缩放</a>
+                                    </div> 
+                <h3>Http客户端</h3>
+                使用Http客户端可以用来访问远程网页的网址，并可以向它发送数据和文件。<br><br>使用它，我们先包含类，并创建实例。<br><div class="code"  ><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">/**<br />&nbsp;*&nbsp;file&nbsp;encoding&nbsp;utf-8<br />&nbsp;*&nbsp;文件字符编码utf-8<br />&nbsp;*/<br /></span><span style="color: #0000BB">$PathToRongFramework&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">dirname</span><span style="color: #007700">(</span><span style="color: #0000BB">__FILE__</span><span style="color: #007700">).</span><span style="color: #DD0000">"/../../lib"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">set_include_path</span><span style="color: #007700">(&nbsp;&nbsp;</span><span style="color: #DD0000">"."&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">PATH_SEPARATOR&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$PathToRongFramework&nbsp;</span><span style="color: #007700">.&nbsp;&nbsp;</span><span style="color: #0000BB">PATH_SEPARATOR&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">get_include_path</span><span style="color: #007700">()&nbsp;);<br /><br /><br />require_once&nbsp;</span><span style="color: #DD0000">'Rong/Net/HttpClient.php'</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">$client&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">Rong_Net_HttpClient</span><span style="color: #007700">();</span></span></code></div><br>我们要设置cookie的存放位置：<br><div class="code"  ><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$client</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">setCookieDir</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">dirname</span><span style="color: #007700">(</span><span style="color: #0000BB">__FILE__</span><span style="color: #007700">)&nbsp;.&nbsp;</span><span style="color: #DD0000">"/data/cookies"&nbsp;</span><span style="color: #007700">);</span></span></code></div><br>假设我们要访问的网页是net_demo_page.php<br><div class="code"  ><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$url&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"http://127.0.0.9/test/net_demo_page.php"</span><span style="color: #007700">;</span></span></code></div><br>我们先用GET的方式访问：<br><div class="code"  ><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /><br /></span><span style="color: #FF8000">//1.GET<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #DD0000">"--------------request&nbsp;method&nbsp;GET-------------&lt;br&nbsp;/&gt;"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$client</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">request</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">$url&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">"?name=YangQingRong"&nbsp;</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"GET"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$response&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$client</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">getContent</span><span style="color: #007700">();<br /><br />echo&nbsp;</span><span style="color: #DD0000">"server&nbsp;response:"</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$response</span><span style="color: #007700">;</span></span></code></div><br>request()方法的参数：<br>$url string 网址<br>$method string GET或者POST<br>$postArray array 键=&gt;值对一维数组，用以POST方式发送<br><br>我们再以post的方式发送数据：<br><div class="code"  ><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /><br /><br /></span><span style="color: #FF8000">//2.POST<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #DD0000">"&lt;br&nbsp;/&gt;--------------request&nbsp;method&nbsp;POST-------------&lt;br&nbsp;/&gt;"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$client</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">addFile</span><span style="color: #007700">(</span><span style="color: #DD0000">"photo"</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">dirname</span><span style="color: #007700">(</span><span style="color: #0000BB">__FILE__</span><span style="color: #007700">)&nbsp;.&nbsp;</span><span style="color: #DD0000">"/data/Yqr.jpg"&nbsp;</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$postData&nbsp;</span><span style="color: #007700">=&nbsp;array(</span><span style="color: #DD0000">"title"</span><span style="color: #007700">=&gt;</span><span style="color: #DD0000">"hello,world"</span><span style="color: #007700">,</span><span style="color: #DD0000">"content"</span><span style="color: #007700">=&gt;</span><span style="color: #DD0000">"good&nbsp;good&nbsp;study,day&nbsp;day&nbsp;up"&nbsp;</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$client</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">request</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">$url&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">"?name=YangQingRong"&nbsp;</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"POST"</span><span style="color: #007700">,</span><span style="color: #0000BB">$postData</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$response&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$client</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">getContent</span><span style="color: #007700">();<br /><br />echo&nbsp;</span><span style="color: #DD0000">"server&nbsp;response:"</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$response</span><span style="color: #007700">;</span></span></code></div><br>其中getContent()方法返回网页的内容。<br>addFile($name,$path)方法用于添加文件到要发送的数据包中。$name是&lt;input type="file" name="photo"/&gt;中的name属性。<br><br>
+
+                <div class="ctrl">
+                    上一页:
+                                        <a href="Rong.Net.html"> 网络</a>
+                    
+                    &nbsp;
+                    <a href="index.html">目录</a>
+                    &nbsp;
+                    下一页 :
+                                        <a href="Rong.Gd.ResizeImage.html">图片缩放</a>
+                                    </div> 
+            </div>
+            <div class="bottom">
+ 要获取最新的Rong Framework,请访问<a href="http://rong.wudimei.com" target="_balnk">http://rong.wudimei.com</a></div>  
+        </div>
+    </body>
+</html>

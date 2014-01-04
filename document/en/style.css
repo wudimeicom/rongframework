@@ -1,0 +1,32 @@
+/* 
+    Document   : style
+    Created on : 2012-12-6, 0:16:08
+    Author     : rong
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+body,div,p,td,th{ font-size: 12pt;}
+body{ padding: 0px; margin: 0px; width:100%; }
+.top{ background-color:  #1392e9; border-bottom: 1px solid #0066cc;  margin-bottom: 15px; padding: 5px 20px;}
+
+.ctrl{ margin: 5px auto; background-color: #eaeaea; padding: 5px 20px; }
+ .rf{ font-size:18px;}
+.content{ padding: 5px 20px;}
+.code{ border: 1px solid #ececea; padding: 5px; background-color: #FaF3F0; word-break:break-all;word-wrap:break-word; }
+code{ width: 100% !important;}
+/* html */
+.tagName{color:blue;}
+.tagAttribute{color:red;}
+.tagValue{color:#AA5500;}
+.HTMLComment{font-style:italic;color:#DA8028;}
+
+.WudimeiTagName{color:green; font-weight: bold; }
+.WudimeiTagAttribute{color:darkgoldenrod; font-weight: bold;}
+.WudimeiTagValue{color: #990099; }
+.WudimeiHTMLComment{font-style:italic;color:green;}
+
+.bottom{background-color:  #1392e9; border-top: 1px solid #0066cc; margin-top: 15px;  padding: 5px 20px;}

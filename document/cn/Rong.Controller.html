@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>控制器</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <link href="style.css" rel="stylesheet" type="text/css" />        <meta name="keywords" content="控制器,Rong Framework" />
+        <meta name="description" content="控制器,Rong Framework" />
+    </head>
+    <body>
+        <div class="Page">
+            <div class="top">
+    <div class="rf">Rong Framework</div>
+</div>            <div class="content"> 
+                <div>
+                    <a href="index.html">目录</a>
+                </div>
+                
+                 <div class="ctrl">
+                    上一页:
+                                        <a href="GettingStart.html"> MVC三层模型快速入门</a>
+                    
+                    &nbsp;
+                    <a href="index.html">目录</a>
+                    &nbsp;
+                    下一页 :
+                                        <a href="Rong.Controller.Request.html">去除magic_quotes</a>
+                                    </div> 
+                <h3>控制器</h3>
+                <!DOCTYPE html>
+
+<h1>控制器</h1>
+
+<p><span class="title1">一、基本控制器形式</span></p>
+
+<p><div class="code"  ><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php&nbsp;</span><span style="color: #007700">class&nbsp;</span><span style="color: #0000BB">GuestBookController&nbsp;</span><span style="color: #007700">extends&nbsp;</span><span style="color: #0000BB">Rong_Controller&nbsp;</span><span style="color: #007700">{&nbsp;<br />&nbsp;&nbsp;public&nbsp;function&nbsp;</span><span style="color: #0000BB">indexAction</span><span style="color: #007700">()&nbsp;{&nbsp;<br />&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"indexAction"</span><span style="color: #007700">;&nbsp;<br />&nbsp;&nbsp;}&nbsp;<br />&nbsp;&nbsp;public&nbsp;function&nbsp;</span><span style="color: #0000BB">testAction</span><span style="color: #007700">()&nbsp;{&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"testAction"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;}&nbsp;<br />}</span></span></code></div></p>
+
+<p><strong>控制器</strong>一般放在controllers目录中以&quot;控制器名Controller.php&quot;做为文件名，该文件只放一个控制器类，类名为&quot;控制器名Controller&quot;，并且它是<strong> Rong_Controller </strong>的子类。<br />
+例如上面的控制器保存为GuestBookController.php<br />
+控制器中的方法中有&quot;动作名Action()&quot;为名称的，可以供给用户访问。访问的url为：</p>
+
+<div class="code">
+<pre>
+http://localhost/GuestBook/index   
+http://localhost/index.php?do=/GuetBook/index 
+http://localhost/index.php/GuetBook/index</pre>
+</div>
+
+<p>其中GuestBook就是<strong>控制器</strong>名称，index就是动作名称，它将访问GuestBookController.php中的GuestBookController类中的indexAction()方法。<br />
+ndex动作一般是可以省略的，Index控制器也可以省略，所以可以这样访问GuestBook的index动作:<br />
+http://localhost/GuetBook<br />
+<span class="title1">二、改变控制器的目录</span><br />
+在index.php中我们使用了Rong_Controller_Engine这个类，它是负责程序转发的任务。<br />
+<strong>Rong_Controller_Engine</strong>::setControllersDirectory( $newControllerDir ); 访方法就是用来改变控制器的存储路径的。$newController参数是新的控制器的路径。</p>
+
+<pre>
+<div class="code"  ><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php&nbsp;</span><span style="color: #007700">require_once&nbsp;</span><span style="color: #DD0000">"Rong/Object.php"</span><span style="color: #007700">;<br />require_once&nbsp;</span><span style="color: #DD0000">"Rong/Controller/Engine.php"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$engine&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">Rong_Controller_Engine</span><span style="color: #007700">();<br /></span><span style="color: #0000BB">$engine</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">setControllersDirectory</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">ROOT&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">"/install/application/controllers"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$engine</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">start</span><span style="color: #007700">();</span></span></code></div>
+</pre>
+
+<p>比如您的程序根目录在 http://localhost/bbs 下， 可以这样访问Index控制器的index动作了。</p>
+
+<div class="code">http://localhost/bbs/Index/index<br />
+http://localhost/bbs/index.php?do=/Index/index</div>
+
+<p>打印出网站的Base Url,比如你的网站安装在/var/www/bbs,则返回&quot;/bbs&quot; , 如果安装在/var/www,则返回空串&quot;&quot;,即返回的字符串后面不带&quot;/&quot;。<br />
+其中的.htaccess是这样写的：</p>
+
+<pre>
+<ifmodule mod_rewrite.c="">
+RewriteEngine On
+RewriteBase /bbs/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php/$1 [L]
+</ifmodule>
+<ifmodule mod_rewrite.c="">
+ErrorDocument 404 /index.php
+</ifmodule>
+Options +Includes
+ <ifmodule mod_php5.c="">
+ php_flag magic_quotes_gpc Off
+ </ifmodule>
+ </pre>
+
+<p>请注意上面的RewriteBase。</p>
+
+<pre>
+<div class="code"  ><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php&nbsp;</span><span style="color: #007700">function&nbsp;</span><span style="color: #0000BB">indexAction</span><span style="color: #007700">()<br />{<br />&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">uri</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">baseUrl</span><span style="color: #007700">;&nbsp;<br />}</span></span></code></div>
+</pre>
+
+
+
+                <div class="ctrl">
+                    上一页:
+                                        <a href="GettingStart.html"> MVC三层模型快速入门</a>
+                    
+                    &nbsp;
+                    <a href="index.html">目录</a>
+                    &nbsp;
+                    下一页 :
+                                        <a href="Rong.Controller.Request.html">去除magic_quotes</a>
+                                    </div> 
+            </div>
+            <div class="bottom">
+ 要获取最新的Rong Framework,请访问<a href="http://rong.wudimei.com" target="_balnk">http://rong.wudimei.com</a></div>  
+        </div>
+    </body>
+</html>

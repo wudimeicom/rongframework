@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>数组</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <link href="style.css" rel="stylesheet" type="text/css" />        <meta name="keywords" content="数组,Rong Framework" />
+        <meta name="description" content="数组,Rong Framework" />
+    </head>
+    <body>
+        <div class="Page">
+            <div class="top">
+    <div class="rf">Rong Framework</div>
+</div>            <div class="content"> 
+                <div>
+                    <a href="index.html">目录</a>
+                </div>
+                
+                 <div class="ctrl">
+                    上一页:
+                                        <a href="Rong.View.Wudimei.Foreach.html"> Foreach</a>
+                    
+                    &nbsp;
+                    <a href="index.html">目录</a>
+                    &nbsp;
+                    下一页 :
+                                        <a href="Rong.View.Wudimei.String.html">字符串</a>
+                                    </div> 
+                <h3>数组</h3>
+                引用数组下标的方法是：$array.index[.index2[.index3][...]]<br>下标由“.”和索引名称组成。<br>“{if $array|empty == true} {/if}”判断数组是否为空.<br>{$array|count} 取得数组的元素个数<br><br>Filename: /test/tpl_wudimei/array.php<div class="code"  ><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">/**<br />&nbsp;*&nbsp;file&nbsp;encoding&nbsp;utf-8<br />&nbsp;*&nbsp;文件字符编码utf-8<br />&nbsp;*/<br /></span><span style="color: #0000BB">$PathToRongFramework&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">dirname</span><span style="color: #007700">(</span><span style="color: #0000BB">__FILE__</span><span style="color: #007700">).</span><span style="color: #DD0000">"/../../lib"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">set_include_path</span><span style="color: #007700">(&nbsp;&nbsp;</span><span style="color: #DD0000">"."&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">PATH_SEPARATOR&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$PathToRongFramework&nbsp;</span><span style="color: #007700">.&nbsp;&nbsp;</span><span style="color: #0000BB">PATH_SEPARATOR&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">get_include_path</span><span style="color: #007700">()&nbsp;);<br /><br /><br />require_once&nbsp;</span><span style="color: #DD0000">'Rong/View/Wudimei.php'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$wudimei&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">Rong_View_Wudimei</span><span style="color: #007700">();<br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">compileDir&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">dirname</span><span style="color: #007700">(</span><span style="color: #0000BB">__FILE__</span><span style="color: #007700">)&nbsp;.&nbsp;</span><span style="color: #DD0000">"/templates/compiled"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">viewsDirectory&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">dirname</span><span style="color: #007700">(</span><span style="color: #0000BB">__FILE__</span><span style="color: #007700">)&nbsp;.&nbsp;&nbsp;</span><span style="color: #DD0000">"/templates"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">leftDelimiter&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"{"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">rightDelimiter&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"}"</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">//assing&nbsp;var&nbsp;msg&nbsp;to&nbsp;template<br /></span><span style="color: #0000BB">$member&nbsp;</span><span style="color: #007700">=&nbsp;array(<br />&nbsp;&nbsp;</span><span style="color: #DD0000">"username"&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">"Yang&nbsp;Qing-rong"</span><span style="color: #007700">,<br />&nbsp;&nbsp;</span><span style="color: #DD0000">"id"&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">"2"</span><span style="color: #007700">,<br />&nbsp;&nbsp;</span><span style="color: #DD0000">"birthday"&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">"1985-04-23"<br /></span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">assign</span><span style="color: #007700">(</span><span style="color: #DD0000">"member"</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$member</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">$fruits&nbsp;</span><span style="color: #007700">=&nbsp;array(<br />&nbsp;&nbsp;array(&nbsp;</span><span style="color: #DD0000">"id"</span><span style="color: #007700">=&gt;</span><span style="color: #0000BB">1</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"name"&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">"orange"&nbsp;</span><span style="color: #007700">),<br />&nbsp;&nbsp;array(&nbsp;</span><span style="color: #DD0000">"id"</span><span style="color: #007700">=&gt;</span><span style="color: #0000BB">2</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"name"&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">"banana"&nbsp;</span><span style="color: #007700">),<br />&nbsp;&nbsp;array(&nbsp;</span><span style="color: #DD0000">"id"</span><span style="color: #007700">=&gt;</span><span style="color: #0000BB">3</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"name"&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">"apple"&nbsp;</span><span style="color: #007700">),<br />&nbsp;&nbsp;array(&nbsp;</span><span style="color: #DD0000">"id"</span><span style="color: #007700">=&gt;</span><span style="color: #0000BB">4</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"name"&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">"pear"&nbsp;</span><span style="color: #007700">)<br />);<br /><br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">assign</span><span style="color: #007700">(</span><span style="color: #DD0000">"fruits"&nbsp;</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$fruits</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">$ArrayReturned&nbsp;</span><span style="color: #007700">=&nbsp;array(&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">"Data"&nbsp;</span><span style="color: #007700">=&gt;&nbsp;array(&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;array(&nbsp;</span><span style="color: #DD0000">"id"&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"name"&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">"Yang&nbsp;Qing-rong"</span><span style="color: #007700">)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);&nbsp;&nbsp;&nbsp;&nbsp;<br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">assign</span><span style="color: #007700">(</span><span style="color: #DD0000">"ArrayReturned"</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$ArrayReturned&nbsp;</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">assign</span><span style="color: #007700">(</span><span style="color: #DD0000">"emptyArray"</span><span style="color: #007700">,&nbsp;array()&nbsp;);<br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">display</span><span style="color: #007700">(</span><span style="color: #DD0000">"hello/array.html"</span><span style="color: #007700">);<br /><br /></span></span></code></div><br><br>Filename: /test/tpl_wudimei/templates/hello/array.html<div class="code"  ><pre>&lt;<span class='tagName'>html</span>&gt;
+	&lt;<span class='tagName'>head</span>&gt;
+		&lt;<span class='tagName'>title</span>&gt;array sample&lt;<span class='tagName'>/title</span>&gt;
+	&lt;<span class='tagName'>/head</span>&gt;
+	&lt;<span class='tagName'>body</span>&gt;
+		
+		&lt;<span class='tagName'>h3</span>&gt;member information&lt;<span class='tagName'>/h3</span>&gt;
+		id: {<span class='WudimeiTagName'>$member.id</span>} &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+		username: {<span class='WudimeiTagName'>$member.username</span>} &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+		birthday: {<span class='WudimeiTagName'>$member.birthday</span>} &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+		
+		&lt;<span class='tagName'>h3</span>&gt;fruits&lt;<span class='tagName'>/h3</span>&gt;
+		id1: {<span class='WudimeiTagName'>$fruits.0.id</span>} &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+		name1:{<span class='WudimeiTagName'>$fruits.0.name</span>} &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+		id2: {<span class='WudimeiTagName'>$fruits.1.id</span>} &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+		name2:{<span class='WudimeiTagName'>$fruits.1.name</span>} &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+		id3: {<span class='WudimeiTagName'>$fruits.2.id</span>} &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+		name3:{<span class='WudimeiTagName'>$fruits.2.name</span>} &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+		id4: {<span class='WudimeiTagName'>$fruits.3.id</span>} &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+		name4:{<span class='WudimeiTagName'>$fruits.3.name</span>} &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+		
+		&lt;<span class='tagName'>h3</span>&gt;array returned&lt;<span class='tagName'>/h3</span>&gt;
+		name: {<span class='WudimeiTagName'>$ArrayReturned.Data.0.name</span>}
+		
+		&lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+		{<span class='WudimeiTagName'>if</span> <span class='WudimeiTagAttribute'>$emptyArray|empty </span>=<span class='WudimeiTagValue'>=</span> <span class='WudimeiTagAttribute'>true</span>}
+			$emptyArray is an empty array &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+		{<span class='WudimeiTagName'>/if</span>}
+	&lt;<span class='tagName'>/body</span>&gt;
+&lt;<span class='tagName'>/html</span>&gt;</pre></div><br><br>输出：<br>URL: /test/tpl_wudimei/array.php<div class="code"  ><pre>&lt;<span class='tagName'>html</span>&gt;
+	&lt;<span class='tagName'>head</span>&gt;
+		&lt;<span class='tagName'>title</span>&gt;array sample&lt;<span class='tagName'>/title</span>&gt;
+	&lt;<span class='tagName'>/head</span>&gt;
+	&lt;<span class='tagName'>body</span>&gt;
+		
+		&lt;<span class='tagName'>h3</span>&gt;member information&lt;<span class='tagName'>/h3</span>&gt;
+		id: 2 &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+		username: Yang Qing-rong &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+		birthday: 1985-04-23 &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+		
+		&lt;<span class='tagName'>h3</span>&gt;fruits&lt;<span class='tagName'>/h3</span>&gt;
+		id1: 1 &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+		name1:orange &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+		id2: 2 &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+		name2:banana &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+		id3: 3 &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+		name3:apple &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+		id4: 4 &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+		name4:pear &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+		
+		&lt;<span class='tagName'>h3</span>&gt;array returned&lt;<span class='tagName'>/h3</span>&gt;
+		name: Yang Qing-rong		
+		&lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+					$emptyArray is an empty array &lt;<span class='tagName'>br</span> <span class='tagAttribute'>/</span>>
+			&lt;<span class='tagName'>/body</span>&gt;
+&lt;<span class='tagName'>/html</span>&gt;</pre></div><br><br>
+
+
+
+
+
+
+                <div class="ctrl">
+                    上一页:
+                                        <a href="Rong.View.Wudimei.Foreach.html"> Foreach</a>
+                    
+                    &nbsp;
+                    <a href="index.html">目录</a>
+                    &nbsp;
+                    下一页 :
+                                        <a href="Rong.View.Wudimei.String.html">字符串</a>
+                                    </div> 
+            </div>
+            <div class="bottom">
+ 要获取最新的Rong Framework,请访问<a href="http://rong.wudimei.com" target="_balnk">http://rong.wudimei.com</a></div>  
+        </div>
+    </body>
+</html>

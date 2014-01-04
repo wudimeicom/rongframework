@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>initialize Wudimei Template Engine</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <link href="style.css" rel="stylesheet" type="text/css" />        <meta name="keywords" content="initialize Wudimei Template Engine,Rong Framework" />
+        <meta name="description" content="initialize Wudimei Template Engine,Rong Framework" />
+    </head>
+    <body>
+        <div class="Page">
+            <div class="top">
+    <div class="rf">Rong Framework</div>
+</div>            <div class="content"> 
+                <div>
+                    <a href="index.html">Table Of Contents</a>
+                </div>
+                
+                 <div class="ctrl">
+                    Prev Page:
+                                        <a href="Rong.View.Wudimei.fetch.html"> fetch() template rendered html result</a>
+                    
+                    &nbsp;
+                    <a href="index.html">Table Of Contents</a>
+                    &nbsp;
+                    Next Page :
+                                        <a href="Rong.View.Wudimei.if_else_elseif.html">if/else/elseif statement</a>
+                                    </div> 
+                <h3>initialize Wudimei Template Engine</h3>
+                <p>Now,let us create a php file,<br>
+The path of this file is "/test/template_wudimei.php"<br>
+First of all,we need require the class of Wudimei template engine and create an instance for it.</p>
+
+<p><div class="code"  ><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">require_once&nbsp;</span><span style="color: #DD0000">'Rong/View/Wudimei.php'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$wudimei&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">Rong_View_Wudimei</span><span style="color: #007700">();</span></span></code></div><br>
+second,we set the path where does the compiled templates located.</p><p>
+<div class="code"  ><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">viewsDirectory&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">dirname</span><span style="color: #007700">(</span><span style="color: #0000BB">__FILE__</span><span style="color: #007700">)&nbsp;.&nbsp;&nbsp;</span><span style="color: #DD0000">"/template_wudimei"</span><span style="color: #007700">;</span></span></code></div><br>
+let us set path of templates we make.<br><div class="code"  ><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">viewsDirectory&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">dirname</span><span style="color: #007700">(</span><span style="color: #0000BB">__FILE__</span><span style="color: #007700">)&nbsp;.&nbsp;&nbsp;</span><span style="color: #DD0000">"/template_wudimei"</span><span style="color: #007700">;</span></span></code></div><br><br>
+we have to tell Wudimei Engine what is the delimiters.let wudimei compile templates correctly.<br><br>
+<div class="code"  ><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">leftDelimiter&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"{"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">rightDelimiter&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"}"</span><span style="color: #007700">;</span></span></code></div><br>
+Ok,our template engine has been initialized!</p>
+
+<p>now,we will test the wudimei engine if it work or not.we assign a variable call "$msg" with the value"Hello,World".and display it with template "/test/template_wudimei/hello/index.html"<br>
+<div class="code"  ><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">//assing&nbsp;var&nbsp;msg&nbsp;to&nbsp;template<br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">assign</span><span style="color: #007700">(</span><span style="color: #DD0000">"msg"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"Hello,World!"</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">display</span><span style="color: #007700">(</span><span style="color: #DD0000">"hello/index.html"</span><span style="color: #007700">);</span></span></code></div><br>
+and the we create a template mentioned above"/test/template_wudimei/hello/index.html"</p>
+
+<p><div class="code"  ><pre>&lt;<span class='HTMLComment'>!DOCTYPE html</span>&gt;
+&lt;<span class='tagName'>html</span>&gt;
+    &lt;<span class='tagName'>head</span>&gt;
+        &lt;<span class='tagName'>title</span>&gt;&lt;<span class='tagName'>/title</span>&gt;
+        &lt;<span class='tagName'>meta</span> <span class='tagAttribute'>http-equiv</span>=<span class='tagValue'>"Content-Type"</span> <span class='tagAttribute'>content</span>=<span class='tagValue'>"text/html; charset=UTF-8"</span>>
+    &lt;<span class='tagName'>/head</span>&gt;
+    &lt;<span class='tagName'>body</span>&gt;
+        &lt;<span class='tagName'>div</span>&gt;{<span class='WudimeiTagName'>$msg</span>}&lt;<span class='tagName'>/div</span>&gt;
+    &lt;<span class='tagName'>/body</span>&gt;
+&lt;<span class='tagName'>/html</span>&gt;</pre></div><br>
+do you see the variable "{$msg}"?it equals the code :&lt;?php echo $this-&gt;data["msg"]; ?&gt;.</p>
+
+<p>ok,let us visit the url:/test/template_wudimei.php,you will see "Hello,World!"</p>
+
+<p>the source code :<br>
+filename:/test/template_wudimei.php<br>
+</p>
+
+<p>&nbsp;<div class="code"  ><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">/**<br />&nbsp;*&nbsp;file&nbsp;encoding&nbsp;utf-8<br />&nbsp;*&nbsp;文件字符编码utf-8<br />&nbsp;*/<br /></span><span style="color: #0000BB">$PathToRongFramework&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">dirname</span><span style="color: #007700">(</span><span style="color: #0000BB">__FILE__</span><span style="color: #007700">).</span><span style="color: #DD0000">"/../../lib"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">set_include_path</span><span style="color: #007700">(&nbsp;&nbsp;</span><span style="color: #DD0000">"."&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">PATH_SEPARATOR&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$PathToRongFramework&nbsp;</span><span style="color: #007700">.&nbsp;&nbsp;</span><span style="color: #0000BB">PATH_SEPARATOR&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">get_include_path</span><span style="color: #007700">()&nbsp;);<br /><br /><br />require_once&nbsp;</span><span style="color: #DD0000">'Rong/View/Wudimei.php'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$wudimei&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">Rong_View_Wudimei</span><span style="color: #007700">();<br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">compileDir&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">dirname</span><span style="color: #007700">(</span><span style="color: #0000BB">__FILE__</span><span style="color: #007700">)&nbsp;.&nbsp;</span><span style="color: #DD0000">"/template_wudimei/compiled"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">viewsDirectory&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">dirname</span><span style="color: #007700">(</span><span style="color: #0000BB">__FILE__</span><span style="color: #007700">)&nbsp;.&nbsp;&nbsp;</span><span style="color: #DD0000">"/template_wudimei"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">leftDelimiter&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"{"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">rightDelimiter&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"}"</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">//assing&nbsp;var&nbsp;msg&nbsp;to&nbsp;template<br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">assign</span><span style="color: #007700">(</span><span style="color: #DD0000">"msg"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"Hello,World!"</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">$wudimei</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">display</span><span style="color: #007700">(</span><span style="color: #DD0000">"hello/index.html"</span><span style="color: #007700">);</span></span></code></div></p>
+
+
+
+
+
+
+
+
+
+                <div class="ctrl">
+                    Prev Page:
+                                        <a href="Rong.View.Wudimei.fetch.html"> fetch() template rendered html result</a>
+                    
+                    &nbsp;
+                    <a href="index.html">Table Of Contents</a>
+                    &nbsp;
+                    Next Page :
+                                        <a href="Rong.View.Wudimei.if_else_elseif.html">if/else/elseif statement</a>
+                                    </div> 
+            </div>
+            <div class="bottom">
+ To get the last version of Rong Framework.please vist <a href="http://rong.wudimei.com" target="_balnk">http://rong.wudimei.com</a></div>  
+        </div>
+    </body>
+</html>
