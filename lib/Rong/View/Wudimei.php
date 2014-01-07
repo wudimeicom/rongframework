@@ -108,12 +108,12 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
         	if( strpos($tag, " ") !== false )
 			{
         		$tagName = substr( $tag, 0,strpos($tag, " "));
-				
-				if( function_exists("wudimei_tag_".$tagName) )
+				$functionName = "wudimei_tag_".$tagName;
+				if( function_exists( $functionName ) )
 				{
-					
-					$code = call_user_func_array( "wudimei_tag_".$tagName, array(substr( $tag,  strpos($tag, " "))) ) ;
-					
+					$attrs = substr( $tag,  strpos($tag, " "));
+			      	//$code = $functionName($this, $attrs  ) ;
+					$code = call_user_func_array( $functionName, array( $attrs ));
 				}
 			}
 			elseif( substr( $tag, 0,1) == "/")
@@ -123,7 +123,8 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
 				$functionName = "wudimei_tag_" . $tagName . "_end";
 				if( function_exists( $functionName))
 				{
-					$code = call_user_func($functionName);
+					//$code =  $functionName ( $this);
+					$code = call_user_func_array( $functionName, array(  ));
 				}
 			}
 			else{
@@ -190,7 +191,7 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
 		$var = $attrs["var"];
         $value = self::compileExpression($attrs["value"]);
         
-        return ' $this->data[' . trim($var, '$') . '] = ' . $value . ';';
+        return ' $this->data["' . trim($var, '$') . '"] = ' . $value . ';';
     }
 
     public static function compileForeach($expression)
@@ -351,8 +352,7 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
     {
 
         $codeText = trim($codeText);
-        //$codeText = str_replace("=", " = ", $codeText);
-        // $codeTextArray = preg_split("/[\s\t\n\r]+/i", $codeText);
+        
         $codeTextArray = self::codeToArray($codeText);
         // print_r( $codeTextArray );
         $attrs = array();

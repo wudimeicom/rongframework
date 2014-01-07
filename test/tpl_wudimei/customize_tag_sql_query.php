@@ -20,36 +20,43 @@ $wudimei->leftDelimiter = "{";
 $wudimei->rightDelimiter = "}";
 $wudimei->forceCompile = true;
 
+function execute_query( $sql )
+{
+	$sql = str_replace("[TablePrefix]", "w_", $sql );
+	$conn = mysql_connect("localhost","root","123456");
+	mysql_select_db("rong_db");
+	$rows = array();
+	$query = mysql_query($sql);
+	while ($row = mysql_fetch_assoc( $query)) {
+		$rows[] = $row;
+	}
+	return $rows;
+}
 
-function  wudimei_tag_loop( $strAttributes)
+function  wudimei_tag_query( $strAttributes)
 {
 	$attrs = array();
-    $attrs = Rong_View_Wudimei::getAttributesArrayFromText($strAttributes, "from,item");
-    $from = Rong_View_Wudimei::compileExpression($attrs["from"]);
+    $attrs = Rong_View_Wudimei::getAttributesArrayFromText($strAttributes, "sql,item");
+    $sql = Rong_View_Wudimei::compileExpression($attrs["sql"]);
     $item = Rong_View_Wudimei::compileExpression($attrs["item"]);  
-	$from = trim( $from,'@ ');  
+	
 	$item = trim( $item,'@ ');
-
 	
 	
-    return ' foreach( ' . $from . ' as ' .   $item  . ' ){';
-	 
+	$code = '$this->data["query"]=execute_query(' . $sql . ');';
+	$from = '$this->data["query"]';
+    $code .= ' foreach( ' . $from . ' as ' .   $item  . ' ){';
+	return $code; 
 }
 
 
 
-function wudimei_tag_loop_end( ){
+function wudimei_tag_query_end( ){
 	return '}';
 }
 
 
-$goods = array(
- array("id"=>1,"name"=>"apple"),
- array("id"=>2,"name"=>"banana"),
- array("id"=>3,"name"=>"pear"),
- array("id"=>4,"name"=>"book"),
-); 
-$wudimei->assign("goods", $goods );
+
  
-$wudimei->display("hello/customize_tag.html");
+$wudimei->display("hello/customize_tag_sql_query.html");
 

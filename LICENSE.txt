@@ -10,11 +10,14 @@ Rong framework是由杨庆荣开发的一款开源免费php框架。
  1.用户可以终身免费使用Rong Framework。可用于商业用途。
 用户义务：
  1.用户必须保留Rong Framework的LICENSE.txt以及Rong Framework的任何版权声明。否则wudimei.com有权追究用户的赔偿义务。
- 2.用户使用Rong Framework开发网站时需要申请著作权的，不得把Rong Framework框架程序(即名称为Rong的文件夹)包含在内。
-
-wudimei.com权利
- 1. wudimei.com对Rong Framework拥有所有著作权。
- 
+ 2.用户使用Rong Framework开发网站时需要申请著作权的，不得把Rong Framework框架程序(即名称为Rong的文件夹里面的所有代码)包含在内。
+  
 wudimei.com义务
  1. 由于用户合法、正确使用Rong Framework并且由rong framework软件本身而造成的系统崩溃并且网站严重瘫痪的损失，wudimei.com最多并且一次性赔偿5元人民币损失费。
  2. 由于骇客利用网站漏洞使用Rong Framework进行破坏的，用户的损失由骇客承担。wudimei.com无须承担任何责任。
+ 
+wudimei.com权力
+ 1. Rong Framework出现错误、bug,并且经过用户报告后，wudimei.com有权选择是否修改此bug。
+ 2. 用户提交的任何改进建议，wudimei.com有权选择是否采纳。
+ 3. 由于是免费产品，wudimei.com不提供任何保修服务。
+ 4. wudimei.com对Rong Framework拥有所有著作权。

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>customize tag</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body>
+    	 
+    	<h3>new articles</h3>
+    	
+    	{query sql="select * from  w_article order by id desc limit 0,10" item=$item}
+    	  {$item.id} {$item.title} {$item.add_time} <br />   
+    	{/query}  
+    	
+    	<h3>view articles</h3>
+		{query sql="select * from  [TablePrefix]article order by id asc limit 0,10" item=$item}
+    	  {$item.id} {$item.title} {$item.add_time} <br />   
+    	{/query}
+
+	</body>
+</html>
