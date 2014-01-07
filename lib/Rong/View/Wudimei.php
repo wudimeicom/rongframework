@@ -104,10 +104,36 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
             $code = self::compileSet(substr($tag, 7));
         } else
         {
-            $code = 'echo ' . self::compileExpression($tag);
+        	
+        	if( strpos($tag, " ") !== false )
+			{
+        		$tagName = substr( $tag, 0,strpos($tag, " "));
+				
+				if( function_exists("wudimei_tag_".$tagName) )
+				{
+					
+					$code = call_user_func_array( "wudimei_tag_".$tagName, array(substr( $tag,  strpos($tag, " "))) ) ;
+					
+				}
+			}
+			elseif( substr( $tag, 0,1) == "/")
+			{
+				$tagName = substr( $tag,1);
+				
+				$functionName = "wudimei_tag_" . $tagName . "_end";
+				if( function_exists( $functionName))
+				{
+					$code = call_user_func($functionName);
+				}
+			}
+			else{
+            	$code = 'echo ' . self::compileExpression($tag);
+			}
         }
         if( trim( $code )  != "echo" )
         {
+        	
+			
             $code = '<?php ' . $code . ' ?>';
             return $code;
         }

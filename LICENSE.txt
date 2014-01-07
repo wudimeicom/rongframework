@@ -2,14 +2,17 @@ Copyright [Yang qing-rong] [shenzhen wudimei e-commerce firm of china]
 
 http://wudimei.com
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+无敌美免费软件许可证1.0
+请取得最新的许可文件：http://wudimei.com/app/software_center/license.php?type=free&version=1.0
+Rong framework是由杨庆荣开发的一款开源免费php框架。
 
-    http://www.apache.org/licenses/LICENSE-2.0
+用户权利：
+ 1.用户可以终身免费使用Rong Framework。可用于商业用途。
+用户义务：
+ 1.用户必须保留Rong Framework的LICENSE.txt以及Rong Framework的任何版权声明。
+ 2.用户使用Rong Framework开发网站时需要申请著作权的，不得把Rong Framework框架程序(即名称为Rong的文件夹)包含在内。
 
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
+wudimei.com权利
+ 1. wudimei.com对Rong Framework拥有所有著作权。
+wudimei.com义务
+ 1. 由于用户使用Rong Framework造成的系统崩溃、网站出错等损失，wudimei.com最多一次性赔偿5元人民币损失费。
