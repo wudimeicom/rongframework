@@ -20,3 +20,4 @@ bug report(±¨¸æ´íÎó): yaqy at qq dot com
 /application/models/TaskModel.php
 /application/views/task
 /application/views/test
+/application
