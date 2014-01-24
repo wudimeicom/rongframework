@@ -1,3 +1,4 @@
+
 2014-01-04 修改了wudimei模板引擎的系统变量{$wudimei.session.username}引用的问题。添加了{php}{/php}模板标签。
 		   添加了调用函数的标签{call function="display_product" qty=1+$cart.0.id name=$cart.0.name return=$prdHtml}{$prdHtml} <br />
 2014-01-02 修改了 wudime模板引擎fetch里$rong_view_data的错误 

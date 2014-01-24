@@ -49,15 +49,20 @@ abstract class Rong_View_Abstract extends Rong_Object
 	 
 	
  	public static function assign( $key , $value )
-        {
+    {
              self::set( $key, $value );
-        }
+    }
         
-        public static function set( $key , $value )
-        {
-            self::$varArray[$key] = $value;	
-        }
+    public static function set( $key , $value )
+    {
+        self::$varArray[$key] = $value;	
+		
+    }
     
+	public function setVar( $key,$value )
+	{
+		$this->data[$key] = $value;
+	}
 
 	public function tag( $tag )
 	{

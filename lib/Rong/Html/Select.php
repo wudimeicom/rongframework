@@ -35,12 +35,21 @@ class Rong_Html_Select extends Rong_Html_Abstract {
     {
         $this->selectedValue = $selectedValue;
     }
-    
+    /**
+	 * 
+	 * @mix $selectedValue array
+	 */
     public function getOptions($row, $selectedValue) {
         $html = '';
+		$selectedArray = $selectedValue;
+		if( is_string( $selectedValue ) )
+		{
+			$selectedArray = explode("," , $selectedValue );
+		}
+		
         foreach ($row as $value => $text) {
             $html .= "<option value=\"{$value}\" ";
-            if ($value == $selectedValue) {
+            if (in_array( $value, $selectedArray) == true) {
                 $html .= " selected=\"selected\" ";
             }
             $html .= ">" . $text . "</option>";

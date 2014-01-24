@@ -8,12 +8,12 @@
     	 
     	<h3>new articles</h3>
     	
-    	<?php $this->data["query"]=execute_query("select * from  w_article order by id desc limit 0,10"); foreach( $this->data["query"] as $this->data['item'] ){ ?>
+    	<?php $this->data["queryResult"]=execute_query("select * from  w_article order by id desc limit 0,10"); foreach( $this->data["queryResult"] as $this->data['item'] ){ ?>
     	  <?php echo wudimei_toString( @$this->data['item']['id']); ?> <?php echo wudimei_toString( @$this->data['item']['title']); ?> <?php echo wudimei_toString( @$this->data['item']['add_time']); ?> <br />   
     	<?php } ?>  
     	
     	<h3>view articles</h3>
-		<?php $this->data["query"]=execute_query("select * from  [TablePrefix]article order by id asc limit 0,10"); foreach( $this->data["query"] as $this->data['item'] ){ ?>
+		<?php $this->data["queryResult"]=execute_query("select * from  [TablePrefix]article order by id asc limit 0,10"); foreach( $this->data["queryResult"] as $this->data['item'] ){ ?>
     	  <?php echo wudimei_toString( @$this->data['item']['id']); ?> <?php echo wudimei_toString( @$this->data['item']['title']); ?> <?php echo wudimei_toString( @$this->data['item']['add_time']); ?> <br />   
     	<?php } ?>
 

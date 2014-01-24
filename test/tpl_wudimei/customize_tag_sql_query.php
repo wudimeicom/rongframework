@@ -8,9 +8,6 @@ $PathToRongFramework = dirname(__FILE__)."/../../lib";
 
 set_include_path(  "." . PATH_SEPARATOR . $PathToRongFramework .  PATH_SEPARATOR . get_include_path() );
 
-ini_set("display_errors",1);
-error_reporting(E_ALL|E_NOTICE|E_WARNING|E_COMPILE_ERROR|E_DEPRECATED|E_STRICT);
-
 require_once 'Rong/View/Wudimei.php';
 $wudimei = new Rong_View_Wudimei();
 $wudimei->compileDir = dirname(__FILE__) . "/templates/compiled";
@@ -43,8 +40,8 @@ function  wudimei_tag_query( $strAttributes)
 	$item = trim( $item,'@ ');
 	
 	
-	$code = '$this->data["query"]=execute_query(' . $sql . ');';
-	$from = '$this->data["query"]';
+	$code = '$this->data["queryResult"]=execute_query(' . $sql . ');';
+	$from = '$this->data["queryResult"]';
     $code .= ' foreach( ' . $from . ' as ' .   $item  . ' ){';
 	return $code; 
 }

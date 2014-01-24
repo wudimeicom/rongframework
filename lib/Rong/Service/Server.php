@@ -112,7 +112,7 @@ class Rong_Service_Server{
         }
 		if( isset( $this->functions[ $function ]) == false )
 		{
-			$msg .= "008,function $function does not exists in functions list.";
+			$msg .= "008,function or method '$function(...)' does not exists in functions list.";
 		}
 		
 		if( $return == null )

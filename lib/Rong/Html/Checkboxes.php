@@ -7,7 +7,8 @@ class Rong_Html_Checkboxes extends Rong_Html_Abstract {
 
     public $options;
     public $checkedValues;
-
+	public $separator="";
+	
     public function __construct() {
         parent::__construct();
     }
@@ -19,6 +20,11 @@ class Rong_Html_Checkboxes extends Rong_Html_Abstract {
     public function setCheckedValues($checkedValues) {
         $this->checkedValues = $checkedValues;
     }
+	
+	public function setSeparator($separator)
+	{
+		$this->separator = $separator;
+	}
 
     public function toHtml() {
         $html = "";
@@ -38,7 +44,7 @@ class Rong_Html_Checkboxes extends Rong_Html_Abstract {
            else{
                $this->remove("checked");
            }
-            $html .= "<input ". $this->attributesToHtml() . " />"  . $text . "  ";
+            $html .= "<input ". $this->attributesToHtml() . " />"  . $text . "  " .$this->separator;
         }
         return $html;
     }

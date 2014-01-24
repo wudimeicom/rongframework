@@ -2,6 +2,7 @@
 
 require_once 'Rong/View/Interface.php';
 require_once 'Rong/View/Abstract.php';
+require_once 'Rong/View/Wudimei/html.php';
 
 class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interface
 {
@@ -423,6 +424,14 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
         return true;
     }
 
+	/**
+	 * "abc\"efg"  to abc"efg
+	 */
+	public static function evalString( $str )
+	{
+		eval( '$str=' . $str . ';');
+		return $str;
+	}
     /*
      * $var.age or $var or $var.0->nu
      */

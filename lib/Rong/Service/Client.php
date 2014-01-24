@@ -13,7 +13,7 @@ class Rong_Service_Client{
     public $password;
 	public $postArray;
 	public $class;
-	
+	public $content;//content returned
 	public $server_message;
     public function __construct( $server_url ) {
         $this->server_url = $server_url;
@@ -31,7 +31,7 @@ class Rong_Service_Client{
 	}
 	
 	/**
-	 * @param array $arguments array(param1,param2,param3,...)
+	 * @param array $arguments array($arg1,$arg2,$arg3,...)
 	 */
     public function request( $function ,$arguments  ){
        
@@ -64,7 +64,7 @@ class Rong_Service_Client{
 		}
 		//print_r( $postArray );
         $response = $httpClient->request($this->server_url, "POST", $postArray);
-        $content = $httpClient->getContent();
+        $this->content = $content = $httpClient->getContent();
         if( isset( $GLOBALS["debug"]))
         {
             echo "<br />----{Rong_Service_Client \$content}---------start<br />";
