@@ -25,7 +25,7 @@ class A{
 	}
 	
 	public function test(){
-		$this->logger->error("line 25 cause error!");
+		$this->logger->error("cause error!");
 		
 		$this->logger->warn("test warn");
 		$this->logger->fatal("fatal");
