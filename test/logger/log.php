@@ -9,12 +9,11 @@ set_include_path(  "." . PATH_SEPARATOR . $PathToRongFramework .  PATH_SEPARATOR
 
 
 require_once "Rong/Logger.php";
-
 $config = array( 
   "log_file_path" => "d:/test.log",
   "logging_enable" => true ,
+  "logging_types" => "WARN,INFO,DEBUG,ERROR,FATAL"
 );
-
 Rong_Logger::setConfig($config);
 
 

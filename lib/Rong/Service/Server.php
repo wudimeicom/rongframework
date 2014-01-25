@@ -1,12 +1,18 @@
 <?php
 require_once 'Rong/Crypto/SwapBit.php';
 require_once 'Rong/Controller/Request.php';
+require_once "Rong/Logger.php";
 
 class Rong_Service_Server{
     
     public $functions;
     public $classes;
     public $password;
+	public $logger;
+	
+	public function __construct(){
+		$this->logger =  Rong_Logger::getLogger();
+	}
     /**
      * 
      * @param string $functon_name
@@ -55,6 +61,7 @@ class Rong_Service_Server{
 		if( empty( $request) )
 		{
 			$msg .= "007,request empty,please remove magic_quotes on the server side.";
+			$this->logger->error("request is empty!may be wrong password or cause by magic_quotes");
 		} 
 		 
         $function =  $request["function"];

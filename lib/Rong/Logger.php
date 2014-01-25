@@ -2,9 +2,11 @@
 class Rong_Logger{
 	
 	/**
+	 * 
 	  array(
 	   "log_file_path" => "d:/test.log",
 	   "logging_enable" => true, 
+	   "logging_types" => "ERROR,WARN,INFO,DEBUG,FATAL"
 	  )
 	 */
 	private static $config;
@@ -46,6 +48,12 @@ class Rong_Logger{
 	
 	public function addLog( $type, $string )
 	{
+		$logging_types = self::$config["logging_types"];
+		if( strpos( $logging_types, $type) === false )
+		{
+			return false;
+		}
+		
 		$dbt = debug_backtrace();
 		
 		

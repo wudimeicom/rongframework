@@ -2,6 +2,7 @@
 require_once 'Rong/Object.php';
 require_once 'Rong/Net/HttpClient.php';
 require_once 'Rong/Crypto/SwapBit.php';
+require_once "Rong/Logger.php";
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -15,8 +16,10 @@ class Rong_Service_Client{
 	public $class;
 	public $content;//content returned
 	public $server_message;
+	public $logger;
     public function __construct( $server_url ) {
         $this->server_url = $server_url;
+		$this->logger =  Rong_Logger::getLogger();
     }
     
 	
@@ -75,7 +78,11 @@ class Rong_Service_Client{
             $content = $swapBit->decrypt( $content , $this->password );
         }
         $returnArr = json_decode( $content , true );
-       	//print_r( $returnArr );
+       	// print_r( $returnArr );
+		if( !is_array( $returnArr ) )
+		{
+			$this->logger->error("can not decode the content,may be password incorrect");
+		}
        	$this->server_message = $returnArr["msg"];
         return $returnArr["return"];
     }
