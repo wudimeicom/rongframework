@@ -1,3 +1,5 @@
+2014-01-25 添加了类Rong_Logger /test/log/log.php
+2014-01-24 添加了  {HtmlRadios} {HtmlCheckboxes}
 2014-01-22 在模板引擎中可以这样设置变量{php} $this->setVar("login_url", $url->login() ); {/php}
 2014-01-15 添加了模板引擎：{HtmlSelect from=$goods selectedValue="2" id="goods1"  name="goods" class="blueSelect"}
 2013-12-15 wudimei template engine support var parameters. eg : {$msg|substr:0:$len}

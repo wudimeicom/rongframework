@@ -4,8 +4,7 @@ please choose fruits: <br />
 	$checkboxes = new Rong_Html_Checkboxes();
 	$checkboxes->setOptions($this->data['goods']);
 	$checkboxes->setCheckedValues("1,3,4");
-	$checkboxes->setSeparator("<br />");$checkboxes->set("checkedValues","1,3,4");
-$checkboxes->set("name","fruits[]");
+	$checkboxes->setSeparator("<br />");$checkboxes->set("name","fruits[]");
 echo $checkboxes->toHtml();   ?>
 
 
@@ -14,6 +13,5 @@ i like these frunits:<br />
 	$checkboxes = new Rong_Html_Checkboxes();
 	$checkboxes->setOptions($this->data['goods']);
 	$checkboxes->setCheckedValues($this->data['checkedValueArray']);
-	$checkboxes->setSeparator("<br />");$checkboxes->set("checkedValues", @$this->data['checkedValueArray']);
-$checkboxes->set("name","my_fruits[]");
+	$checkboxes->setSeparator("<br />");$checkboxes->set("name","my_fruits[]");
 echo $checkboxes->toHtml();   ?>
