@@ -1,3 +1,5 @@
+2014-03-21 Rong_View_Wudimei引擎可以添加字符串常量索引了。<?php $arr["lucy"]["home.number"] 可以表示为 {$arr.lucy."home.number"}
+   添加了方法：Rong_View_Wudimei::segmentWithConstStringSupport($tag2, array(".") );
 2014-01-25 添加了类Rong_Logger /test/log/log.php
 2014-01-24 添加了  {HtmlRadios} {HtmlCheckboxes}
 2014-01-22 在模板引擎中可以这样设置变量{php} $this->setVar("login_url", $url->login() ); {/php}

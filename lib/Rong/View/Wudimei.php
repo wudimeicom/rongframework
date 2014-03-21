@@ -451,11 +451,11 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
         {
             return $tag;
         }
-
-        
-        preg_match_all("/([a-zA-Z0-9\_\.\\$\->]+)/i", $tag, $matches);
+		
+        //$var."number.home" | $abc.efg 
+        preg_match_all("/([a-zA-Z0-9\$\_]+(\.\"[^\"]*\")+)|([a-zA-Z0-9\_\.\\$\->]+)/i", $tag, $matches);
         // echo $tag; echo "<br />";
-        //print_r( $matches );
+         // print_r( $matches );
         $varName = $matches[0][0];
         preg_match_all("/[\|]\s*([a-z0-9\_]+)(\s*[\:]\s*(([\$a-zA-Z0-9\.\_\->]+)|(\"[^\"]*\")|(\'([^\']*)\')))*/i", $tag, $modifier_matches);
         //  print_r( $modifier_matches );
@@ -486,13 +486,18 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
                 }
             }
         }
-
+		
+		//echo $tag;
         //print_r( $functions );
         if (strpos($tag, ".") !== false)
         {
+        	//echo "--- " . $tag ." ---";
+			
             $tag2 = substr($tag, 1);
-            $arr = explode(".", $tag2);
-
+			//echo $tag2;
+            //$arr = explode(".", $tag2);
+			$arr = Rong_View_Wudimei::segmentWithConstStringSupport($tag2, array(".") );
+            // print_r( $arr );
             $code = " @\$this->data['" . trim($arr[0]) . "']";
 
             if (preg_match("/\\$([a-zA-Z0-9\_]+)/i", $arr[0]))
@@ -506,7 +511,13 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
                     $code .= "[" . trim(self::compileExpression($arr[$i])) . "]";
                 } else
                 {
-                    $code .= "['" . trim($arr[$i]) . "']";
+                	if( substr( trim($arr[$i]),0,1) == "\"")
+					{
+						$code .= "[" . trim($arr[$i]) . "]";
+					}
+					else{
+                    	$code .= "['" . trim($arr[$i]) . "']";
+					}
                 }
             }
             $code .= "";
@@ -534,7 +545,79 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
 		//echo $code;
         return $code;
     }
-
+	
+		 
+	public static function segmentWithConstStringSupport( $str ,$splitArr )
+	{
+		$len = strlen( $str );
+		$el = "";
+		$arr = array();
+		$inStr = false;
+		
+		for( $i=0;$i< $len;$i++ )
+		{
+			$ch = $str[$i];
+			$nextCh = isset($str[$i+1])?$str[$i+1]:"";
+			if( $inStr == false )
+			{
+				if( $ch == "\"")
+				{
+					$inStr = true;
+					//echo $el ."<br />";
+					if( trim($el)!="") $arr[]=$el;
+					$el = $ch;
+				}
+				else{
+					$found = false;
+					$str_found = "";
+					for( $j=0;$j<count( $splitArr);$j++ )
+					{
+						$chrs = $splitArr[$j];
+						if( substr( $str , $i,strlen( $chrs)) == $chrs )
+						{
+							//echo $el."<br />";
+							if( trim($el)!="") $arr[]=$el;
+							$el="";
+							$found =  true;
+							$str_found = $chrs;
+						}
+					}
+					if( $found == false )
+					{
+						$el .=$ch;
+					}
+					else{
+						$i+=strlen( $str_found)-1;
+					}
+				}
+				
+			}
+			elseif( $inStr == true ){
+				if( $ch == "\\")
+				{
+					if( $nextCh=="\"")
+					{
+						$el .= $ch.$nextCh;
+						$i++;
+					}
+				}
+				$el .=$ch;
+				if( $ch == "\"")
+				{
+					$inStr =false;
+					if( trim($el)!="") $arr[]=$el;
+					//echo $el . " <br />";
+					$el = "";
+				}
+				
+			}
+		}
+		if( trim( $el ) != "")
+		{
+			$arr[] = $el;
+		}
+		return $arr;
+	}
     /**
      * operation chars
      * Enter description here ...
@@ -551,13 +634,13 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
         }
         
         // $var.name   |  abc :efg
-        $modifier = "((\\$[a-zA-Z0-9\_]+((\->([a-zA-Z0-9\_]+))|(\.[\$]?[a-zA-Z0-9\_]+))*)|(\".*\")|('.*'))(\s*[\|]\s*[a-zA-Z0-9\_]+((\s*[\:]\s*((\$[a-z0-9A-Z\.\_\->]+)|(\"([^\"]*)\")|('([^']*)')|([0-9]+)|([a-zA-Z0-9\.\$\_]+)))*)*)*";
+        $modifier = "((\\$[a-zA-Z0-9\_]+((\->([a-zA-Z0-9\_]+))|(\.\"[a-zA-Z\s\.]*\")|(\.[\$]?[a-zA-Z0-9\_]+))*)|(\".*\")|('.*'))(\s*[\|]\s*[a-zA-Z0-9\_]+((\s*[\:]\s*((\$[a-z0-9A-Z\.\_\->]+)|(\"([^\"]*)\")|('([^']*)')|([0-9]+)|([a-zA-Z0-9\.\$\_]+)))*)*)*";
 
         preg_match_all('/' . $modifier . '|[0-9\.]+|\$[a-zA-Z0-9\_\.]+|[a-zA-Z0-9\_]+|===|!==|==|!=|\->|::|<=|>=|\*=|\+=|\/=|\-=|\%=|=|>|,|<|!|\(|\)|\.|\"[^\"]+\"|\'[^\']+\'|and|or|\&\&|\|\||%|\d+|\+|\-|\*|\/|gt|eq|lt/i', $expression, $matches);
         $expArr = $matches[0];
        
         //echo $expression;
-          // print_r( $matches );
+          //  print_r( $matches[0] );
          
         $newExp = "";
         for ($i = 0; $i < count($expArr); $i++)

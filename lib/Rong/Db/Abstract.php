@@ -31,7 +31,13 @@ abstract class Rong_DB_Abstract extends Rong_Object implements Rong_Db_Interface
 	
 	public function addQuotedIdentifier( $name )
 	{
-		return $this->leftQuotedIdentifier. $name . $this->rightQuotedIdentifier;
+		
+		if( strpos( $name , $this->leftQuotedIdentifier ) === false )
+		{
+			return $this->leftQuotedIdentifier. $name . $this->rightQuotedIdentifier;
+		}
+		
+		return  $name ;
 	}
 	
 	public function delete($table, $where) {
