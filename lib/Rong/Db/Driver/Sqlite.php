@@ -48,7 +48,15 @@ class Rong_Db_Driver_Sqlite extends Rong_DB_Abstract
 	public function query( $sql )
 	{
 		
-		return $this->result = sqlite_query ( $sql  , $this->conn , SQLITE_ASSOC );
+		 $this->result = sqlite_query ( $sql  , $this->conn , SQLITE_ASSOC );
+		 
+		 if (isset($GLOBALS["debug"])) {
+            echo "<div>" . $sql . "   --------";
+            echo "\n<br />error:" . $this->error();
+            echo "\n<br />insert id:" . $this->insertId();
+            echo "\n<br />affected rows:" . $this->affectedRows() . "</div>";
+        }
+		 return $this->result;
 	}
 	
 	public function fetchAll( $sql )
@@ -94,6 +102,19 @@ class Rong_Db_Driver_Sqlite extends Rong_DB_Abstract
 	public function numRows()
 	{
 		return sqlite_num_rows( $this->result  );
+	}
+	public function beginTransaction()
+	{
+		$this->query("begin transaction");
+	}
+	
+	public function commit()
+	{
+		$this->query("commit transaction");
+	}
+	
+	public function rollback(){
+		$this->query("rollback transaction");
 	}
 	
 	

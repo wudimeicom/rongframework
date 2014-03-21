@@ -61,7 +61,7 @@ class Rong_Service_Server{
 		if( empty( $request) )
 		{
 			$msg .= "007,request empty,please remove magic_quotes on the server side.";
-			$this->logger->error("request is empty!may be wrong password or cause by magic_quotes");
+			$this->logger->error("request is empty!may be wrong password");
 		} 
 		 
         $function =  $request["function"];

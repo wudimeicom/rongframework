@@ -28,12 +28,12 @@ class Rong_Db_Driver_Pg extends Rong_DB_Abstract
 		 
 		 if( $this->conn )
 		 {
-					}
+		}
 		else
 		{
 			echo $this->error();
 		}
-                $this->setConfig($config);
+        $this->setConfig($config);
 	}
 	
 	public function call( $sql )
@@ -94,6 +94,19 @@ class Rong_Db_Driver_Pg extends Rong_DB_Abstract
 		return pg_num_rows( $this->result  );
 	}
 	
+	public function beginTransaction()
+	{
+		$this->query("start transaction");
+	}
 	
+	public function commit()
+	{
+		$this->query("commit");
+	}
+	
+	public function rollback(){
+		$this->query("rollback");
+	}
+	// savepoint rollbackto savepoint...pending
 }
 ?>

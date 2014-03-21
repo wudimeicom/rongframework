@@ -16,12 +16,16 @@ class Rong_Db_Driver_Mssql extends Rong_DB_Abstract {
     public $result = null;
 
     public function __construct($config) {
-        $this->fieldEscapeLeft = "[";
-        $this->fieldEscapeRight = "]";
+        $this->leftQuotedIdentifier = "[";
+        $this->rightQuotedIdentifier = "]";
         if (!isset($config["port"])) {
             $config["port"] = 1433;
         }
-        $this->conn = mssql_connect($config["host"] . ":" . $config["port"], $config["username"], $config["password"]);
+		if( !isset( $config["server_name"]))
+		{
+			$config["server_name"] = $config["host"];
+		}
+        $this->conn = mssql_connect($config["server_name"]  , $config["username"], $config["password"]);
 
         if ($this->conn) {
             mssql_select_db($config["dbname"], $this->conn);
@@ -80,6 +84,9 @@ class Rong_Db_Driver_Mssql extends Rong_DB_Abstract {
         
     }
 
+    public function beginTransaction(){
+    	$this->query("");
+    }
 }
 
 ?>

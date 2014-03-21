@@ -49,7 +49,7 @@ class Rong_Html_Select extends Rong_Html_Abstract {
 		
         foreach ($row as $value => $text) {
             $html .= "<option value=\"{$value}\" ";
-            if (in_array( $value, $selectedArray) == true) {
+            if (@in_array( $value, $selectedArray) == true) {
                 $html .= " selected=\"selected\" ";
             }
             $html .= ">" . $text . "</option>";

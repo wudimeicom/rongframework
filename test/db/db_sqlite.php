@@ -40,28 +40,28 @@ Rong_Db_Model::setDefaultDb( $db );
 require_once dirname(__FILE__) . "/models/ArticleModel.php";
 $articleModel = new ArticleModel();
 
-
+/*
 $lastInsertId = $articleModel->insert(array(
   "title" => "good good study",
   "content" => "day day up"
 ));
 echo "last insert id:" . $lastInsertId ."<br />";
+*/
 
 
-
-
+/*
 $affectedRows = $articleModel->update(
             array(
                 "title" => "new title"// db field name => value
             ), "id=" . $lastInsertId
         );
 echo "update affected rows:".$affectedRows . "<br />";
+*/
 
-
-
+/*
 $affectedRows = $articleModel->delete("id=" . $lastInsertId);
 echo "Deletion affected rows:".$affectedRows . "<br />";		
-
+*/
 $record = $articleModel->fetchRow("id=1" );
 echo "fetch a record:";
 print_r( $record );
@@ -69,7 +69,7 @@ echo "<br />";
 
 $records = $articleModel->fetchAll("id>0");
 echo "fetch all records:<pre>";
-var_dump( $records );
+print_r( $records );
 echo "</pre>";
 
 

@@ -4,7 +4,7 @@
  * 文件字符编码utf-8
  */
 $PathToRongFramework = dirname(__FILE__)."/../../lib";
-
+$PathToRongFramework = "D:\\www\\wudimei\\wudimei.com\\lib";
 set_include_path(  "." . PATH_SEPARATOR . $PathToRongFramework .  PATH_SEPARATOR . get_include_path() );
 
 
@@ -13,6 +13,7 @@ $wudimei = new Rong_View_Wudimei();
 $wudimei->compileDir = dirname(__FILE__) . "/templates/compiled";
 $wudimei->viewsDirectory = dirname(__FILE__) .  "/templates";
 
+$wudimei->forceCompile = true;
 $wudimei->leftDelimiter = "{";
 $wudimei->rightDelimiter = "}";
 
@@ -20,7 +21,8 @@ $wudimei->rightDelimiter = "}";
 $member = array(
   "username" => "Yang Qing-rong",
   "id" => "2",
-  "birthday" => "1985-04-23"
+  "birthday" => "1985-04-23",
+  "number.home" => "13714715608"
 );
 $wudimei->assign("member", $member);
 
@@ -38,6 +40,7 @@ $ArrayReturned = array(
 						array( "id" => 1, "name" => "Yang Qing-rong")
 					)
 			);	
+			
 $wudimei->assign("ArrayReturned", $ArrayReturned );
 $wudimei->assign("emptyArray", array() );
 $wudimei->display("hello/array.html");

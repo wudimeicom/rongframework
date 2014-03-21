@@ -18,8 +18,8 @@ class Rong_Db_Driver_Mysql extends Rong_DB_Abstract
 	
     public function __construct($config)
     {
-        $this->fieldEscapeLeft = "`";
-        $this->fieldEscapeRight = "`";
+        $this->leftQuotedIdentifier = "`";
+        $this->rightQuotedIdentifier = "`";
         if (!isset($config["port"]))
         {
             $config["port"] = 3306;
@@ -113,6 +113,23 @@ class Rong_Db_Driver_Mysql extends Rong_DB_Abstract
 	{
 		return $this->sql;
 	}
+	/**
+	 * only support innodb
+	 */
+	public function beginTransaction()
+	{
+		$this->query("set autocommit=0");
+	}
+	
+	public function commit()
+	{
+		$this->query("commit");
+	}
+	
+	public function rollback(){
+		$this->query("rollback");
+	}
+	
 	
 }
 

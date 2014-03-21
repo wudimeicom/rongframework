@@ -8,8 +8,8 @@
  */
 require_once 'Rong/Db/Interface.php';
 abstract class Rong_DB_Abstract extends Rong_Object implements Rong_Db_Interface {
-	public $fieldEscapeLeft = "";
-	public $fieldEscapeRight = "";
+	public $leftQuotedIdentifier = "";
+	public $rightQuotedIdentifier = "";
 	public $config = array();
 	public function setConfig($config) {
 		$this -> config = $config;
@@ -18,9 +18,24 @@ abstract class Rong_DB_Abstract extends Rong_Object implements Rong_Db_Interface
 	public function getConfig() {
 		return $this -> config;
 	}
+	
+	public function getConfigItem( $name )
+	{
+		return @$this->config[$name];
+	}
 
+	public function table( $nameWithoutTablePrefix )
+	{
+		return  $this->addQuotedIdentifier( $this->getConfigItem("table_prefix") . $nameWithoutTablePrefix );
+	}
+	
+	public function addQuotedIdentifier( $name )
+	{
+		return $this->leftQuotedIdentifier. $name . $this->rightQuotedIdentifier;
+	}
+	
 	public function delete($table, $where) {
-		$sql = "delete from " . $table . " where {$where}";
+		$sql = "delete from " . $this->addQuotedIdentifier( $table ) . " where {$where}";
 		$this -> query($sql);
 		return $this -> affectedRows();
 	}
@@ -28,9 +43,9 @@ abstract class Rong_DB_Abstract extends Rong_Object implements Rong_Db_Interface
 	public function update($table, $data, $where) {
 		$setArray = array();
 		foreach ($data as $key => $value) {
-			$setArray[] = $this -> fieldEscapeLeft . "{$key}" . $this -> fieldEscapeRight . " = '" . $this -> escape($value) . "'";
+			$setArray[] = $this->addQuotedIdentifier( $key) . " = '" . $this -> escape($value) . "'";
 		}
-		$sql = "update " . $table . " set " . implode(",", $setArray) . " where {$where}";
+		$sql = "update " . $this->addQuotedIdentifier( $table ) . " set " . implode(",", $setArray) . " where {$where}";
 		$this -> query($sql);
 		return $this -> affectedRows();
 	}
@@ -40,11 +55,11 @@ abstract class Rong_DB_Abstract extends Rong_Object implements Rong_Db_Interface
 		$values = array_values($data);
 
 		for ($i = 0; $i < count($fields); $i++) {
-			$fields[$i] = $this -> fieldEscapeLeft . $this -> escape($fields[$i]) . $this -> fieldEscapeRight;
+			$fields[$i] = $this->addQuotedIdentifier(  $this -> escape($fields[$i]) );
 
 			$values[$i] = "'" . $this -> escape($values[$i]) . "'";
 		}
-		$sql = "insert into {$table}(" . implode(",", $fields) . ") " . " values( " . implode(",", $values) . ");";
+		$sql = "insert into ". $this->addQuotedIdentifier( $table)."(" . implode(",", $fields) . ") " . " values( " . implode(",", $values) . ")";
 		$this -> query($sql);
 		return $this -> insertId();
 	}
@@ -69,7 +84,7 @@ abstract class Rong_DB_Abstract extends Rong_Object implements Rong_Db_Interface
 			$sqlCount = $sqlMixed[1];
 		}
 
-		$sqlAll = $sql . " limit " . $start . "," . $pageSize . ";" . $sqlCount;
+		$sqlAll = $this->addLimitClause( $sql , $pageSize , $start ). ";" . $sqlCount;
 		$rows = $this -> call($sqlAll);
 		//print_r( $rows );
 		$RecordCount = 0;
@@ -99,6 +114,11 @@ abstract class Rong_DB_Abstract extends Rong_Object implements Rong_Db_Interface
 		return $result;
 	}
 
+	public function addLimitClause($sql,$rowCount,$offset)
+	{
+		return $sql . " limit " . $rowCount . " offset " . $offset;
+	}
+	
 	public function getPaginator($sql, $page, $pageSize, $urlTemplate, $paginatorSettings = array()) {
 		$data = $this -> limit($sql, $page, $pageSize);
 		require_once 'Rong/Html/Paginator.php';

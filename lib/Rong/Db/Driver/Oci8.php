@@ -13,8 +13,13 @@ class Rong_Db_Driver_Oci8 extends Rong_DB_Abstract
 {
 	public $conn = null;
 	public $stmt;
+	
+	public $mode = OCI_COMMIT_ON_SUCCESS;
 	public function __construct( $config )
 	{
+		$this->leftQuotedIdentifier = '"';
+		$this->rightQuotedIdentifier = '"';
+		
 	    if( !isset( $config["port"] ) )
 		{
 			$config["port"] = 1521 ;
@@ -35,14 +40,13 @@ class Rong_Db_Driver_Oci8 extends Rong_DB_Abstract
 		  
 		if( $this->conn )
 		{
-			//mysql_select_db( $config["dbname"] , $this->conn );
-			//$this->query( "set names " . $config["charset"]);
+			
 		}
 		else
 		{
 			echo $this->error();
 		}
-                $this->setConfig($config);
+        $this->setConfig($config);
 	}
 	
 	public function call( $sql )
@@ -63,7 +67,14 @@ class Rong_Db_Driver_Oci8 extends Rong_DB_Abstract
 	{
 		$stmt = oci_parse( $this->conn , $sql );
 		$this->stmt = $stmt;
-		return oci_execute( $stmt );
+		$r = oci_execute( $stmt , $this->mode );
+		if (isset($GLOBALS["debug"])) {
+            echo "<div>" . $sql . "   --------";
+            echo "\n<br />error:" . $this->error();
+            echo "\n<br />insert id:" . $this->insertId();
+            echo "\n<br />affected rows:" . $this->affectedRows() . "</div>";
+        }
+		return $r;
 	}
 	
 	public function fetchAll( $sql )
@@ -90,7 +101,7 @@ class Rong_Db_Driver_Oci8 extends Rong_DB_Abstract
 	}
 	public function error( )
 	{
-		return oci_error( $this->stmt );
+		return @oci_error( $this->stmt );
 	}
 	
 	public function escape( $str )
@@ -108,6 +119,26 @@ class Rong_Db_Driver_Oci8 extends Rong_DB_Abstract
 	{
 		return oci_num_rows( $this->stmt );
 	}
+	
+	public function beginTransaction(){
+		$this->mode = OCI_NO_AUTO_COMMIT;
+	}
+	
+	public function commit(){
+		return oci_commit( $this->conn );
+	}
+	
+	public function rollback(){
+		return oci_rollback( $this->conn );
+	}
+	
+	public function addLimitClause($sql,$rowCount,$offset)
+	{
+		$str = "select * from(select myview.*,rownum row_index from(". $sql.") myview where rownum<=".($offset+$rowCount).") where row_index>" . $offset;
+		
+		return $str;
+	}
+	
 	
 }
 ?>

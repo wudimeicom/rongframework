@@ -4,6 +4,7 @@ class Rong_Logger{
 	/**
 	 * 
 	  array(
+	   "logging_appender" => "FILE" ,  // FILE or ECHO
 	   "log_file_path" => "d:/test.log",
 	   "logging_enable" => true, 
 	   "logging_types" => "ERROR,WARN,INFO,DEBUG,FATAL"
@@ -54,23 +55,51 @@ class Rong_Logger{
 			return false;
 		}
 		
-		$dbt = debug_backtrace();
-		
-		
-		$logText = date("Y-m-d H:i:s")." ". $dbt[1]["file"] . " line:" . $dbt[1]["line"]  . " " .
-		 "\r\n[" . $type . "] " . $string . "\r\n";
+		$logText = $this->getLogText($type, $string);
 		
 		if( self::$config["logging_enable"] == true )
 		{
-			$log_file_path = self::$config["log_file_path"];
-			if( file_exists( $log_file_path ) )
+			if( self::$config["logging_appender"] == "FILE" )
 			{
+				$log_file_path = self::$config["log_file_path"];
+			 
 				$fp = fopen( $log_file_path , "a+" );
 				fwrite($fp , $logText);
 				fclose( $fp );
+			 
+			}
+			elseif( self::$config["logging_appender"] == "ECHO" ){
+				echo $logText;
 			}
 		}
 		
+	}
+	
+	protected function getLogText( $type,$string ){
+		$dbt = debug_backtrace();
+		
+		
+		$logText = date("Y-m-d H:i:s"). " [" . $type . "] " . $string . "\r\n";
+		//$i=0,1  method in this class
+		for( $i=2; $i< count( $dbt);$i++ )
+		{
+			$logText .= "  at ". $dbt[$i]["file"] . " line:" . $dbt[$i]["line"]  . " ";
+			
+			$args = $dbt[$i]["args"];
+			for($j=0;$j<count( $args);$j++ )
+			{
+				$args[$j] = var_export($args[$j],true);
+			}
+			$class = "";
+			if( isset( $dbt[$i]["class"]))
+			{
+				$class = $dbt[$i]["class"]."_instance";
+			} 
+			$logText .= $class. $dbt[$i]["type"]."".$dbt[$i]["function"]."(". implode( ",", $args ) . " );";
+			 
+			$logText .= "\r\n";
+		}
+		return $logText; 
 	}
 	
 }

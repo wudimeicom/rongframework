@@ -6,6 +6,8 @@
  *
  */
  require_once 'Rong/Object.php';
+ require_once 'Rong/Logger.php';
+ 
 class Rong_Net_HttpClient extends Rong_Object {
 	public $headers = array();
 	public $responseText;
@@ -24,10 +26,11 @@ class Rong_Net_HttpClient extends Rong_Object {
 	public $fileContentType = "multipart/mixed";
 
 
-
+	public $logger;
 	public function __construct() {
 		parent::__construct();
 		$this -> headers = array("Content-Type" => "text/html;charset=utf-8");
+		$this->logger =  Rong_Logger::getLogger();
 	}
 	
 	
@@ -68,7 +71,13 @@ class Rong_Net_HttpClient extends Rong_Object {
 	 * @param string $file
 	 */
 	public function addFile($name, $file) {
-		$this -> fileArray[$name] = $file;
+		if( file_exists( $file ) == true )
+		{
+			$this -> fileArray[$name] = $file;
+		}
+		else{
+			$this->logger->error("file \"" . $file . "\" not found!");
+		}
 	}
 
 
@@ -84,6 +93,17 @@ class Rong_Net_HttpClient extends Rong_Object {
 		$urlArray = parse_url($url);
 		$this -> currentHost = $urlArray["host"];
 
+		if( !isset($urlArray["host"]) )
+		{
+			 
+			$this->logger->fatal("host name can not be null,please check your url.");
+			return false;
+		}
+		if( in_array( $method, array("GET","HEAD","POST","PUT","DELETE","TRACE"," OPTIONS")) == false )
+		{
+			$this->logger->warn("method \"" . $method."\" is not supported!");
+		}
+		 
 		$CRLF = "\r\n";
 
 		$postText = "";
@@ -168,6 +188,7 @@ class Rong_Net_HttpClient extends Rong_Object {
 		$response = "";
 		while (!feof($fp)) {
 			$response .= $t = fread($fp, 1024);
+			 
 		}
 
 		fclose($fp);
@@ -185,6 +206,7 @@ class Rong_Net_HttpClient extends Rong_Object {
 	private function getLocalCookies() {
 
 		if (trim($this -> getCookieDir()) == "") {
+			$this->logger->warn("\$cookieDir is null,get no cookies.");
 			return null;
 		}
 		$cookieText = "Cookie: ";
@@ -204,6 +226,7 @@ class Rong_Net_HttpClient extends Rong_Object {
 
 	private function saveCookies() {
 		if (trim($this -> getCookieDir()) == "") {
+			$this->logger->warn("\$cookieDir is null,no place to store cookies.");
 			return false;
 		}
 		$headerLen = strpos($this -> responseText, "\r\n\r\n");
@@ -273,16 +296,15 @@ class Rong_Net_HttpClient extends Rong_Object {
 				//if( $num =0 ) break;
 				// echo "[$hexNum:$num]";
 				if ($num > 0) {
-					//echo "{$num}";
+					
 					$content .= substr($chunkContent, $i + strlen($hexNum), $num + 2);
 				}
 				$i += strlen($hexNum) + 2 + $num + 1;
-				//break;
+				
 			}
-			//echo "------------";
-			//echo $content;
+			
 			return $content;
-			exit();
+			
 		} else {
 			$cnt = substr($this -> responseText, strpos($this -> responseText, "\r\n\r\n") + 4);
 

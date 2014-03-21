@@ -3,7 +3,7 @@
 		<title>array sample</title>
 	</head>
 	<body>
-		
+	  
 		<h3>member information</h3>
 		id: <?php echo wudimei_toString( @$this->data['member']['id']); ?> <br />
 		username: <?php echo wudimei_toString( @$this->data['member']['username']); ?> <br />
@@ -26,5 +26,12 @@
 		<?php if( wudimei_empty (  @$this->data['emptyArray'] )  == true): ?>
 			$emptyArray is an empty array <br />
 		<?php endif; ?>
+		
+		
+		 
+		 
+		<?php  $this->data["numberHome"] = "number.home"; ?>
+		<?php echo wudimei_toString( @$this->data['member'][@$this->data['numberHome']]); ?>
+		<?php echo wudimei_toString( @$this->data['member']["number.home"]); ?>
 	</body>
 </html>

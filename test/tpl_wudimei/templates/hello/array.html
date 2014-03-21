@@ -3,7 +3,7 @@
 		<title>array sample</title>
 	</head>
 	<body>
-		
+	  
 		<h3>member information</h3>
 		id: {$member.id} <br />
 		username: {$member.username} <br />
@@ -26,5 +26,12 @@
 		{if $emptyArray|empty == true}
 			$emptyArray is an empty array <br />
 		{/if}
+		
+		
+		 
+		 
+		{assign var=$numberHome value="number.home"}
+		{$member.$numberHome}
+		{$member."number.home"}
 	</body>
 </html>
