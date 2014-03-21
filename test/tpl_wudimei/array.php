@@ -5,7 +5,7 @@
  */
 $PathToRongFramework = dirname(__FILE__)."/../../lib";
  
- $PathToRongFramework = "D:\\www\\wudimei\\wudimei.com\\lib";
+ 
  
 set_include_path(  "." . PATH_SEPARATOR . $PathToRongFramework .  PATH_SEPARATOR . get_include_path() );
 
@@ -25,7 +25,7 @@ $member = array(
   "id" => "2",
   "birthday" => "1985-04-23",
   "number.home" => "13714715608",
-  "other" => array("name.a"=> "test") 
+  "other" => array("name.a"=> array("test")) 
 );
 $wudimei->assign("member", $member);
 
