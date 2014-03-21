@@ -5,6 +5,8 @@
  */
 $PathToRongFramework = dirname(__FILE__)."/../../lib";
  
+ $PathToRongFramework = "D:\\www\\wudimei\\wudimei.com\\lib";
+ 
 set_include_path(  "." . PATH_SEPARATOR . $PathToRongFramework .  PATH_SEPARATOR . get_include_path() );
 
 
@@ -22,7 +24,8 @@ $member = array(
   "username" => "Yang Qing-rong",
   "id" => "2",
   "birthday" => "1985-04-23",
-  "number.home" => "13714715608"
+  "number.home" => "13714715608",
+  "other" => array("name.a"=> "test") 
 );
 $wudimei->assign("member", $member);
 

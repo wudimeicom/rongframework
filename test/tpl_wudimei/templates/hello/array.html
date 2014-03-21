@@ -3,7 +3,7 @@
 		<title>array sample</title>
 	</head>
 	<body>
-	  
+	  {**
 		<h3>member information</h3>
 		id: {$member.id} <br />
 		username: {$member.username} <br />
@@ -32,6 +32,8 @@
 		 
 		{assign var=$numberHome value="number.home"}
 		{$member.$numberHome}
-		{$member."number.home"}
+		{$member."number.home"|substr:0:5}
+		*}
+		{$member.other."name.a"|trim}
 	</body>
 </html>
