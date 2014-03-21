@@ -4,7 +4,7 @@
  * 文件字符编码utf-8
  */
 $PathToRongFramework = dirname(__FILE__)."/../../lib";
-$PathToRongFramework = "D:\\www\\wudimei\\wudimei.com\\lib";
+ 
 set_include_path(  "." . PATH_SEPARATOR . $PathToRongFramework .  PATH_SEPARATOR . get_include_path() );
 
 
