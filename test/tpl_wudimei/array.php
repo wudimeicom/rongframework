@@ -43,7 +43,7 @@ $ArrayReturned = array(
 						array( "id" => 1, "name" => "Yang Qing-rong")
 					)
 			);	
-			
+			$wudimei->assign("config", array("SITE.URL_PREFIX" => "http://"));
 $wudimei->assign("ArrayReturned", $ArrayReturned );
 $wudimei->assign("emptyArray", array() );
 $wudimei->display("hello/array.html");

@@ -3,7 +3,7 @@
 		<title>array sample</title>
 	</head>
 	<body>
-	   
+	   {**
 		<h3>member information</h3>
 		id: {$member.id} <br />
 		username: {$member.username} <br />
@@ -35,5 +35,8 @@
 		{$member."number.home"|substr:0:5}
 		 
 		{$member.other."name.a".0|substr:0:3}
+		**}
+		
+		{$config."SITE.URL_PREFIX"}
 	</body>
 </html>

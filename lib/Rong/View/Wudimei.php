@@ -438,7 +438,7 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
 
     public static function compileVar($tag)
     {
-       //echo $tag. "<br />";
+        //echo $tag. "<br />";
         if (self::isStringExpression($tag))
         {
 
@@ -452,7 +452,7 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
             return $tag;
         }
 		
-        //$var."number.home" | $abc.efg 
+        //$var.aa."number.home".0 | $abc.efg 
         preg_match_all("/([a-zA-Z0-9\$\_]+(\.[a-zA-Z0-9\_]+)*(\.(\"[^\"]*\"))+(\.[a-zA-Z0-9\_]+)*)|([a-zA-Z0-9\_\.\\$\->]+)/i", $tag, $matches);
         // echo $tag; echo "<br />";
           //print_r( $matches );
@@ -497,7 +497,7 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
 			//echo $tag2;
             //$arr = explode(".", $tag2);
 			$arr = Rong_View_Wudimei::segmentWithConstStringSupport($tag2, array(".") );
-             // print_r( $arr );
+            // print_r( $arr );
             $code = " @\$this->data['" . trim($arr[0]) . "']";
 
             if (preg_match("/\\$([a-zA-Z0-9\_]+)/i", $arr[0]))
@@ -634,7 +634,7 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
         }
         
         // $var.name   |  abc :efg
-        $modifier = "((\\$[a-zA-Z0-9\_]+((\->([a-zA-Z0-9\_]+))|(\.\"[a-zA-Z\s\.]*\")|(\.[\$]?[a-zA-Z0-9\_]+))*)|(\".*\")|('.*'))(\s*[\|]\s*[a-zA-Z0-9\_]+((\s*[\:]\s*((\$[a-z0-9A-Z\.\_\->]+)|(\"([^\"]*)\")|('([^']*)')|([0-9]+)|([a-zA-Z0-9\.\$\_]+)))*)*)*";
+        $modifier = "((\\$[a-zA-Z0-9\_]+((\->([a-zA-Z0-9\_]+))|(\.\"[^\"]*\")|(\.[\$]?[a-zA-Z0-9\_]+))*)|(\".*\")|('.*'))(\s*[\|]\s*[a-zA-Z0-9\_]+((\s*[\:]\s*((\$[a-z0-9A-Z\.\_\->]+)|(\"([^\"]*)\")|('([^']*)')|([0-9]+)|([a-zA-Z0-9\.\$\_]+)))*)*)*";
 
         preg_match_all('/' . $modifier . '|[0-9\.]+|\$[a-zA-Z0-9\_\.]+|[a-zA-Z0-9\_]+|===|!==|==|!=|\->|::|<=|>=|\*=|\+=|\/=|\-=|\%=|=|>|,|<|!|\(|\)|\.|\"[^\"]+\"|\'[^\']+\'|and|or|\&\&|\|\||%|\d+|\+|\-|\*|\/|gt|eq|lt/i', $expression, $matches);
         $expArr = $matches[0];
