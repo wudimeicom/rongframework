@@ -11,11 +11,14 @@
  * http://windows.php.net/downloads/pecl/releases/memcache/3.0.8/
  * php_memcache-3.0.8-[php version]-ts-vc11-x86.zip
  */
+require_once 'Rong/Exception.php';
 require_once 'Rong/Cache/Abstract.php';
+require_once "Rong/Logger.php";
 
 class Rong_Cache_Driver_Memcache extends Rong_Cache_Abstract
 {
 	public $memcache;
+	public $logger;
 	public function __construct( $config )
 	{
 		parent::__construct( $config);
@@ -23,27 +26,36 @@ class Rong_Cache_Driver_Memcache extends Rong_Cache_Abstract
 	}
 	
 	protected function initMemcache(){
+		$this->logger =  Rong_Logger::getLogger();
 		if( class_exists("Memcache") !== false )
 		{
 			$this->memcache = new Memcache();
-			
-		}
-		elseif( class_exists("Memcached") !== false )
-		{
-			$this->memcache = new Memcached();
-			//echo "memcached";
 		}
 		else{
 			throw new Rong_Exception("the memcache extension is not installed");
+			$this->logger->error("the memcache extension is not installed");
 		}
 		
 		$servers = $this->config["servers"];
-		 
+		
+		$countServerConnected =0;
 		for( $i=0;$i< count( $servers); $i++ )
 		{
 			$server = $servers[$i];
 			$this->memcache->addServer($server[0],$server[1],$server[2]);
+			$status = $this->memcache->getServerStatus( $server[0],$server[1] );
 			
+			if( $status>0 )
+			{
+				$countServerConnected +=1;
+			
+			}
+		}
+		 
+		if( $countServerConnected==0 )
+		{
+			 
+			$this->logger->error("no memcache server start,please start them at first!");
 		}
 	}
 	
