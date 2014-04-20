@@ -15,6 +15,6 @@ interface Rong_Cache_Interface
 	public function delete( $key );
 	public function deleteOld( );
 	public function update( $key , $value );
-	
+	public function deleteByTag($tag = array(), $type);
 }
 ?>

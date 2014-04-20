@@ -6,7 +6,7 @@
  * Email : yaqy@qq.com yangqingrong@gmail.com
  * blog  : http://hi.baidu.com/tangtou
  * 
- * Copyright 2009, 2010 Yang Qing-rong
+ * Copyright 2009, 2014 Yang Qing-rong
  */
 require_once 'Rong/Cache/Abstract.php';
 
