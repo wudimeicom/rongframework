@@ -210,10 +210,12 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
         $key = self::compileExpression($attrs["key"]);
 
         $code = "";
-
-        $code .= '$this->data["wudimei"]["foreach"]["' . trim($attrs["from"], '$ ') . '" ]= array("index"=>-1);' . " ";
+		$foreachName = trim($attrs["from"], '$ ');
+		$foreachName = str_replace('$', "_", $foreachName );
+		
+        $code .= '$this->data["wudimei"]["foreach"]["' . $foreachName . '" ]= array("index"=>-1);' . " ";
         $code .= "foreach( " . $from . "  as " . trim($key, '@ ') . " =>  " . trim($item, '@ ') . " ){  ";
-        $code .= '$this->data["wudimei"]["foreach"]["' . trim($attrs["from"], '$ ') . '"]["index"]++;' . " ";
+        $code .= '$this->data["wudimei"]["foreach"]["' . $foreachName . '"]["index"]++;' . " ";
         return $code;
     }
 

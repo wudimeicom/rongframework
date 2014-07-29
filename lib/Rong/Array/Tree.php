@@ -92,6 +92,22 @@ class Rong_Array_Tree extends Rong_Object
         return $resultRowset;
     }
     
+	
+	public function getArrayTree( $parentId )
+	{
+		$children = array();
+		$children = $this->getChildren($parentId);
+		if( !empty( $children ) )
+		{
+			for( $i=0; $i< count( $children); $i++ )
+			{
+				$item = $children[$i];
+				$children2 = $this->getArrayTree($item[$this->idKeyName]);
+				$children[$i]["children"] = $children2;
+			}
+		}
+		return $children;
+	}
     public function getPath( $id )
     {
          

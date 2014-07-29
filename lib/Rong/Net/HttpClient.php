@@ -232,7 +232,13 @@ class Rong_Net_HttpClient extends Rong_Object {
 		$headerLen = strpos($this -> responseText, "\r\n\r\n");
 		$headerText = substr($this -> responseText, 0, $headerLen);
 		//echo $headerText;
+		/*
+		 * Set-Cookie: <name>=<value>[; <name>=<value>]...
+                    [; expires=<date>][; domain=<domain_name>]
+                    [; path=<some_path>][; secure][; httponly]
+		 */
 		preg_match_all("/Set-Cookie:(.+)\r\n/i", $headerText, $matches);
+		print_r( $matches );
 		$cookies = array();
 		for ($i = 0; $i < count($matches[1]); $i++) {
 			$cookieLine = $matches[1][$i];

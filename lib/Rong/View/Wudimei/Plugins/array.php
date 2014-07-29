@@ -13,3 +13,8 @@ function wudimei_search( $array, $needle )
 {
     return array_search($needle, $array );
 }
+
+function wudimei_is_array( $array ){
+	
+	return is_array( $array );
+}

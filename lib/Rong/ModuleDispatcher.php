@@ -43,21 +43,15 @@ class Rong_ModuleDispatcher
 		$cfgs = array();
 		$cfgs = $this->loadModuleConfigs();
 		//print_r( $cfgs );
-		
 		$route = new Rong_Controller_Route();
-
 		foreach ($cfgs as $module => $cfg ) {
 			$uriArray = $cfg["uri"];
-			
-			foreach ($uriArray as $uriName => $routeArr ) {
-				 
+			foreach ($uriArray as $uriName => $routeArr ) {	 
 				$route->add( $routeArr["pattern"] , "/". $module . "/" . $routeArr["match"] );
 			}
 		}
 		
 		$this->uri = $route->replace( $this->uri );
-		
-		 
 		$path = $this->uri->getPathWithoutQueryString();
 		 
 		if( $path == "/" )
