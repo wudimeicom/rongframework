@@ -1,0 +1,33 @@
+<html>
+	<head>
+		<title>模板继承示例</title> 
+		<style type="text/css">
+		body{}
+		.wBlock{ width:1000px;margin-left:auto;margin-right:auto;height:100px; }
+		.wTop{ background-color:#E0EAEA; }
+		.wTop h1{ padding:5px;}
+		.wContent{}
+		 .wMenu{width:200px;float:left;}
+		 .wDetail{width:790px;float:right;}
+		.wClear{clear:both;}
+		.wFooter{ background-color:#EAEAEA;text-align:center;}
+		</style>
+		<?php  $this->block_open($Rong_View_File,"");  ?>
+	</head>
+	<body>
+		<div class="wBlock wTop">
+			<h1>Rong Framework inherit(extends)</h1>
+		</div>
+		 
+		<div class="wBlock">
+			<?php  $this->blockDisplay($Rong_View_File,"content");  ?>
+		</div>
+		
+		       
+		
+		<div class="wBlock wFooter">
+		wudimei.com版权所有
+		</div>
+		
+	</body>
+</html>

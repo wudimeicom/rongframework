@@ -133,6 +133,7 @@ class Rong_Service_Server{
 		
 		$returnJson = json_encode( $returnJsonArr );
 		
+		echo "[Rong.Service.Server@wudimei.com]";
         if( trim( $this->password ) != "" )
         {
             echo $swapBit->encrypt( $returnJson, $this->password );
@@ -140,6 +141,7 @@ class Rong_Service_Server{
         else{
             echo $returnJson;
         }
+        echo "[/Rong.Service.Server@wudimei.com]";
     }
 }
 ?>

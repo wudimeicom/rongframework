@@ -39,5 +39,5 @@ class Rong_Controller_Request extends Rong_Controller_Abstract {
         }
         return $value;
     }
-
+	
 }

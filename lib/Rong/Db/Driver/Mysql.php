@@ -130,7 +130,33 @@ class Rong_Db_Driver_Mysql extends Rong_DB_Abstract
 		$this->query("rollback");
 	}
 	
+	public function getTableNames(){
+		$dt = $this->fetchAll("show tables");
+		$tables = array();
+		for( $i=0;$i< count( $dt); $i++ ){
+			$item = $dt[$i];
+			$keys =array_keys($item);
+			$tbl = $item[$keys[0]];
+			$tables[] = $tbl;
+		}
+		return $tables;
+	}
 	
+	public function getTableComment( $table ){
+		$sql = "show table status  where name='{$table}'";
+		echo $sql;
+		$row = $this->fetchRow($sql);
+		echo mysql_error();
+		return @$row["Comment"];
+	}
+	
+	public function getColumns( $table ){
+		$sql = "show full columns from " . $table;
+		echo $sql;
+		$dt = $this->fetchAll($sql);
+		echo mysql_error();
+		return $dt;
+	}
 }
 
 ?>

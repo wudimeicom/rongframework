@@ -13,7 +13,11 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
     public $forceCompile = false;
     //public $basePath = ""; //base path of the template
     public $data;
-
+    public $blocks;
+    public $blockNames =array();
+    public $extendsView = array(); //View file name that extends other views, array(a/2.html=>a/1.html)
+    public $viewBlocks = array(); // a/view.html=>array(blockName1,...);
+    
     public function __construct()
     {
         parent::__construct();
@@ -85,16 +89,39 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
         } elseif (substr($tag, 0, 8) == "/foreach")
         {
             $code = "}";
-        } elseif (substr($tag, 0, 3) == "for")
+        } 
+        elseif (substr($tag, 0, 3) == "for")
         {
             $code = self::compileFor(substr($tag, 4));
         } elseif (substr($tag, 0, 4) == "/for")
         {
             $code = "}";
-        } elseif (substr($tag, 0, 7) == "include")
+        }
+        elseif (substr($tag, 0, 13) == "block.display")
+        {
+            $code = self::compileBlockDisplay(substr($tag, 13));
+        }
+        elseif (substr($tag, 0, 14) == "/block.display")
+        {
+            $code = "";
+        }
+        elseif (substr($tag, 0, 5) == "block")
+        {
+            $code = self::compileBlock(substr($tag, 5));
+        } 
+        elseif (substr($tag, 0, 6) == "/block")
+        {
+            $code = " \$this->block_close(\$Rong_View_File); ";
+        }
+        elseif (substr($tag, 0, 7) == "include")
         {
             $code = self::compileInclude(substr($tag, 8));
-        } elseif (substr($tag, 0, 4) == "call")
+        }
+        elseif (substr($tag, 0, 7) == "extends")
+        {
+            $code = self::compileExtends(substr($tag, 8));
+        }
+        elseif (substr($tag, 0, 4) == "call")
         {
             $code = $this->compileCall(substr($tag, 5)   );
         } elseif (substr($tag, 0, 3) == "set")
@@ -147,6 +174,13 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
         preg_match_all('/file[\s]{0,5}=[\s]{0,5}["|\']{0,1}([^\'|"]+)["|\']{0,1}/i', $expression, $matches);
         $file = $matches[1][0];
         return 'echo $this->fetch("' . $file . '", $this->data );';
+    }
+    
+    public static function compileExtends($expression)
+    {
+        preg_match_all('/file[\s]{0,5}=[\s]{0,5}["|\']{0,1}([^\'|"]+)["|\']{0,1}/i', $expression, $matches);
+        $file = $matches[1][0];
+        return ' $this->extendsView($Rong_View_File,"' . $file . '" );';
     }
 
     public  function compileCall($expression  )
@@ -248,6 +282,31 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
         }
         return $code;
     }
+    
+    public static function compileBlock($expression){
+        $attrs = array();
+        $attrs = self::getAttributesArrayFromText($expression, "name");
+       
+        $name = self::compileExpression($attrs["name"]);
+        //echo $name;
+        
+        $code = "";
+        $code = " \$this->block_open(\$Rong_View_File,". $name."); ";
+        return $code;
+        
+    }
+    public static function compileBlockDisplay($expression){
+        $attrs = array();
+        $attrs = self::getAttributesArrayFromText($expression, "name");
+         
+        $name = self::compileExpression($attrs["name"]);
+        //echo $name;
+    
+        $code = "";
+        $code = " \$this->blockDisplay(\$Rong_View_File,". $name."); ";
+        return $code;
+    
+    }
 
     public static function codeToArray($code)
     {
@@ -346,7 +405,7 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
                 $attrs[$key] = "";
             }
 
-            $attrs[$key] .= $codeTextArray[$i];
+            @$attrs[$key] .= @$codeTextArray[$i];
         }
         return $attrs;
     }
@@ -819,6 +878,7 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
 
     public function fetch($Rong_View_File, $Rong_View_Data)
     {
+        
     	$this->updateWudimeiSystemArray();
         /**
          * @var string compiled file name.
@@ -881,6 +941,12 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
         include( $distFileName );
         $output = ob_get_contents();
         ob_end_clean();
+        
+       
+        if( isset( $this->extendsView[$Rong_View_File ])){
+            
+           $output .= $this->fetch( $this->extendsView[$Rong_View_File ], $Rong_View_Data);
+        }
         return $output;
     }
 
@@ -908,5 +974,57 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
             return $fileContent;
         }
     }
-
+    
+    public function blockDisplay($Rong_View_File, $name){
+        echo @$this->blocks[$name];
+    }
+    
+    public function block_open( $Rong_View_File, $name ){
+       array_push( $this->blockNames, $name);
+       if(!isset( $this->viewBlocks[$Rong_View_File])){
+           $this->viewBlocks[$Rong_View_File] = array();
+       }
+       array_push( $this->viewBlocks[$Rong_View_File], $name );
+       ob_start();  
+    }
+    /**
+     * 
+     * @param unknown $viewFile $Rong_View_File
+     */
+    public function block_close($viewFile){
+        $c = ob_get_contents();
+        ob_end_clean();
+        $name = array_pop( $this->blockNames );
+       
+        //print_r(  $this->extendsView );
+        //echo $c;
+        if( trim( @$this->blocks[$name] ) == "" ){
+            $this->blocks[$name] = $c;
+        }
+        if( !isset( $this->extendsView[$viewFile])){ //top level template
+            echo $this->blocks[$name];
+        }
+        else{
+            $parentViewFile = $this->extendsView[$viewFile];
+            $arr = @$this->viewBlocks[$parentViewFile];
+            
+            $found = false;
+            for( $i=0; $i< count( $arr ); $i++ ){
+                if( $arr[$i] == $name ){
+                    $found =true;
+                }
+            }
+            if( $found == false ){
+               // echo $c;print_r( $this->viewBlocks );//echo "[".$name . "]";
+            }
+        }
+         
+    }
+    
+    public function extendsView($Rong_View_File,$viewFile){
+         $this->extendsView[$Rong_View_File] = $viewFile ;
+        
+       // print_r( $this->subViews );
+         
+    }
 }

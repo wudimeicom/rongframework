@@ -31,7 +31,7 @@ class Rong_Language{
 	{
 		$value = $this->languageArray[ $key ];
 		$value = $this->replaceLanguageTemplate($value ,$options );
-		if( trim(  $value ) == "" && $this->allowLogNotFoundItem === true )
+		if( @trim(  $value ) == "" && $this->allowLogNotFoundItem === true )
 		{
 			if( !file_exists( $this->logFile ) )
 			{

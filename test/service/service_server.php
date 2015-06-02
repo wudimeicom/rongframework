@@ -4,6 +4,7 @@
  * 文件字符编码utf-8
  */
 $PathToRongFramework = dirname(__FILE__) . "/../../lib";
+//$PathToRongFramework = "d:/www/wudimei/wudimei.com/lib";
 
 set_include_path("." . PATH_SEPARATOR . $PathToRongFramework . PATH_SEPARATOR . get_include_path());
 
@@ -17,6 +18,8 @@ $config = array(
 );
 Rong_Logger::setConfig($config);
 */
+ini_set("display_errors",1);
+error_reporting(E_ALL|E_WARNING|E_NOTICE|E_COMPILE_ERROR);
 
 require_once 'Rong/Service/Server.php';
 
@@ -43,6 +46,8 @@ $server = new Rong_Service_Server();
 $server->password = "123456";
 $server->addFunction("addNumber");
 $server->addFunction("welcome");
+
+eregi("/[0-9]+/i","1234");
 
 $person = new Person();
 $server->addClass("Person", $person );

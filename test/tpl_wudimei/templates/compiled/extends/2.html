@@ -1,0 +1,9 @@
+<?php  $this->extendsView($Rong_View_File,"extends/1.html" ); ?>
+
+<?php  $this->block_open($Rong_View_File,"content");  ?>
+		<div class="wContent">
+			<div class="wMenu"><?php  $this->blockDisplay($Rong_View_File,"menu");  ?></div>
+			<div class="wDetail"><?php  $this->blockDisplay($Rong_View_File,"detail");  ?></div>
+			<div class="wClear"></div> 
+		</div>
+<?php  $this->block_close($Rong_View_File);  ?>
