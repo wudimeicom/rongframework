@@ -3,6 +3,7 @@
 require_once 'Rong/View/Interface.php';
 require_once 'Rong/View/Abstract.php';
 require_once 'Rong/View/Wudimei/html.php';
+require_once 'Rong/View/Wudimei/Parser/Document.php';
 
 class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interface
 {
@@ -13,10 +14,18 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
     public $forceCompile = false;
     //public $basePath = ""; //base path of the template
     public $data;
-    public $blocks;
-    public $blockNames =array();
-    public $extendsView = array(); //View file name that extends other views, array(a/2.html=>a/1.html)
-    public $viewBlocks = array(); // a/view.html=>array(blockName1,...);
+    
+    public $cachedTplFiles = array();
+    public $blocks; 
+    public $blockNames = array();
+    /* array( [a.html]=> array("parent" => "b.html",
+     *                          "blocks" => array(
+     *                                          array("name"=>"name",
+     *                                                 "content" =>"abc"
+     *                                               )
+     *                                           )
+     *                         ); */
+    
     
     public function __construct()
     {
@@ -105,9 +114,13 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
         {
             $code = "";
         }
+        elseif (substr($tag, 0, 13) == "block.parent")
+        {
+            $code = $this->compileBlockParent(substr($tag, 13) );
+        }
         elseif (substr($tag, 0, 5) == "block")
         {
-            $code = self::compileBlock(substr($tag, 5));
+            $code = $this->compileBlock(substr($tag, 5));
         } 
         elseif (substr($tag, 0, 6) == "/block")
         {
@@ -119,7 +132,7 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
         }
         elseif (substr($tag, 0, 7) == "extends")
         {
-            $code = self::compileExtends(substr($tag, 8));
+            $code = $this->compileExtends(substr($tag, 8));
         }
         elseif (substr($tag, 0, 4) == "call")
         {
@@ -176,10 +189,12 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
         return 'echo $this->fetch("' . $file . '", $this->data );';
     }
     
-    public static function compileExtends($expression)
+    public  function compileExtends($expression)
     {
         preg_match_all('/file[\s]{0,5}=[\s]{0,5}["|\']{0,1}([^\'|"]+)["|\']{0,1}/i', $expression, $matches);
         $file = $matches[1][0];
+        //echo  $file;
+        $this->fetch($file, $this->data );
         return ' $this->extendsView($Rong_View_File,"' . $file . '" );';
     }
 
@@ -283,7 +298,7 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
         return $code;
     }
     
-    public static function compileBlock($expression){
+    public   function compileBlock($expression){
         $attrs = array();
         $attrs = self::getAttributesArrayFromText($expression, "name");
        
@@ -294,6 +309,12 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
         $code = " \$this->block_open(\$Rong_View_File,". $name."); ";
         return $code;
         
+    }
+    
+    public function compileBlockParent(){
+        $code = "";
+        $code = " \$this->blockParent(\$Rong_View_File); ";
+        return $code;
     }
     public static function compileBlockDisplay($expression){
         $attrs = array();
@@ -929,23 +950,23 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
             }
         }
 
-
-        $content = file_get_contents($filePath);
-        $content = $this->compileDocumentContent($content);
-
+        if( !isset( $this->cachedTplFiles[ $Rong_View_File])){
+            $content = file_get_contents($filePath);
+            $content = $this->compileDocumentContent($content);
+            file_put_contents($distFileName, $content);
+            $this->cachedTplFiles[ $Rong_View_File] = 1;
+        }
         
-
-        file_put_contents($distFileName, $content);
         $output = "";
         ob_start();
         include( $distFileName );
         $output = ob_get_contents();
         ob_end_clean();
         
-       
-        if( isset( $this->extendsView[$Rong_View_File ])){
+       $parentView = $this->blocks[$Rong_View_File ]["parent"];
+        if( isset( $parentView ) && trim( $parentView ) != "" ){
             
-           $output .= $this->fetch( $this->extendsView[$Rong_View_File ], $Rong_View_Data);
+           $output .= $this->fetch( $parentView , $Rong_View_Data);
         }
         return $output;
     }
@@ -976,55 +997,97 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
     }
     
     public function blockDisplay($Rong_View_File, $name){
-        echo @$this->blocks[$name];
+       // echo @$this->blocks[$name];
+        echo @$this->blocks[$Rong_View_File]["blocks"][$name];
+    }
+    
+    public function blockParent($Rong_View_File){
+        $blockName = end( $this->blockNames );
+         
+        $viewName = $Rong_View_File;
+        $ViewNameFound = $viewName;
+        while( trim( $viewName ) != "" ){
+            $parentViewName = $this->blocks[$viewName]["parent"];
+            $blocks = $this->blocks[$parentViewName]["blocks"];
+            if( isset( $blocks[ $blockName ])){
+                $ViewNameFound = $parentViewName;
+                break;
+            }
+            //echo $viewName;
+            $viewName = $parentViewName;
+        }
+        echo @$this->blocks[$ViewNameFound]["blocks"][$blockName];
     }
     
     public function block_open( $Rong_View_File, $name ){
-       array_push( $this->blockNames, $name);
-       if(!isset( $this->viewBlocks[$Rong_View_File])){
-           $this->viewBlocks[$Rong_View_File] = array();
+      
+       if(!isset( $this->blocks[$Rong_View_File])){
+           $this->blocks[$Rong_View_File] = array( "parent" =>"", "blocks" => array() ,"child" => "" );
        }
-       array_push( $this->viewBlocks[$Rong_View_File], $name );
+      // $this->blocks[$Rong_View_File]["curBlockName"] = $name;
+      // $this->blocks[$Rong_View_File]["blocks"][$name] = "abc";
+       array_push( $this->blockNames, $name); 
        ob_start();  
     }
     /**
      * 
      * @param unknown $viewFile $Rong_View_File
      */
-    public function block_close($viewFile){
+    public function block_close($Rong_View_File){
         $c = ob_get_contents();
         ob_end_clean();
-        $name = array_pop( $this->blockNames );
-       
-        //print_r(  $this->extendsView );
-        //echo $c;
-        if( trim( @$this->blocks[$name] ) == "" ){
-            $this->blocks[$name] = $c;
+        
+        $curBlockName = array_pop($this->blockNames);
+        $this->blocks[$Rong_View_File]["blocks"][$curBlockName] = $c;
+        
+        $viewName = $Rong_View_File;
+        $firstTimeDeclaredViewName = $viewName;
+        while( trim( $viewName ) != "" ){
+            $parentViewName = $this->blocks[$viewName]["parent"];
+            $blocks = $this->blocks[$viewName]["blocks"];
+            if( isset( $blocks[ $curBlockName ])){
+                $firstTimeDeclaredViewName = $viewName;
+            }
+            //echo $viewName;
+            $viewName = $parentViewName;
         }
-        if( !isset( $this->extendsView[$viewFile])){ //top level template
-            echo $this->blocks[$name];
-        }
-        else{
-            $parentViewFile = $this->extendsView[$viewFile];
-            $arr = @$this->viewBlocks[$parentViewFile];
-            
-            $found = false;
-            for( $i=0; $i< count( $arr ); $i++ ){
-                if( $arr[$i] == $name ){
-                    $found =true;
+      // echo $firstTimeDeclaredViewName .":". $curBlockName . " ";
+        // print_r( $this->blocks );
+        if( $firstTimeDeclaredViewName == $Rong_View_File ){
+            //echo $c;
+            $view2 =  $firstTimeDeclaredViewName;
+            $viewFound = $view2;
+            while( $view2 != ""){
+                $blocks = $this->blocks[$view2]["blocks"];
+               // echo "[".$view2 . " = ";  foreach ( $blocks as $k=>$v ){ echo $k . ","; } echo "] ";
+                
+                if( isset( $blocks[$curBlockName])){
+                    $viewFound = $view2;
                 }
+               // echo $view2. "--";
+                $view2 = $this->getChildView( $view2 );
             }
-            if( $found == false ){
-               // echo $c;print_r( $this->viewBlocks );//echo "[".$name . "]";
-            }
+           // echo $viewFound . ":" . $curBlockName . "<br />";
+            $c2 = $this->blocks[ $viewFound ]["blocks"][$curBlockName];
+            echo $c2;
         }
-         
     }
     
-    public function extendsView($Rong_View_File,$viewFile){
-         $this->extendsView[$Rong_View_File] = $viewFile ;
+    public function getChildView( $parentView ){
+        $childView = "";
+        if( isset( $this->blocks )){
+            foreach ( $this->blocks as $v => $item ){
+                if( $item["parent"] == $parentView ){
+                    $childView = $v;
+                }
+            }
+        }
+        return $childView;
+    }
+    
+    public function extendsView($Rong_View_File,$parentViewFile){
         
-       // print_r( $this->subViews );
-         
+        $this->blocks[$Rong_View_File]["parent"] = $parentViewFile;
+      
     }
 }

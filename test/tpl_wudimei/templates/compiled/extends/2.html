@@ -2,8 +2,15 @@
 
 <?php  $this->block_open($Rong_View_File,"content");  ?>
 		<div class="wContent">
-			<div class="wMenu"><?php  $this->blockDisplay($Rong_View_File,"menu");  ?></div>
-			<div class="wDetail"><?php  $this->blockDisplay($Rong_View_File,"detail");  ?></div>
+			<div class="wMenu"><?php  $this->block_open($Rong_View_File,"menu");  ?>这儿请放置菜单<?php  $this->block_close($Rong_View_File);  ?></div>
+			<div class="wDetail">
+			
+				<?php  $this->block_open($Rong_View_File,"detail");  ?>这儿请放详细内容<?php  $this->block_close($Rong_View_File);  ?>
+				<div>
+			    <?php  $this->block_open($Rong_View_File,"links");  ?>这儿请放些友情链接<?php  $this->block_close($Rong_View_File);  ?>
+			    </div>
+			    
+			</div>
 			<div class="wClear"></div> 
 		</div>
-<?php  $this->block_close($Rong_View_File);  ?>
+<?php  $this->block_close($Rong_View_File);  ?> 

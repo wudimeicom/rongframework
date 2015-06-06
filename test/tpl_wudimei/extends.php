@@ -3,10 +3,13 @@
  * file encoding utf-8
  * 文件字符编码utf-8
  */
+ini_set("display_errors",1);
+error_reporting(E_ALL|E_NOTICE|E_WARNING|E_ERROR|E_COMPILE_ERROR);
+
 $PathToRongFramework = dirname(__FILE__)."/../../lib";
 
-$PathToRongFrameworkDev = dirname(__FILE__)."/../../../www.wudimei.com/lib";
-if( is_dir( $PathToRongFrameworkDev )){   $PathToRongFramework = $PathToRongFrameworkDev; }
+$PathToRongFrameworkDev = dirname(__FILE__)."/../../../../www.wudimei.com/lib";
+if( is_dir( $PathToRongFrameworkDev )){    $PathToRongFramework = $PathToRongFrameworkDev; }
 
 set_include_path(  "." . PATH_SEPARATOR . $PathToRongFramework .  PATH_SEPARATOR . get_include_path() );
 
