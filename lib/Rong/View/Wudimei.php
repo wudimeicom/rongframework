@@ -945,6 +945,7 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
                 include( $distFileName );
                 $output = ob_get_contents();
                 ob_end_clean();
+                $output .= $this->fetchParentView( $Rong_View_File,$Rong_View_Data );
                 //echo "<br />cache " . filemtime( $distFileName ) . " ". $distFileName  ;
                 return $output;
             }
@@ -963,10 +964,16 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
         $output = ob_get_contents();
         ob_end_clean();
         
-       $parentView = $this->blocks[$Rong_View_File ]["parent"];
+        
+        $output .= $this->fetchParentView( $Rong_View_File,$Rong_View_Data );
+        return $output;
+    }
+    private function fetchParentView( $Rong_View_File,$Rong_View_Data ){
+        $output = "";
+        $parentView = $this->blocks[$Rong_View_File ]["parent"];
         if( isset( $parentView ) && trim( $parentView ) != "" ){
-            
-           $output .= $this->fetch( $parentView , $Rong_View_Data);
+        
+            $output .= $this->fetch( $parentView , $Rong_View_Data);
         }
         return $output;
     }
@@ -1058,7 +1065,7 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
             $view2 =  $firstTimeDeclaredViewName;
             $viewFound = $view2;
             while( $view2 != ""){
-                $blocks = $this->blocks[$view2]["blocks"];
+                $blocks = @$this->blocks[$view2]["blocks"];
                // echo "[".$view2 . " = ";  foreach ( $blocks as $k=>$v ){ echo $k . ","; } echo "] ";
                 
                 if( isset( $blocks[$curBlockName])){
@@ -1088,6 +1095,9 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
     public function extendsView($Rong_View_File,$parentViewFile){
         
         $this->blocks[$Rong_View_File]["parent"] = $parentViewFile;
-      
+        if( $this->forceCompile == false ){
+            $this->fetch( $parentViewFile, $this->data );
+        }
     }
+    
 }
