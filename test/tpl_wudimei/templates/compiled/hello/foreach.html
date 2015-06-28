@@ -5,8 +5,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
-        <div><?php echo wudimei_toString( @$this->data['msg']); ?></div>
-        
+        <div><?php echo wudimei_toString($this->data["msg"]); ?></div>
+         
         	<table border="1">
                 <tr>
                     <th>index</th>
@@ -14,15 +14,20 @@
                     <th>name</th>
                     <th>company</th>
                 </tr>
-            <?php $this->data["wudimei"]["foreach"]["languages" ]= array("index"=>-1); foreach(  @$this->data['languages']  as $this->data['k'] =>  $this->data['lang'] ){  $this->data["wudimei"]["foreach"]["languages"]["index"]++;  ?>
+            <?php $this->data["wudimei"]["foreach"]["languages" ]= array("index"=>-1); if( count($this->data["languages"])>0 ){ foreach( $this->data["languages"]  as $this->data["k"] =>  $this->data["lang"] ){  $this->data["wudimei"]["foreach"]["languages"]["index"]++;  ?>
                 <tr>
-                     <td><?php echo wudimei_toString( @$this->data['wudimei']['foreach']['languages']['index']); ?></td>
-                     <td><?php echo wudimei_toString( @$this->data['k']); ?></td>
-                    <td><?php echo wudimei_toString( @$this->data['lang']['name']); ?></td>
-                     <td><?php echo wudimei_toString( @$this->data['lang']['company']); ?></td>
+                     <td><?php echo wudimei_toString($this->data["wudimei"]["foreach"]["languages"]["index"]); ?></td>
+                     <td><?php echo wudimei_toString($this->data["k"]); ?></td>
+                    <td><?php echo wudimei_toString($this->data["lang"]["name"]); ?></td>
+                     <td><?php echo wudimei_toString($this->data["lang"]["company"]); ?></td>
                 </tr>
-            <?php } ?>
+            <?php }} ?>
             </table>
             
+            <?php $this->data["wudimei"]["foreach"]["books" ]= array("index"=>-1); if( count($this->data["books"])>0 ){ foreach( $this->data["books"]  as $this->data["k"] =>  $this->data["item"] ){  $this->data["wudimei"]["foreach"]["books"]["index"]++;  ?>
+               <?php echo wudimei_toString($this->data["item"]["name"]); ?>
+            <?php }}else{{ ?>
+            no books
+            <?php }} ?>
     </body>
 </html>

@@ -28,7 +28,7 @@ $languages = array(
         );
 $wudimei->assign("languages", $languages );
 		
-
+$wudimei->assign("books", array());
 
 $wudimei->display("hello/foreach.html");
 

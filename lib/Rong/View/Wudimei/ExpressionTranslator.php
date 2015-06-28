@@ -46,6 +46,9 @@ class Rong_View_Wudimei_ExpressionTranslator{
                 if( $tn[0] == T_STRING ){
                     $code = "\"" . $tn[1]."\"";
                 }
+                elseif( $tn[0] == T_FOREACH ){
+                    $code = "\"" . $tn[1]."\"";
+                }
                 $tn[1] = "[" . $code . "]";
                 $tn[3] = WT_ARRAY_ELEMENT;
                 $newTk[] = $tn;

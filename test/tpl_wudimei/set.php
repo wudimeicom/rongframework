@@ -3,6 +3,10 @@
  * file encoding utf-8
  * 文件字符编码utf-8
  */
+ini_set("display_errors",1);
+error_reporting(E_ALL|E_NOTICE|E_ERROR|E_WARNING);
+
+
 $PathToRongFramework = dirname(__FILE__)."/../../lib";
 
 set_include_path(  "." . PATH_SEPARATOR . $PathToRongFramework .  PATH_SEPARATOR . get_include_path() );

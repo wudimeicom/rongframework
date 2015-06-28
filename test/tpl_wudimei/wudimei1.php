@@ -29,5 +29,5 @@ $wudimei->assign("info", array("len"=>7));
 $info2 = array("a"=>array("b"=>array("c"=>10)));
  
 $wudimei->assign("info2", $info2);
-
+$wudimei->assign("row", array("register_url"=>"http://wudimei.com"));
 $wudimei->display("hello/index.html");

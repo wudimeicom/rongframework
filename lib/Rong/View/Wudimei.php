@@ -342,10 +342,11 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
     
     }
 
+    //把xml表达式 分成键值对数组,此函数将会被删除
     public static function codeToArray($code)
     {
-        
-        
+    
+    
         $arr = array();
         $arr_index = 0;
         $inString = false;
@@ -354,67 +355,67 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
         // echo $code . "<br />";
         for ($i = 0; $i < $codeLength; $i++)
         {
-            $char = $code[$i];
-            if (in_array($char, array('=', ' ')) == true && $inString == false)
+        $char = $code[$i];
+        if (in_array($char, array('=', ' ')) == true && $inString == false)
+        {
+        $arr_index++;
+        if (!isset($arr[$arr_index]))
+        {
+        $arr[$arr_index] = "";
+        }
+        $arr[$arr_index] .= $char;
+            $arr_index++;
+            continue;
+        }
+        //string start
+        if (in_array($char, array("\"", "'")) && $inString == false)
+        {
+        $strQuote = $char;
+        $inString = true;
+        if (!isset($arr[$arr_index]))
+        {
+            $arr[$arr_index] = "";
+        }
+        $arr[$arr_index] .= $char;
+        continue;
+        }
+        if ($char == "\\" && $inString == true)
+        {
+        if( in_array( $code[$i+1], array( $strQuote , "t","b","n","r","\\","'","\"" ) ) )
+        {
+        $arr[$arr_index] .= $char . $code[$i+1];
+        $i++;
+        continue;
+        }
+        }
+        //string may end
+        if ($char == $strQuote && $inString == true)
             {
-                $arr_index++;
-                if (!isset($arr[$arr_index]))
-                {
-                    $arr[$arr_index] = "";
-                }
-                $arr[$arr_index] .= $char;
-                $arr_index++;
-                continue;
-            }
-            //string start
-            if (in_array($char, array("\"", "'")) && $inString == false)
-            {
-                $strQuote = $char;
-                $inString = true;
-                if (!isset($arr[$arr_index]))
-                {
-                    $arr[$arr_index] = "";
-                }
-                $arr[$arr_index] .= $char;
-                continue;
-            }
-            if ($char == "\\" && $inString == true)
-            {
-                if( in_array( $code[$i+1], array( $strQuote , "t","b","n","r","\\","'","\"" ) ) )
-                {
-                    $arr[$arr_index] .= $char . $code[$i+1];
-                    $i++;
-                    continue;
-                }
-            }
-            //string may end
-            if ($char == $strQuote && $inString == true)
-            {
-                
-               $inString = false;
-               $arr[$arr_index] .= $char;
-               $arr_index++;
-               continue;
-            }
-            if (!isset($arr[$arr_index]))
-            {
-                $arr[$arr_index] = "";
-            }
+    
+            $inString = false;
             $arr[$arr_index] .= $char;
+                    $arr_index++;
+                        continue;
+                    }
+                    if (!isset($arr[$arr_index]))
+                    {
+                    $arr[$arr_index] = "";
+        }
+        $arr[$arr_index] .= $char;
         }
         // print_r( $arr );
         $arr2 = array();
         $arr2_idx = 0;
-        //echo count($arr);
-        for ($j = 0; $j < $arr_index + 1; $j++)
-        {
+            //echo count($arr);
+            for ($j = 0; $j < $arr_index + 1; $j++)
+            {
             if (trim(@$arr[$j]) != "")
             {
-                $arr2[$arr2_idx++] = $arr[$j];
-            }
+            $arr2[$arr2_idx++] = $arr[$j];
+        }
         }
         // print_r( $arr2 );
-        return $arr2;
+                return $arr2;
     }
 
     public static function getAttributesArrayFromText($codeText, $keywordList)

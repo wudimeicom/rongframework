@@ -2,11 +2,12 @@
 //thanks my friend's sugestion
 
 $exp = "\$item.\$type.12.\"jiba\"|cat:\$abc:\"efg\"|cut:12==\"checkbox\" || (\$a->height.cm == 1.23 and 1 neq 2) and 2 lt 3 and 2 lte 3 and 4 eq 4";
+$exp = "\$wudimei.foreach.languages.index";
 $tk = token_get_all("<"."?php ". $exp );
 
 
 echo htmlspecialchars($exp);
-//display_token( $tk );
+display_token( $tk );
 
 echo "<hr />";
 
@@ -56,6 +57,9 @@ function compileExp( $exp ){
            $tn = &$tokens[$i+1];
            $code = $tn[1];
            if( $tn[0] == T_STRING ){
+               $code = "\"" . $tn[1]."\"";
+           }
+           elseif( $tn[0] == T_FOREACH ){
                $code = "\"" . $tn[1]."\"";
            }
            $tn[1] = "[" . $code . "]";

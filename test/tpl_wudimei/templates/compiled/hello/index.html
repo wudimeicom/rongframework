@@ -6,11 +6,11 @@
     </head>
     <body>
     	
-        <?php echo wudimei_toString(wudimei_substr (  @$this->data['msg'],0,7 ) ); ?><br />
-        <?php echo wudimei_toString(wudimei_substr (  @$this->data['msg'],0, @$this->data['len'] ) ); ?><br />
-        <?php echo wudimei_toString(wudimei_substr (  @$this->data['msg'],0, @$this->data['info']['len'] ) ); ?><br />
-        <?php echo wudimei_toString(wudimei_substr (  @$this->data['msg'],0, @$this->data['info2']['a']['b']['c'] ) ); ?><br />
+        <?php echo wudimei_toString(wudimei_substr($this->data["msg"],0,7) ); ?><br />
+        <?php echo wudimei_toString(wudimei_substr($this->data["msg"],0,$this->data["len"]) ); ?><br />
+        <?php echo wudimei_toString(wudimei_substr($this->data["msg"],0,$this->data["info"]["len"]) ); ?><br />
+        <?php echo wudimei_toString(wudimei_substr($this->data["msg"],0,$this->data["info2"]["a"]["b"]["c"]) ); ?><br />
         
-        <?php echo wudimei_toString( @$this->data['row']['register_url']); ?> 
+        <?php echo wudimei_toString($this->data["row"]["register_url"]); ?> 
     </body>
 </html>
