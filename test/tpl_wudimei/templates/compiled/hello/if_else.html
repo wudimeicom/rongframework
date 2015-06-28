@@ -6,26 +6,31 @@
     </head>
     <body>
         <div>
-            <?php if(  @$this->data['age'] <= 18): ?>
+           
+            <?php if( $this->data["age"]<=18): ?>
                Forbidden!
-            <?php elseif(  @$this->data['age'] <= 0 || @$this->data['age'] > 150): ?> 
+            <?php elseif( $this->data["age"]<=0 || $this->data["age"]>150): ?> 
                Super human!2
             <?php else: ?>
                Welcome!
             <?php endif; ?>
             
-            <?php if( @$this->data["man"]->age >= 18 && @$this->data['age'] >= 18): ?>
+            <?php if( $this->data["man"]->age>=18 && $this->data["age"]>=18): ?>
               two adult!
             <?php endif; ?>
             
-            <?php if( @$this->data["man"]->age <=@$this->data["man"]->age + @$this->data['age']): ?>
+            <?php if( $this->data["man"]->age <= $this->data["man"]->age+$this->data["age"]): ?>
               the man is not so old!
             <?php endif; ?>
              
-             <?php if( @$this->data["man"]->age >= 18 || @$this->data['age'] >= 18): ?>
+             <?php if( $this->data["man"]->age>=18||$this->data["age"]>=18): ?>
               at lease one is adult.
             <?php endif; ?>
+          
             
+            <?php if( $this->data["item"]["type"]== "checkbox" || $this->data["item"]["type"] == "radio"): ?>
+            select type
+            <?php endif; ?>      
         </div>
     </body>
 </html>

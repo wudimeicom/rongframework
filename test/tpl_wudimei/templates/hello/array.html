@@ -3,7 +3,7 @@
 		<title>array sample</title>
 	</head>
 	<body>
-	   {**
+	       
 		<h3>member information</h3>
 		id: {$member.id} <br />
 		username: {$member.username} <br />
@@ -31,12 +31,12 @@
 		 
 		 
 		{assign var=$numberHome value="number.home"}
-		{$member.$numberHome}
-		{$member."number.home"|substr:0:5}
+		phone number: {$member.$numberHome}<br />
+		substring1: {$member."number.home"|substr:0:5} <br />
 		 
-		{$member.other."name.a".0|substr:0:3}
-		**}
+		substring2: {$member.other."name.a".0|substr:0:3} <br />
+		 
 		
-		{$config."SITE.URL_PREFIX"}
+		url prefix:{$config."SITE.URL_PREFIX"}
 	</body>
 </html>

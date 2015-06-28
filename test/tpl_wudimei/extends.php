@@ -21,7 +21,7 @@ $wudimei->viewsDirectory = dirname(__FILE__) .  "/templates";
 
 $wudimei->leftDelimiter = "<!--{";
 $wudimei->rightDelimiter = "}-->";
-$wudimei->forceCompile = true;
+$wudimei->forceCompile = false;
 
 
 

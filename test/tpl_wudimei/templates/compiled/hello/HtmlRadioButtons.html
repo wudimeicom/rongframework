@@ -3,7 +3,7 @@ please choose a fruit:<br />
 
 <?php 
 	$radios = new Rong_Html_Radios();
-	$radios->setOptions($this->data['goods']);
+	$radios->setOptions($this->data["goods"]);
 	$radios->setCheckedValue("2");
 	$radios->setSeparator("<br />");$radios->set("name","goods");
 echo $radios->toHtml();   ?>

@@ -6,6 +6,7 @@
     </head>
     <body>
         <div>
+           
             {if $age<=18}
                Forbidden!
             {elseif $age<=0 || $age>150} 
@@ -25,7 +26,11 @@
              {if $man->age>=18||$age>=18}
               at lease one is adult.
             {/if}
+          
             
+            {if $item.type== "checkbox" || $item.type == "radio"}
+            select type
+            {/if}      
         </div>
     </body>
 </html>

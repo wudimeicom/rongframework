@@ -8,7 +8,7 @@
     	
     	<?php 
 	$select = new Rong_Html_Select();
-	$select->setOptions($this->data['goods']);
+	$select->setOptions($this->data["goods"]);
 	$select->setSelectedValue("2");$select->set("id","goods1");
 $select->set("name","goods");
 $select->set("class","blueSelect");
@@ -17,7 +17,7 @@ echo $select->toHtml();   ?>
     	多个选中项:
     	<?php 
 	$select = new Rong_Html_Select();
-	$select->setOptions($this->data['goods']);
+	$select->setOptions($this->data["goods"]);
 	$select->setSelectedValue("2,3,4");$select->set("id","goods1");
 $select->set("name","goods");
 $select->set("class","blueSelect");
@@ -27,7 +27,7 @@ echo $select->toHtml();   ?>
 		
 		<?php 
 	$select = new Rong_Html_Select();
-	$select->setOptions($this->data['goods']);
+	$select->setOptions($this->data["goods"]);
 	$select->setSelectedValue("4");$select->set("id","goods1");
 $select->set("name","goods");
 $select->set("class","blueSelect");

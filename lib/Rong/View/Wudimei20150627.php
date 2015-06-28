@@ -4,7 +4,6 @@ require_once 'Rong/View/Interface.php';
 require_once 'Rong/View/Abstract.php';
 require_once 'Rong/View/Wudimei/html.php';
 require_once 'Rong/View/Wudimei/Parser/Document.php';
-require_once 'Rong/View/Wudimei/ExpressionTranslator.php';
 require_once "Rong/Logger.php";
 
 class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interface
@@ -469,8 +468,250 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
         }
         return $attrs;
     }
-   
-	 
+
+    /**
+     * 
+     * @param type $expression
+     */
+    public static function isStringExpression($expression)
+    {
+        $expression = trim($expression);
+
+
+
+        $char = @$expression[0];
+
+        if ($char == '"' || $char == '\'')
+        {
+
+            if ($expression[strlen($expression) - 1] == $char)
+            {
+
+                for ($i = 1; $i < strlen($expression) - 1; $i++)
+                {
+                    if ($expression[$i] == '\\')
+                    {
+                        if (in_array($expression[$i + 1], array('\\', '"', '\'', 'b', 's', 'n', 'r', 't')))
+                        {
+                            $i++;
+                        } else
+                        {
+                            return false;
+                        }
+                    }
+                    if ($expression[$i] == $char)
+                    {
+                        if ($expression[$i - 1] != '\\')
+                        {
+                            return false;
+                        }
+                    }
+                }
+            } else
+            {
+                return false;
+            }
+        } else
+        {
+            return false;
+        }
+        return true;
+    }
+
+	/**
+	 * "abc\"efg"  to abc"efg
+	 */
+	public static function evalString( $str )
+	{
+		eval( '$str=' . $str . ';');
+		return $str;
+	}
+    /*
+     * $var.age or $var or $var.0->nu
+     */
+
+    public static function compileVar($tag)
+    {
+        //echo $tag. "<br />";
+        if (self::isStringExpression($tag))
+        {
+
+            return trim($tag);
+        }
+
+        $functions = array();
+        //number
+        if (preg_match("/^[0-9]+$/i", $tag))
+        {
+            return $tag;
+        }
+		
+        //$var.aa."number.home".0 | $abc.efg 
+        preg_match_all("/([a-zA-Z0-9\$\_]+(\.[a-zA-Z0-9\_]+)*(\.(\"[^\"]*\"))+(\.[a-zA-Z0-9\_]+)*)|([a-zA-Z0-9\_\.\\$\->]+)/i", $tag, $matches);
+        // echo $tag; echo "<br />";
+          //print_r( $matches );
+        $varName = $matches[0][0];
+        preg_match_all("/[\|]\s*([a-z0-9\_]+)(\s*[\:]\s*(([\$a-zA-Z0-9\.\_\->]+)|(\"[^\"]*\")|(\'([^\']*)\')))*/i", $tag, $modifier_matches);
+        //  print_r( $modifier_matches );
+        $modifierTxt = "";
+        if (trim($varName) !== "")
+        {
+            $tag = $varName;
+            if (!empty($modifier_matches[0]))
+            {
+                for ($i = 0; $i < count($modifier_matches[0]); $i++)
+                {
+                    $funcExp = $modifier_matches[0][$i];
+                    $funcName = $modifier_matches[1][$i];
+                    preg_match_all("/\:\s*(\\$*[a-z0-9\_\.\_]+|[\$a-z0-9\.\_]+|\"[^\"]*\"|\'([^\']*)\')/i", $funcExp, $params_matches);
+                    $params = $params_matches[1];
+                     //print_r($params_matches );
+                    for ($j = 0; $j < count($params); $j++)
+                    {
+                        if (preg_match("/^([\$a-z0-9\_]+)(\.[0-9a-z\_]+)*$/i", $params[$j]))
+                        {
+                            $params[$j] = self::compileVar($params[$j]);
+                        }
+                    }
+                    $functions[] = array(
+                        "name" => $funcName,
+                        "params" => $params
+                    );
+                }
+            }
+        }
+		
+		//echo $tag;
+        //print_r( $functions );
+        if (strpos($tag, ".") !== false)
+        {
+        	//echo "--- " . $tag ." ---";
+			
+            $tag2 = substr($tag, 1);
+			//echo $tag2;
+            //$arr = explode(".", $tag2);
+			$arr = Rong_View_Wudimei::segmentWithConstStringSupport($tag2, array(".") );
+            // print_r( $arr );
+            $code = " @\$this->data['" . trim($arr[0]) . "']";
+
+            if (preg_match("/\\$([a-zA-Z0-9\_]+)/i", $arr[0]))
+            {
+                $code = " @\$this->data[" . self::compileExpression($arr[0]) . "]";
+            }
+            for ($i = 1; $i < count($arr); $i++)
+            {
+                if (preg_match("/\\$([a-z0-9\_]+)/i", $arr[$i]))
+                {
+                    $code .= "[" . trim(self::compileExpression($arr[$i])) . "]";
+                } else
+                {
+                	if( substr( trim($arr[$i]),0,1) == "\"")
+					{
+						$code .= "[" . trim($arr[$i]) . "]";
+					}
+					else{
+                    	$code .= "['" . trim($arr[$i]) . "']";
+					}
+                }
+            }
+            $code .= "";
+        } elseif (strpos($varName, "->") != false)
+        {
+            //echo $varName;
+            $code = preg_replace("/\\$([a-z0-9\_]+)/i", "@\$this->data[\"\\1\"]", $varName);
+            //echo $varName;
+        } else
+        {
+            $code = ' @$this->data[\'' . substr($tag, 1) . '\']';
+        }
+        //echo $code;
+        for ($i = 0; $i < count($functions); $i++)
+        {
+            $f = $functions[$i];
+			 
+            $code = "wudimei_" . $f["name"] . " ( " . $code;
+            if (count($f["params"]) > 0)
+            {
+                $code .= "," . implode(",", $f["params"]);
+            }
+            $code .= " ) ";
+        }
+		//echo $code;
+        return $code;
+    }
+	
+		 
+	public static function segmentWithConstStringSupport( $str ,$splitArr )
+	{
+		$len = strlen( $str );
+		$el = "";
+		$arr = array();
+		$inStr = false;
+		
+		for( $i=0;$i< $len;$i++ )
+		{
+			$ch = $str[$i];
+			$nextCh = isset($str[$i+1])?$str[$i+1]:"";
+			if( $inStr == false )
+			{
+				if( $ch == "\"")
+				{
+					$inStr = true;
+					//echo $el ."<br />";
+					if( trim($el)!="") $arr[]=$el;
+					$el = $ch;
+				}
+				else{
+					$found = false;
+					$str_found = "";
+					for( $j=0;$j<count( $splitArr);$j++ )
+					{
+						$chrs = $splitArr[$j];
+						if( substr( $str , $i,strlen( $chrs)) == $chrs )
+						{
+							//echo $el."<br />";
+							if( trim($el)!="") $arr[]=$el;
+							$el="";
+							$found =  true;
+							$str_found = $chrs;
+						}
+					}
+					if( $found == false )
+					{
+						$el .=$ch;
+					}
+					else{
+						$i+=strlen( $str_found)-1;
+					}
+				}
+				
+			}
+			elseif( $inStr == true ){
+				if( $ch == "\\")
+				{
+					if( $nextCh=="\"")
+					{
+						$el .= $ch.$nextCh;
+						$i++;
+					}
+				}
+				$el .=$ch;
+				if( $ch == "\"")
+				{
+					$inStr =false;
+					if( trim($el)!="") $arr[]=$el;
+					//echo $el . " <br />";
+					$el = "";
+				}
+				
+			}
+		}
+		if( trim( $el ) != "")
+		{
+			$arr[] = $el;
+		}
+		return $arr;
+	}
     /**
      * operation chars
      * Enter description here ...
@@ -479,8 +720,47 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
     public static function compileExpression($expression)
     {
          
-        return Rong_View_Wudimei_ExpressionTranslator::translate( $expression );
         
+        if (self::isStringExpression($expression))
+        {
+
+            return trim($expression);
+        }
+        
+        // $var.name   |  abc :efg
+        $modifier = "((\\$[a-zA-Z0-9\_]+((\->([a-zA-Z0-9\_]+))|(\.\"[^\"]*\")|(\.[\$]?[a-zA-Z0-9\_]+))*)|(\".*\")|('.*'))(\s*[\|]\s*[a-zA-Z0-9\_]+((\s*[\:]\s*((\$[a-z0-9A-Z\.\_\->]+)|(\"([^\"]*)\")|('([^']*)')|([0-9]+)|([a-zA-Z0-9\.\$\_]+)))*)*)*";
+
+        preg_match_all('/' . $modifier . '|[0-9\.]+|\$[a-zA-Z0-9\_\.]+|[a-zA-Z0-9\_]+|===|!==|==|!=|\->|::|<=|>=|\*=|\+=|\/=|\-=|\%=|=|>|,|<|!|\(|\)|\.|\"[^\"]+\"|\'[^\']+\'|and|or|\&\&|\|\||%|\d+|\+|\-|\*|\/|gt|eq|lt/i', $expression, $matches);
+        $expArr = $matches[0];
+       
+        //echo $expression;
+          //  print_r( $matches[0] );
+        self::$logger->debug("exp:" . var_export($expArr, true) );
+        
+        $newExp = "";
+        for ($i = 0; $i < count($expArr); $i++)
+        {
+            $tag = $expArr[$i];
+            if (substr($tag, 0, 1) == "$")
+            {
+                $newExp .= self::compileVar($tag); // ' $this->data[\'' . substr($tag, 1) . '\']';
+            } elseif (substr($tag, 0, 2) == "eq")
+            {
+                $newExp .= "==";
+            } elseif (substr($tag, 0, 2) == "gt" )
+            {
+                $newExp .= ">";
+            } elseif (substr($tag, 0, 2) == "lt")
+            {
+                $newExp .= "<";
+            }
+            else
+            {
+                $newExp .= ' ' . $tag;
+            }
+        }
+        
+        return $newExp;
     }
 
     public function compileDocumentContent($content)
