@@ -196,18 +196,21 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
 
     public static function compileInclude($expression)
     {
-        preg_match_all('/file[\s]{0,5}=[\s]{0,5}["|\']{0,1}([^\'|"]+)["|\']{0,1}/i', $expression, $matches);
-        $file = $matches[1][0];
-        return 'echo $this->fetch("' . $file . '", $this->data );';
+      
+        $attrs = self::getAttributesArrayFromText($expression, "file");
+        $file = self::compileExpression($attrs["file"]);
+       // print_r( )
+        return 'echo $this->fetch(' . $file . ', $this->data );';
     }
     
     public  function compileExtends($expression)
     {
-        preg_match_all('/file[\s]{0,5}=[\s]{0,5}["|\']{0,1}([^\'|"]+)["|\']{0,1}/i', $expression, $matches);
-        $file = $matches[1][0];
-        //echo  $file;
-        $this->fetch($file, $this->data );
-        return ' $this->extendsView($Rong_View_File,"' . $file . '" );';
+       
+        $attrs = self::getAttributesArrayFromText($expression, "file");
+        $file = self::compileExpression($attrs["file"]);
+       
+        $this->fetch(trim($file,"'\""), $this->data );
+        return ' $this->extendsView($Rong_View_File,' . $file . ' );';
     }
 
     public  function compileCall($expression  )
@@ -706,7 +709,7 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
     }
     private function fetchParentView( $Rong_View_File,$Rong_View_Data ){
         $output = "";
-        $parentView = $this->blocks[$Rong_View_File ]["parent"];
+        $parentView = @$this->blocks[$Rong_View_File ]["parent"];
         if( isset( $parentView ) && trim( $parentView ) != "" ){
         
             $output .= $this->fetch( $parentView , $Rong_View_Data);
