@@ -29,7 +29,7 @@ class Rong_Language{
 	
 	public function text( $key , $options = array() )
 	{
-		$value = $this->languageArray[ $key ];
+		$value = @$this->languageArray[ $key ];
 		$value = $this->replaceLanguageTemplate($value ,$options );
 		if( @trim(  $value ) == "" && $this->allowLogNotFoundItem === true )
 		{

@@ -3,8 +3,8 @@
 require_once 'Rong/View/Interface.php';
 require_once 'Rong/View/Abstract.php';
 require_once 'Rong/View/Wudimei/html.php';
-require_once 'Rong/View/Wudimei/Parser/Document.php';
 require_once 'Rong/View/Wudimei/ExpressionTranslator.php';
+require_once 'Rong/View/Wudimei/Language.php';
 require_once "Rong/Logger.php";
 
 class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interface
@@ -16,7 +16,11 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
     public $forceCompile = false;
     //public $basePath = ""; //base path of the template
     public $data;
-    
+    /**
+     * 
+     * @var Rong_View_Wudimei_Language
+     */
+    public $lang;
     public $cachedTplFiles = array();
     public $blocks; 
     public $blockNames = array();
@@ -38,9 +42,13 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
         $this->data["wudimei"] = array("foreach" => array()  );
 		$this->updateWudimeiSystemArray();
         $this->loadPlugins();
+        $this->lang = new Rong_View_Wudimei_Language();
     }
 	
-	
+    public function setLanguageObject($languageObject){
+        $this->lang->setLanguageObject($languageObject);
+    }
+    
 	public function updateWudimeiSystemArray()
 	{
 		$this->data["wudimei"]["get"] = &$_GET;
@@ -118,13 +126,9 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
         {
             $code = "}";
         }
-        elseif (substr($tag, 0, 13) == "block.display")
+        elseif (substr($tag, 0, 4) == "lang")
         {
-            $code = self::compileBlockDisplay(substr($tag, 13));
-        }
-        elseif (substr($tag, 0, 14) == "/block.display")
-        {
-            $code = "";
+            $code = $this->lang->compileLangTag(substr($tag, 4) );
         }
         elseif (substr($tag, 0, 13) == "block.parent")
         {
@@ -332,18 +336,7 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
         $code = " \$this->blockParent(\$Rong_View_File); ";
         return $code;
     }
-    public static function compileBlockDisplay($expression){
-        $attrs = array();
-        $attrs = self::getAttributesArrayFromText($expression, "name");
-         
-        $name = self::compileExpression($attrs["name"]);
-        //echo $name;
-    
-        $code = "";
-        $code = " \$this->blockDisplay(\$Rong_View_File,". $name."); ";
-        return $code;
-    
-    }
+     
 
     //把xml表达式 分成键值对数组,此函数将会被删除
     public static function codeToArray($code)
@@ -505,7 +498,7 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
         $leftDelimiterLength = strlen($this->leftDelimiter);
         $rightDelimiterLength = strlen($this->rightDelimiter);
         $wudimeiCode = "";
-        //echo $code . "<br />";
+        
         $html = "";
         for ($i = 0; $i < $contentLength; $i++)
         {
@@ -546,11 +539,13 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
                                 if( trim( $wudimeiCode ) == "ignore" || trim( $wudimeiCode) == "literal" )
                                 {
                                     $inIgnore = true;
+                                   // echo "ignore";
                                     continue;
                                 }
                                 if( trim( $wudimeiCode ) == "/ignore" || trim( $wudimeiCode) == "/literal" )
                                 {
                                     $inIgnore = false;
+                                    //echo "/ignore";
                                     continue;
                                 }
 								if( trim( $wudimeiCode) == "php" )
@@ -568,9 +563,10 @@ class Rong_View_Wudimei extends Rong_View_Abstract implements Rong_View_Interfac
 								
                                 if( $inIgnore == true )
                                 {
+                                   // echo $this->leftDelimiter. $wudimeiCode . $this->rightDelimiter;
                                     $html .= $this->leftDelimiter. $wudimeiCode . $this->rightDelimiter;
                                 }
-								if( $inPHP == true )
+								elseif( $inPHP == true )
 								{
 									$html .= $this->leftDelimiter. $wudimeiCode . $this->rightDelimiter;
 								}

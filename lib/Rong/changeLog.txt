@@ -1,3 +1,4 @@
+2015-07-17 fix Wudimei template {ignore} bug.
 2014-04-19 add Rong_Cache_Driver_Memcache
 2014-01-25 {HtmlRadios} {HtmlCheckboxes} {HtmlSelect}共有options属性，前身是from.还有selected ,checked属性的修改。
 2014-01-04 修改了wudimei模板引擎的系统变量{$wudimei.session.username}引用的问题。添加了{php}{/php}模板标签。
@@ -23,7 +24,7 @@
 2012-12-12 fixed the Rong_View_Wudimei::display() not compatible bug.
 2012-12-02 fixed the quote's bug in class Rong_View_Wudimei 
            add a modifier "date" for wudimei template engine: <!--{$wudimei.now|date:"Y"}--> <!--{$wudimei.now|date:"Y-m-d H:i:s"}-->
-2012-12-01 change Rong_Text_String and Rong_Common_Utf8String, i removed the $string member variable form each class.
+2012-12-01 change Rong_Text_String and Rong_Common_Utf8String, i removed the $string Member_ variable form each class.
    pls use it like this:$strName = new Rong_Text_String("yangqingrong");
    $strName = new Rong_Common_Utf8String("杨庆荣yangqingrong");
    add class Rong_URI_PathInfoParam, "index.php/{action}/{param1}/{value1}/{param2}/{value2}"
