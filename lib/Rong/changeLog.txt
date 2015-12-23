@@ -1,4 +1,5 @@
 2015-07-17 fix Wudimei template {ignore} bug.
+2015-07-16 新增了{lang key="fullname"} {lang key="msg" name="yqr"},其中 array("msg"=>"hello,{name}");
 2014-04-19 add Rong_Cache_Driver_Memcache
 2014-01-25 {HtmlRadios} {HtmlCheckboxes} {HtmlSelect}共有options属性，前身是from.还有selected ,checked属性的修改。
 2014-01-04 修改了wudimei模板引擎的系统变量{$wudimei.session.username}引用的问题。添加了{php}{/php}模板标签。

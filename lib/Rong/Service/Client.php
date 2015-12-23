@@ -66,11 +66,11 @@ class Rong_Service_Client{
 			}
 		}
 		
-		//print_r( $postArray );
+		// print_r( $postArray );exit();
         $response = $httpClient->request($this->server_url, "POST", $postArray);
        
         $content = $httpClient->getContent();
-       
+        // echo "abc";exit();
         if( isset( $GLOBALS["debug"]))
         {
             echo "<br />----{Rong_Service_Client \$content}---------start<br />";

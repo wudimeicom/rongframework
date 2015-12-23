@@ -32,7 +32,9 @@ class Rong_Controller_Route extends Rong_Controller_Abstract
 	public function replace( $uri )
 	{
 		$uri->path = preg_replace( $this->patterns , $this->replacements , $uri->path );
+		
 		$uri->uriToGET( $uri->path );
+		//print_r( $_GET );
 		return $uri;
 	}
 	

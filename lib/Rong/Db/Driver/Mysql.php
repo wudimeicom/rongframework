@@ -152,7 +152,7 @@ class Rong_Db_Driver_Mysql extends Rong_DB_Abstract
 	
 	public function getColumns( $table ){
 		$sql = "show full columns from " . $table;
-		echo $sql;
+		//echo $sql;
 		$dt = $this->fetchAll($sql);
 		echo mysql_error();
 		return $dt;

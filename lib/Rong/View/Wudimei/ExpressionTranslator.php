@@ -22,7 +22,7 @@ class Rong_View_Wudimei_ExpressionTranslator{
             $t = &$tokens[$i];
             if( is_array($t)){
                 if( $t[0] == T_VARIABLE ){
-                    $t[1] = "\$this->data[\"" .trim( $t[1],"\$") . "\"]";
+                    $t[1] = "@\$this->data[\"" .trim( $t[1],"\$") . "\"]";
                 }
                 if( $t[0] == T_STRING ){ //replace template keyword
                     if( isset($replacement[ trim($t[1])] )){
@@ -115,7 +115,7 @@ class Rong_View_Wudimei_ExpressionTranslator{
     
                         $t2 = $newTk2[$j];
                         //echo $t2[1];
-                        if( trim($t2 ) != ":"){
+                        if( @trim($t2 ) != ":"){
     
                             break;
                         }

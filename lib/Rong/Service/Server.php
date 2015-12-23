@@ -56,6 +56,7 @@ class Rong_Service_Server{
         {
             $json_data = $swapBit->decrypt( $json_data , $this->password );
         }
+         
 		
         $request = json_decode( $json_data  , true  );
 		if( empty( $request) )
@@ -126,6 +127,7 @@ class Rong_Service_Server{
 		{
 			$msg .= "006,return null";
 		}
+		//echo $msg;
 		$returnJsonArr = array();
 		$returnJsonArr["msg"] = $msg;
 		$returnJsonArr["return"] = $return;
