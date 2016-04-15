@@ -143,7 +143,11 @@ class Rong_Service_Server{
         else{
             echo $returnJson;
         }
+        //echo "\r\n\r\n".$returnJson;
         echo "[/Rong.Service.Server@wudimei.com]";
+        if( trim( $msg) != ""){
+        	$this->logger->error( $msg );
+        }
     }
 }
 ?>
